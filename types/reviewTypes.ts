@@ -2,7 +2,7 @@ export type Question = {
   id: number;
   users_id: number;
   title: string;
-  type: string;
+  type: string[];
   state: string;
   content: string;
   read_count: number;
