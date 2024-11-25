@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+
+*.test.tsx
+
 # production
 /build
 
