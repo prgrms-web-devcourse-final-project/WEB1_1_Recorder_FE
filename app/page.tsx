@@ -1,9 +1,9 @@
+import Footer from '../components/footer';
 
-
-const Home = ({ }) => {
+const Home = () => {
   return (
-<div className="">
-  RevUP
+    <div className="">
+      <Footer />
     </div>
   );
 };
