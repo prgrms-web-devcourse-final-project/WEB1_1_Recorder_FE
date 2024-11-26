@@ -18,7 +18,11 @@ const Home = ({}) => {
       created_at: "2020-10-10",
       updated_at: "2020-10-11",
       is_deleted: false,
-      is_anomyous: false
+      is_anomyous: false,
+      userInfo: {
+        userName: "user123",
+        userImage: "https://github.com/shadcn.png"
+      }
     },
     {
       id: 2,
@@ -79,6 +83,7 @@ const Home = ({}) => {
     }
   ];
   const userTypes = ["all", "typesciprt", "react"];
+
   return (
     <main className="m-auto max-w px-4">
       <section className="my-2 flex">
