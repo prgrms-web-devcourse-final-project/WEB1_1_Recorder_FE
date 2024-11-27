@@ -1,4 +1,3 @@
-import Footer from '../components/footer';
 import MentorSummaryItem from "@/components/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviewSummaryList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
