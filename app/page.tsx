@@ -1,6 +1,5 @@
 import MentorSummaryItem from "@/components/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviewSummaryList";
-import HeaderMember from "../components/headerMember";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -113,10 +112,8 @@ const Home = ({}) => {
   const userTypes = ["typesciprt", "react", "python"];
 
   return (
-    <div>
-    <HeaderMember />
-    <main className="m-auto max-w px-4">
-      <section className="my-2 flex flex-col sm:flex-row">
+    <main className="m-auto my-10 max-w px-4">
+      <section className="my-4 flex flex-col sm:flex-row">
         <Card className="sm:mr-2 sm:w-1/2">
           <CardHeader>
             <CardTitle>최신 질문</CardTitle>
@@ -134,7 +131,7 @@ const Home = ({}) => {
           </CardContent>
         </Card>
       </section>
-      <section className="my-2">
+      <section className="my-4">
         <Card>
           <CardHeader>
             <CardTitle>기술별 질문</CardTitle>
@@ -155,7 +152,7 @@ const Home = ({}) => {
           </CardContent>
         </Card>
       </section>
-      <section className="my-2">
+      <section className="my-4">
         <Card>
           <CardHeader>
             <CardTitle>라이브 피드백</CardTitle>
@@ -178,7 +175,7 @@ const Home = ({}) => {
         </Card>
       </section>
     </main>
-    </div>
+  );
 };
 
 export default Home;
