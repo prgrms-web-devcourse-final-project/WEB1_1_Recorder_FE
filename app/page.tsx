@@ -1,7 +1,7 @@
 import MentorSummaryItem from "@/components/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviewSummaryList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Carousel, CarouselContent } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 const Home = ({}) => {
@@ -80,14 +80,41 @@ const Home = ({}) => {
       liveCount: 12,
       userId: "user3",
       comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
+    },
+    {
+      title: "라이브 피드백 멘토합니다.",
+      type: ["react", "typescript"],
+      business: "프로그래머스",
+      score: 100,
+      liveCount: 12,
+      userId: "user1",
+      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
+    },
+    {
+      title: "라이브 피드백 멘토합니다.",
+      type: ["react", "typescript"],
+      business: "프로그래머스",
+      score: 100,
+      liveCount: 12,
+      userId: "user2",
+      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
+    },
+    {
+      title: "라이브 피드백 멘토합니다.",
+      type: ["react", "typescript"],
+      business: "프로그래머스",
+      score: 100,
+      liveCount: 12,
+      userId: "user3",
+      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
     }
   ];
-  const userTypes = ["all", "typesciprt", "react"];
+  const userTypes = ["typesciprt", "react", "python"];
 
   return (
     <main className="m-auto max-w px-4">
-      <section className="my-2 flex">
-        <Card className="mr-2 w-1/2">
+      <section className="my-2 flex flex-col sm:flex-row">
+        <Card className="sm:mr-2 sm:w-1/2">
           <CardHeader>
             <CardTitle>최신 질문</CardTitle>
           </CardHeader>
@@ -95,7 +122,7 @@ const Home = ({}) => {
             <ReviewSummaryList reviewList={reviewList} />
           </CardContent>
         </Card>
-        <Card className="ml-2 w-1/2">
+        <Card className="sm:ml-2 sm:w-1/2">
           <CardHeader>
             <CardTitle>인기 질문</CardTitle>
           </CardHeader>
@@ -109,7 +136,7 @@ const Home = ({}) => {
           <CardHeader>
             <CardTitle>기술별 질문</CardTitle>
             <CardDescription>
-              <ToggleGroup type="multiple" variant="outline" className="flex justify-start">
+              <ToggleGroup type="single" variant="outline" className="flex justify-start">
                 {userTypes.map((type, i) => {
                   return (
                     <ToggleGroupItem key={i} value={type} aria-label="Toggle bold">
@@ -121,7 +148,7 @@ const Home = ({}) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ReviewSummaryList reviewList={reviewList} />
+            <ReviewSummaryList reviewList={reviewList} size="lg" />
           </CardContent>
         </Card>
       </section>
@@ -132,11 +159,17 @@ const Home = ({}) => {
           </CardHeader>
           <CardContent>
             <Carousel>
-              <CarouselContent>
+              <CarouselContent className="p-2">
                 {mentorList.map((mentor, i) => {
-                  return <MentorSummaryItem key={i} {...mentor} />;
+                  return (
+                    <CarouselItem key={i} className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                      <MentorSummaryItem {...mentor} />
+                    </CarouselItem>
+                  );
                 })}
               </CarouselContent>
+              <CarouselPrevious className="-left-4" />
+              <CarouselNext className="-right-4" />
             </Carousel>
           </CardContent>
         </Card>
