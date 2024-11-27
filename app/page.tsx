@@ -1,5 +1,6 @@
 import Footer from '../components/footer';
 import MentorSummaryItem from "@/components/mentorSummaryItem";
+import SearchBox from "@/components/questions/searchBox";
 import ReviewSummaryList from "@/components/reviewSummaryList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -114,6 +115,7 @@ const Home = ({}) => {
 
   return (
     <main className="m-auto my-10 max-w px-4">
+      <SearchBox />
       <section className="my-4 flex flex-col sm:flex-row">
         <Card className="sm:mr-2 sm:w-1/2">
           <CardHeader>

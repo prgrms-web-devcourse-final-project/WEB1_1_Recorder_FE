@@ -37,7 +37,7 @@ const ReviewSummaryItem = ({ size = "md", title, content, created_at, type, answ
           <div className="my-1 line-clamp-1">
             {type.map((name, i) => {
               return (
-                <Badge key={i} className="mr-1">
+                <Badge key={i} className="mr-1" variant="secondary">
                   {name}
                 </Badge>
               );
