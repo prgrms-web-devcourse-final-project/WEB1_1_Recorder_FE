@@ -1,5 +1,6 @@
 import MentorSummaryItem from "@/components/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviewSummaryList";
+import HeaderMember from "../components/headerMember";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -112,6 +113,8 @@ const Home = ({}) => {
   const userTypes = ["typesciprt", "react", "python"];
 
   return (
+    <div>
+    <HeaderMember />
     <main className="m-auto max-w px-4">
       <section className="my-2 flex flex-col sm:flex-row">
         <Card className="sm:mr-2 sm:w-1/2">
@@ -175,7 +178,7 @@ const Home = ({}) => {
         </Card>
       </section>
     </main>
-  );
+    </div>
 };
 
 export default Home;
