@@ -1,7 +1,7 @@
 import Footer from '../components/footer';
 import MentorSummaryItem from "@/components/mentorSummaryItem";
+import SearchBox from "@/components/questions/searchBox";
 import ReviewSummaryList from "@/components/reviewSummaryList";
-import SearchFillter from "@/components/seachFillter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -115,7 +115,7 @@ const Home = ({}) => {
 
   return (
     <main className="m-auto my-10 max-w px-4">
-      <SearchFillter />
+      <SearchBox />
       <section className="my-4 flex flex-col sm:flex-row">
         <Card className="sm:mr-2 sm:w-1/2">
           <CardHeader>

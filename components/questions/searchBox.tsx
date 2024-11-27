@@ -2,7 +2,6 @@
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import SearchInput from "@/components/questions/searchInput";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import SearchSelect from "@/components/questions/searchSelect";
 import SearchFillter from "@/components/questions/searchfillter";
 
@@ -18,7 +17,7 @@ const SearchBox = ({}: Props) => {
   return (
     <Card className="p-4">
       <SearchInput state={input} setState={setInput} />
-      <div className="flex">
+      <div className="mt-2 flex gap-2">
         <SearchSelect state={value} setState={setValue} fillterList={types} />
         <SearchSelect state={value2} setState={setValue2} fillterList={type2} />
         <SearchFillter />

@@ -5,6 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { IoIosArrowDown } from "react-icons/io";
+import { FaCheck } from "react-icons/fa6";
 
 type Props = {
   state: string;
@@ -43,7 +44,7 @@ const SearchSelect = ({ state, setState, fillterList }: Props) => {
                   }}
                 >
                   {fillterItem}
-                  <Check className={cn("ml-auto", state === fillterItem ? "opacity-100" : "opacity-0")} />
+                  <FaCheck />
                 </CommandItem>
               ))}
             </CommandGroup>

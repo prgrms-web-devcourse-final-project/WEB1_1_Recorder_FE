@@ -12,9 +12,9 @@ const SearchInput = ({ state, setState }: Props) => {
     setState(e.target.value);
   };
   const handleSubmit = () => {
-    // console.log(input);
     setState("");
   };
+
   return (
     <div className="flex gap-2">
       <Input
@@ -24,7 +24,9 @@ const SearchInput = ({ state, setState }: Props) => {
           handleChange(e);
         }}
       ></Input>
-      <Button onClick={handleSubmit}>검색</Button>
+      <Button variant="outline" onClick={handleSubmit}>
+        검색
+      </Button>
     </div>
   );
 };
