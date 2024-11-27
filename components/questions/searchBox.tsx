@@ -9,18 +9,26 @@ type Props = {};
 
 const SearchBox = ({}: Props) => {
   const [input, setInput] = useState("");
-  const types = ["typescript", "react", "javsscript", "nextjs", "java", "lua", "go", "ruby"];
-  const [value, setValue] = useState("기술 스택을 선택해 보세요");
-  const type2 = ["최신순", "인기순"];
-  const [value2, setValue2] = useState("최신순");
+  const techStackList = ["전체", "typescript", "react", "javsscript", "nextjs", "java", "lua", "go", "ruby"];
+  const [techStack, setTechStack] = useState("기술 스택");
+  const sortTypeList = ["최신순", "인기순"];
+  const [sortType, setSortType] = useState("최신순");
+  const fillterList = ["전체", "해결됨", "미해결"];
+  const [fillter, setFillter] = useState("전체");
 
   return (
     <Card className="p-4">
       <SearchInput state={input} setState={setInput} />
       <div className="mt-2 flex gap-2">
-        <SearchSelect state={value} setState={setValue} fillterList={types} />
-        <SearchSelect state={value2} setState={setValue2} fillterList={type2} />
-        <SearchFillter />
+        <SearchSelect
+          className="w-32"
+          placeholder="기술 스택을 입력해보세요."
+          state={techStack}
+          setState={setTechStack}
+          fillterList={techStackList}
+        />
+        <SearchSelect className="w-24" state={sortType} setState={setSortType} fillterList={sortTypeList} />
+        <SearchFillter fillterList={fillterList} state={fillter} setState={setFillter} />
       </div>
     </Card>
   );
