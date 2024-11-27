@@ -42,7 +42,7 @@ const SearchSelect = ({ state, setState, fillterList, className, placeholder }: 
                   }}
                 >
                   {item}
-                  <FaCheck />
+                  <FaCheck className={state === item ? "" : "hidden"} />
                 </CommandItem>
               ))}
             </CommandGroup>
