@@ -1,9 +1,11 @@
+import HeaderNonmember from "../components/headerNonmeber";
+import HeaderMember from "../components/headerMember";
 
-
-const Home = ({ }) => {
+const Home = ({}) => {
   return (
-<div className="">
-  RevUP
+    <div className="">
+      {/* <HeaderNonmember /> */}
+      <HeaderMember />
     </div>
   );
 };
