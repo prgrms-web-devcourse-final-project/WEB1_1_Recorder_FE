@@ -3,13 +3,15 @@ import { Question } from "@/types/reviewTypes";
 
 type Props = {
   reviewList: Question[];
+  size?: "md" | "lg";
+  length?: number;
 };
 
-const ReviewSummaryList = ({ reviewList }: Props) => {
+const ReviewSummaryList = ({ reviewList, size = "md", length = reviewList.length }: Props) => {
   return (
     <div className="flex flex-col gap-4">
-      {reviewList.map((review, i) => {
-        return <ReviewSummaryItem key={i} {...review}></ReviewSummaryItem>;
+      {reviewList.slice(0, length).map((review, i) => {
+        return <ReviewSummaryItem key={i} size={size} {...review}></ReviewSummaryItem>;
       })}
     </div>
   );
