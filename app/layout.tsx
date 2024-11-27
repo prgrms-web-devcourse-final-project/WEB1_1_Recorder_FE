@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-import HeaderMember from "@/components/headerMember";
+import HeaderNonMember from "@/components/headerNonmeber";
 import Footer from "@/components/footer";
 
 const pretendard = localFont({
@@ -26,7 +26,7 @@ export default function RootLayout({
       <body
         className={`${pretendard.variable} font-pretendard flex flex-col min-h-screen`}
       >
-        <HeaderMember />
+        <HeaderNonMember />
         <main className="flex-grow">{children}</main>
         <Footer />
       </body>
