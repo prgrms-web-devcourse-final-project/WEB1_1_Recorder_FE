@@ -1,9 +1,11 @@
-import Header from '../components/header'
+import HeaderNonmember from "../components/headerNonmeber";
+import HeaderMember from "../components/headerMember";
 
-const Home = ({ }) => {
+const Home = ({}) => {
   return (
-<div className="">
-  <Header />
+    <div className="">
+      {/* <HeaderNonmember /> */}
+      <HeaderMember />
     </div>
   );
 };
