@@ -18,7 +18,7 @@ const SocialLogin = ({}: Props) => {
         </button>
       </div>
       <div>
-        <button className="flex items-center gap-[20px] w-full bg-black text-white p-[20px] rounded-xl hover:bg-[#0d1117] transition">
+        <button className="flex items-center gap-[20px] w-full bg-black text-white p-[20.5px] rounded-xl hover:bg-[#0d1117] transition">
           <Image className="ml-32"src="/img/github_grayimg.png" alt="githubIcon" width={30} height={30} />
           <span>Login with Github</span>
         </button>
