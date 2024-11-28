@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import HeaderNonMember from "@/components/headerNonmeber";
 import Footer from "@/components/footer";
+import Login from "./socialLogin/page";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -28,6 +29,7 @@ export default function RootLayout({
       >
         <HeaderNonMember />
         <main className="flex-grow">{children}</main>
+        {/* <main className="flex-grow"><Login /></main> */}
         <Footer />
       </body>
     </html>
