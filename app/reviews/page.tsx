@@ -1,4 +1,4 @@
-import SearchBox from "@/components/questions/searchBox";
+import SearchBox from "@/components/reviews/searchBox";
 import ReviewSummaryList from "@/components/reviewSummaryList";
 
 const Reviews = () => {
