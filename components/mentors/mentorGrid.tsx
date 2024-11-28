@@ -1,4 +1,4 @@
-import MentorSummaryItem from "@/components/mentorSummaryItem";
+import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import { Mentor } from "@/types/mentorTypes";
 
 type Props = {

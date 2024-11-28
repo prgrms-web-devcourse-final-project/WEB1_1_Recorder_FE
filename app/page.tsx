@@ -1,6 +1,5 @@
-import ChatInput from "@/components/chat/chatInput";
-import MentorSummaryItem from "@/components/mentorSummaryItem";
-import ReviewSummaryList from "@/components/reviewSummaryList";
+import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
+import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";

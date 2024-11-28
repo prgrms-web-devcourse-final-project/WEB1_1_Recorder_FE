@@ -1,4 +1,4 @@
-import ReviewSummaryItem from "@/components/reviewSummaryItem";
+import ReviewSummaryItem from "@/components/reviews/reviewSummaryItem";
 import { Question } from "@/types/reviewTypes";
 
 type Props = {
