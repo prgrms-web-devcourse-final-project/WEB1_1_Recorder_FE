@@ -1,3 +1,4 @@
+import ChatInput from "@/components/chat/chatInput";
 import MentorSummaryItem from "@/components/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviewSummaryList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
