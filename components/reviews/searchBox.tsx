@@ -1,9 +1,9 @@
 "use client";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
-import SearchInput from "@/components/questions/searchInput";
-import SearchSelect from "@/components/questions/searchSelect";
-import SearchFillter from "@/components/questions/searchfillter";
+import SearchInput from "@/components/reviews/searchInput";
+import SearchSelect from "@/components/reviews/searchSelect";
+import SearchFillter from "@/components/reviews/searchfillter";
 
 type Props = {};
 

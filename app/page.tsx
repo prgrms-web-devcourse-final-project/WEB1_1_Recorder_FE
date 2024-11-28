@@ -112,7 +112,7 @@ const Home = ({}) => {
   const userTypes = ["typesciprt", "react", "python"];
 
   return (
-    <main className="m-auto my-10 max-w px-4">
+    <main className="m-auto my-10 max-w px-4 lg:px-20">
       <section className="my-4 flex flex-col sm:flex-row">
         <Card className="sm:mr-2 sm:w-1/2">
           <CardHeader>
