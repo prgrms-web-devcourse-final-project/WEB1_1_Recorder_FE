@@ -60,13 +60,16 @@ const Mentors = () => {
       comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
     }
   ];
+
   return (
-    <main className="m-auto my-10 max-w px-4 lg:px-20">
+    <div className="m-auto max-w px-4 lg:px-20">
       <PageHeader title="라이브 피드백 멘토">
-        <Button variant="outline">신청하기</Button>
+        <Button size="lg" className="text-white">
+          멘토 신청하기
+        </Button>
       </PageHeader>
       <MentorGrid mentorList={mentorList} className="my-10"></MentorGrid>
-    </main>
+    </div>
   );
 };
 
