@@ -1,5 +1,5 @@
 import SearchBox from "@/components/reviews/searchBox";
-import ReviewSummaryList from "@/components/reviewSummaryList";
+import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 
 const Reviews = () => {
   const reviewList = [

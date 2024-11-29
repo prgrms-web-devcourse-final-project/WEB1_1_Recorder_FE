@@ -1,16 +1,21 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import React from "react";
+import React, { SetStateAction } from "react";
 
 type Props = {
+  state: string[];
+  setState: React.Dispatch<SetStateAction<string[]>>;
+  ref: { current: string };
   className?: string;
 };
 
-const ChatInput = ({ className }: Props) => {
+const ChatInput = ({ state, setState, ref, className }: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    ref.current = formData.get("content") as string;
+    setState((prev) => [ref.current, ...prev]);
     e.currentTarget.reset();
   };
   return (
