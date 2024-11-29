@@ -29,7 +29,6 @@ export default function RootLayout({
       >
         <HeaderNonMember />
         <main className="flex-grow">{children}</main>
-        {/* <main className="flex-grow"><Login /></main> */}
         <Footer />
       </body>
     </html>
