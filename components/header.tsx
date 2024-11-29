@@ -17,7 +17,7 @@ const Header = ({ isLogin }: Props) => {
   const [input, setInput] = useState("");
   const router = useRouter();
   return (
-    <header className="shadow-md">
+    <header className="fixed z-50 w-full bg-white shadow-md">
       <div className="m-auto flex max-w p-4">
         <div className="flex items-center gap-4">
           <h1 className="mr-4 cursor-pointer" onClick={() => router.push("/")}>
