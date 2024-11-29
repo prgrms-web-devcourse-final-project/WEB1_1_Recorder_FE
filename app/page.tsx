@@ -1,5 +1,6 @@
-import MentorSummaryItem from "@/components/mentorSummaryItem";
-import ReviewSummaryList from "@/components/reviewSummaryList";
+import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
+import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -112,7 +113,7 @@ const Home = ({}) => {
   const userTypes = ["typesciprt", "react", "python"];
 
   return (
-    <main className="m-auto my-10 max-w px-4">
+    <main className="m-auto my-10 max-w px-4 lg:px-20">
       <section className="my-4 flex flex-col sm:flex-row">
         <Card className="sm:mr-2 sm:w-1/2">
           <CardHeader>

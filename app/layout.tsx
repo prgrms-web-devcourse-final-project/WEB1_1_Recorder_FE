@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+
 import HeaderNonMember from "@/components/headerNonmeber";
 import Footer from "@/components/footer";
 import Login from "./socialLogin/page";
@@ -24,6 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body
         className={`${pretendard.variable} font-pretendard flex flex-col min-h-screen`}
       >

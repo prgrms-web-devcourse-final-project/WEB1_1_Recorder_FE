@@ -22,7 +22,7 @@ const MentorSummaryItem = ({ userImg = "https://github.com/shadcn.png", ...mento
         <div className="line-clamp-1">
           {mentor.type.map((name, i) => {
             return (
-              <Badge key={i} className="mr-1">
+              <Badge key={i} className="mr-1" variant="secondary">
                 {name}
               </Badge>
             );
