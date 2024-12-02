@@ -5,12 +5,12 @@ type Props = object;
 const MyInfoProfile = ({}: Props) => {
   const router = useRouter();
   return (
-    <div className="flex flex-col bg-[#E8E8E8] rounded-[10px] p-6">
+    <div className="flex flex-col bg-wireframe rounded-[10px] p-6">
       <div className="flex flex-col items-center justify-center">
         <Image
           className="bg-white border-none rounded-full"
-          src=""
-          alt="profile"
+          src="img/svg/logo.svg"
+          alt=""
           width={150}
           height={150}
         />
