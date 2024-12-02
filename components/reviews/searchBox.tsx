@@ -1,15 +1,15 @@
 "use client";
-import { Card } from "@/components/ui/card";
-import { useState } from "react";
 import SearchInput from "@/components/reviews/searchInput";
 import SearchSelect from "@/components/reviews/searchSelect";
 import SearchFillter from "@/components/reviews/searchfillter";
+import { Card } from "@/components/ui/card";
+import { useState } from "react";
 
 type Props = {};
 
 const SearchBox = ({}: Props) => {
   const [input, setInput] = useState("");
-  const techStackList = ["전체", "typescript", "react", "javsscript", "nextjs", "java", "lua", "go", "ruby"];
+  const techStackList = ["전체", "TypeScript", "React", "JavaScript", "NextJS", "Java", "Lua", "Go", "Ruby"];
   const [techStack, setTechStack] = useState("기술 스택");
   const sortTypeList = ["최신순", "인기순"];
   const [sortType, setSortType] = useState("최신순");

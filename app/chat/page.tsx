@@ -1,23 +1,10 @@
 "use client";
-import { useState } from "react";
 import ChatList from "@/components/chat/chatList";
 import ChatDetail from "@/components/chat/chatDetail";
+import { users } from "@/constants/user";
+import { useState } from "react";
 
 const Chat = () => {
-  const users = [
-    "user1",
-    "user2",
-    "user3",
-    "user4",
-    "user5",
-    "user6",
-    "user7",
-    "user8",
-    "user9",
-    "user10",
-    "user11",
-    "user12"
-  ];
   const [selectedUser, setSelectedUser] = useState("");
   return (
     <main className="m-auto my-10 flex max-w gap-4 px-4">

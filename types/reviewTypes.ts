@@ -5,16 +5,14 @@ export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
 
 export type Question = {
   id: number;
-  users_id: number;
+  writer: string;
+  writerImage?: string;
   title: string;
-  type: string[];
-  state: string;
-  content: string;
-  read_count: number;
-  created_at: string;
-  updated_at: string;
-  is_deleted: boolean;
-  is_anomyous: boolean;
+  content?: string;
+  createdAt: string;
+  answerCount: number;
+  readCount: number;
+  stacks: string[];
 };
 
 export type Code = {

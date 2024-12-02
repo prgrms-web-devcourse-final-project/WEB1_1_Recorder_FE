@@ -1,22 +1,25 @@
+"use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Mentor } from "@/types/mentorTypes";
+import { useRouter } from "next/navigation";
 
 type Props = {
-  title: string;
-  type: string[];
-  business: string;
-  score: number;
-  liveCount: number;
-  userId: string;
-  comment: string;
-  userImg?: string;
+  mentor: Mentor;
 };
 
-const MentorSummaryItem = ({ userImg = "https://github.com/shadcn.png", ...mentor }: Props) => {
+const MentorSummaryItem = ({ mentor }: Props) => {
+  const router = useRouter();
   return (
-    <Card>
-      <CardHeader className="border-b-2 pb-4">
+    <Card
+      className="cursor-pointer transition-all hover:scale-[0.995] hover:shadow-lg"
+      onClick={() => {
+        router.push(`/detail/mentor/${mentor.userId}`);
+      }}
+    >
+      <CardHeader className="pb-4">
         <CardTitle>{mentor.title}</CardTitle>
         <CardDescription className="line-clamp-2">{mentor.comment}</CardDescription>
         <div className="line-clamp-1">
@@ -29,10 +32,11 @@ const MentorSummaryItem = ({ userImg = "https://github.com/shadcn.png", ...mento
           })}
         </div>
       </CardHeader>
+      <Separator />
       <CardContent className="pt-4">
         <div className="flex items-center pb-4">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={userImg}></AvatarImage>
+            <AvatarImage src={mentor.userImage || "https://github.com/shadcn.png"}></AvatarImage>
           </Avatar>
           <span className="px-2">{mentor.userId}</span>
         </div>

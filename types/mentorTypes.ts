@@ -5,5 +5,6 @@ export type Mentor = {
   score: number;
   liveCount: number;
   userId: string;
+  userImage?: string;
   comment: string;
 };
