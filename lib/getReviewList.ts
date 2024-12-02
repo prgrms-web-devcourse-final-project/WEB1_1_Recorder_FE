@@ -37,4 +37,4 @@ const getRecentReviewList = async (params: { size: number }) => {
   return data;
 };
 
-export { getReviewList, getPopularReviewList };
+export { getReviewList, getPopularReviewList, getRecentReviewList };

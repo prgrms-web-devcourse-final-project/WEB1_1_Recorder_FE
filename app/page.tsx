@@ -1,14 +1,16 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import { reviewList } from "@/constants/reviews";
 import { mentorList } from "@/constants/mentors";
-import { userStacks } from "@/constants/user";
-import { getPopularReviewList, getReviewList } from "@/lib/getReviewList";
+import ReviewByStack from "@/components/reviews/reviewByStack";
+import { getPopularReviewList } from "@/lib/getReviewList";
 
-const Home = ({}) => {
+const Home = async () => {
+  // const popularReviewList = await getPopularReviewList({ size: 1, days: 7 });
+  // const recentReviewList = await getRecentReviewList({ size: 1 });
+
   return (
     <div className="m-auto max-w px-4 lg:px-20">
       <section className="my-8 flex flex-col sm:flex-row">
@@ -30,25 +32,7 @@ const Home = ({}) => {
         </Card>
       </section>
       <section className="my-8">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">기술별 질문</CardTitle>
-            <CardDescription className="pt-2">
-              <ToggleGroup type="single" variant="outline" className="flex justify-start">
-                {userStacks.map((stack, i) => {
-                  return (
-                    <ToggleGroupItem key={i} value={stack} aria-label="Toggle bold">
-                      {stack}
-                    </ToggleGroupItem>
-                  );
-                })}
-              </ToggleGroup>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ReviewSummaryList reviewList={reviewList} size="lg" length={3} />
-          </CardContent>
-        </Card>
+        <ReviewByStack />
       </section>
       <section className="my-8">
         <Card>
