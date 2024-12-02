@@ -4,9 +4,9 @@ type Props = object;
 const ComponentName = ({ }: Props) => {
   return (
 <div className="mt-2 flex gap-2">
-    <Badge variant="outline">react</Badge>
-    <Badge variant="outline">Java</Badge>
-    <Badge variant="outline">Nextjs</Badge>
+    <Badge variant="secondary">react</Badge>
+    <Badge variant="secondary">Java</Badge>
+    <Badge variant="secondary">Nextjs</Badge>
     </div>
   );
 };
