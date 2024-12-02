@@ -3,7 +3,7 @@ import { reviewFormSchema } from "@/lib/reviewFormSchema";
 
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
 
-export type Question = {
+export type ReviewItem = {
   id: number;
   writer: string;
   writerImage?: string;
