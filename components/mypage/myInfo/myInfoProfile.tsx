@@ -1,21 +1,18 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 type Props = object;
 
 const MyInfoProfile = ({}: Props) => {
   const router = useRouter();
   return (
-    <div className="flex flex-col bg-secondary rounded-[10px] p-6">
+    <div className="flex flex-col rounded-[10px] bg-secondary p-6">
       <div className="flex flex-col items-center justify-center">
-        <Image
-          className="bg-white border-none rounded-full"
-          src="img/svg/logo.svg"
-          alt=""
-          width={150}
-          height={150}
-        />
-        <div className="flex flex-col gap-2 items-center mt-4">
+        <Avatar className="w-40 h-40">
+          <AvatarImage src="https://github.com/shadcn.png" className="w-40 h-40 rounded-full border-none bg-white" />
+        </Avatar>
+        <div className="mt-4 flex flex-col items-center gap-2">
           <div className="flex items-center gap-2">
             <Image src="/img/reward.png" alt="reward" width={30} height={30} />
             <p>test1</p>
@@ -27,7 +24,7 @@ const MyInfoProfile = ({}: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-end mt-4 mr-12">
+      <div className="mr-12 mt-4 flex justify-end">
         <Button size="edit" className="bg-btnColor text-white" onClick={() => router.push("/myPage/editProfile")}>
           회원정보수정
         </Button>
