@@ -9,10 +9,8 @@ import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
 import TextViewer from "@/components/textEditor/textViewer";
 import { data } from "@/constants/detailReviewData";
-type Props = {
-  postId: number;
-};
-const ReviewDetail = ({ postId }: Props) => {
+
+const ReviewDetail = () => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   return (
     <>
