@@ -1,8 +1,8 @@
 import ReviewSummaryItem from "@/components/reviews/reviewSummaryItem";
-import { Question } from "@/types/reviewTypes";
+import { ReviewItem } from "@/types/reviewTypes";
 
 type Props = {
-  reviewList: Question[];
+  reviewList: ReviewItem[];
   size?: "md" | "lg";
   length?: number;
 };
@@ -11,7 +11,7 @@ const ReviewSummaryList = ({ reviewList, size = "md", length = reviewList.length
   return (
     <div className="flex flex-col gap-4">
       {reviewList.slice(0, length).map((review, i) => {
-        return <ReviewSummaryItem key={i} size={size} {...review}></ReviewSummaryItem>;
+        return <ReviewSummaryItem key={i} size={size} review={review}></ReviewSummaryItem>;
       })}
     </div>
   );
