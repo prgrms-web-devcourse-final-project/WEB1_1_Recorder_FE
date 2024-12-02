@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { FaCheck } from "react-icons/fa";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 
@@ -13,43 +12,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 import CodeEditor from "@/components/codeEditor";
 import { useEffect, useState } from "react";
 import TextEditor from "@/components/textEditor/textEditor";
-
-const formSchema = z.object({
-  category: z.enum(["refactoring", "debugging"], {
-    required_error: "질문 유형을 선택해야 합니다."
-  }),
-  title: z.string().min(2, {
-    message: "제목을 입력해야 합니다."
-  }),
-  stacks: z
-    .array(
-      z.object({
-        value: z.string()
-      })
-    )
-    .optional(),
-  githubLink: z.string().url().optional(),
-  githubLinkReveal: z.boolean().optional(),
-  codes: z.array(
-    z.object({
-      name: z.string(),
-      content: z.string()
-    })
-  ),
-  content: z.string().min(2, {
-    message: "내용을 입력해야 합니다."
-  }),
-  isAnonymous: z.boolean().optional()
-});
-
-type formSchemaType = z.infer<typeof formSchema>;
+import { reviewFormSchema } from "@/lib/reviewFormSchema";
+import { ReviewFormSchema } from "@/types/reviewTypes";
 
 const RequestReviewForm = ({}) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
-  const form = useForm<formSchemaType>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ReviewFormSchema>({
+    resolver: zodResolver(reviewFormSchema),
     defaultValues: {
-      category: "refactoring",
+      type: "REFACTOR",
       title: "test_title",
       stacks: [{ value: "React" }, { value: "Typescript" }],
       githubLink: "https://github.com/",
@@ -75,7 +46,7 @@ const RequestReviewForm = ({}) => {
     name: "codes",
     control: form.control
   });
-  function onSubmit(values: formSchemaType) {
+  function onSubmit(values: ReviewFormSchema) {
     console.log(values);
   }
 
@@ -85,7 +56,7 @@ const RequestReviewForm = ({}) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="category"
+            name="type"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>질문유형</FormLabel>
@@ -97,30 +68,30 @@ const RequestReviewForm = ({}) => {
                   >
                     <FormItem>
                       <FormControl>
-                        <RadioGroupItem value="refactoring" className="sr-only" />
+                        <RadioGroupItem value="REFACTOR" className="sr-only" />
                       </FormControl>
                       <FormLabel
                         className={cn(
                           "flex justify-between rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent",
-                          field.value === "refactoring" && "border-primary bg-accent text-primary"
+                          field.value === "REFACTOR" && "border-primary bg-accent text-primary"
                         )}
                       >
-                        Refactoring
-                        <FaCheck className={cn(field.value !== "refactoring" && "text-transparent")} />
+                        REFACTOR
+                        <FaCheck className={cn(field.value !== "REFACTOR" && "text-transparent")} />
                       </FormLabel>
                     </FormItem>
                     <FormItem>
                       <FormControl>
-                        <RadioGroupItem value="debugging" className="sr-only" />
+                        <RadioGroupItem value="DEBUG" className="sr-only" />
                       </FormControl>
                       <FormLabel
                         className={cn(
                           "flex justify-between rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent",
-                          field.value === "debugging" && "border-primary bg-accent text-primary"
+                          field.value === "DEBUG" && "border-primary bg-accent text-primary"
                         )}
                       >
                         Debugging
-                        <FaCheck className={cn(field.value !== "debugging" && "text-transparent")} />
+                        <FaCheck className={cn(field.value !== "DEBUG" && "text-transparent")} />
                       </FormLabel>
                     </FormItem>
                   </RadioGroup>

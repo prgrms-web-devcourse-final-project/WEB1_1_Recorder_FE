@@ -1,5 +1,3 @@
-"use client";
-
 import RequestReviewForm from "@/components/request/review/requestReviewForm";
 import PageHeader from "@/components/pageHeader";
 const RequestReview = ({}) => {
