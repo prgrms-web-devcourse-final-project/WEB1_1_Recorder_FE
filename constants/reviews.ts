@@ -1,6 +1,6 @@
-import { ReviewListItem } from "@/types/reviewTypes";
+import { ReviewItem } from "@/types/reviewTypes";
 
-export const reviewList: ReviewListItem[] = [
+export const reviewList: ReviewItem[] = [
   {
     id: 1,
     writer: "user1",

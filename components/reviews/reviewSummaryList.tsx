@@ -1,8 +1,8 @@
 import ReviewSummaryItem from "@/components/reviews/reviewSummaryItem";
-import { ReviewListItem } from "@/types/reviewTypes";
+import { ReviewItem } from "@/types/reviewTypes";
 
 type Props = {
-  reviewList: ReviewListItem[];
+  reviewList: ReviewItem[];
   size?: "md" | "lg";
   length?: number;
 };

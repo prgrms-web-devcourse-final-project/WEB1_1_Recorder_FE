@@ -6,6 +6,7 @@ import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import { reviewList } from "@/constants/reviews";
 import { mentorList } from "@/constants/mentors";
 import { userStacks } from "@/constants/user";
+import { getPopularReviewList, getReviewList } from "@/lib/getReviewList";
 
 const Home = ({}) => {
   return (

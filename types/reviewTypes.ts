@@ -1,4 +1,4 @@
-export type ReviewListItem = {
+export type ReviewItem = {
   id: number;
   writer: string;
   writerImage?: string;
