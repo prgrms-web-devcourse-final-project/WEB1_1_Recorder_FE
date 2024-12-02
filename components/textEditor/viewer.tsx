@@ -10,45 +10,20 @@ import {
   MDXEditor,
   type MDXEditorMethods,
   type MDXEditorProps,
-  toolbarPlugin,
-  UndoRedo,
-  BoldItalicUnderlineToggles,
-  CodeToggle,
-  ListsToggle,
-  CreateLink,
   linkDialogPlugin,
   imagePlugin,
-  InsertImage,
-  InsertThematicBreak,
   codeMirrorPlugin,
   codeBlockPlugin,
-  InsertCodeBlock,
-  InsertAdmonition,
   directivesPlugin,
   AdmonitionDirectiveDescriptor
 } from "@mdxeditor/editor";
 
 type Props = { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps;
 
-const Editor = ({ editorRef, ...props }: Props) => {
+const Viewer = ({ editorRef, ...props }: Props) => {
   return (
     <MDXEditor
       plugins={[
-        toolbarPlugin({
-          toolbarContents: () => (
-            <>
-              <UndoRedo />
-              <BoldItalicUnderlineToggles />
-              <CodeToggle />
-              <ListsToggle />
-              <CreateLink />
-              <InsertImage />
-              <InsertThematicBreak />
-              <InsertCodeBlock />
-              <InsertAdmonition />
-            </>
-          )
-        }),
         imagePlugin({
           imageAutocompleteSuggestions: ["https://via.placeholder.com/150", "https://via.placeholder.com/150"],
           imageUploadHandler: async () => Promise.resolve("https://picsum.photos/200/300")
@@ -59,7 +34,7 @@ const Editor = ({ editorRef, ...props }: Props) => {
         quotePlugin(),
         thematicBreakPlugin(),
         markdownShortcutPlugin(),
-        codeBlockPlugin({ defaultCodeBlockLanguage: "js" }),
+        codeBlockPlugin({ defaultCodeBlockLanguage: "JavaScript" }),
         codeMirrorPlugin({
           codeBlockLanguages: {
             js: "JavaScript",
@@ -78,4 +53,4 @@ const Editor = ({ editorRef, ...props }: Props) => {
     />
   );
 };
-export default Editor;
+export default Viewer;

@@ -263,7 +263,7 @@ const RequestReviewForm = ({}) => {
               <FormItem className="flex-grow">
                 <FormLabel>본문</FormLabel>
                 <FormControl>
-                  <TextEditor markdown={field.value} onChange={field.onChange} className="h-96 overflow-y-scroll" />
+                  <TextEditor markdown={field.value} onChange={field.onChange} className="overflow-y-scroll" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
