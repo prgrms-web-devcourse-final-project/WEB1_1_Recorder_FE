@@ -14,6 +14,7 @@ export default {
       colors: {
         primary: "#EE6F57",
         background: "hsl(var(--background))",
+        btnColor: "#2D3648", // 와이어프레임 버튼 색상
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
