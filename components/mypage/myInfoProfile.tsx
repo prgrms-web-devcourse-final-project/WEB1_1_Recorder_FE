@@ -10,7 +10,7 @@ const myInfoProfile = ({ }: Props) => {
         <p>test@email.com</p>
         <div className="flex items-center">
             <p>계정 연동</p>
-            <Image src="" alt="profile" width={30} height={30}/>
+            <Image src="/img/logo.svg" alt="logo" width={30} height={30}/>
         </div>
     </div>
   </div>
