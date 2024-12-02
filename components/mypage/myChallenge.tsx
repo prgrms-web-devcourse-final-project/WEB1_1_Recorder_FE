@@ -1,14 +1,21 @@
-import { useRouter } from "next/navigation";
 type Props = object;
+import { Progress } from "@/components/ui/progress"
 
-const ComponentName = ({ }: Props) => {
-  const router = useRouter();
+const myChallenge = ({}: Props) => {
   return (
-    <div className="flex justify-between items-center gap-6 border-b-2 border-[#2D3648] mt-8">
-        <p className="text-[32px] font-bold pb-3">나의 업적</p>
-        <button className="text-[12px] text-[#2D3648]" onClick={() => router.push("/myPage/challengeDetail")}>+ 업적 상세 보기</button>
+    <div className="mt-10">
+      <div className="flex flex-col rounded-[10px] bg-[#E8E8E8] px-[120px] py-[70px]">
+        <div className="flex flex-col items-center justify-center">
+            <div className="flex gap-10">
+                <p className="text-2xl">달성한 업적 3개</p>
+                <div className="border-r-2 border-[#B3B3B3]"></div>
+                <p className="text-2xl">총 업적 10개</p>
+            </div>
+            <Progress value={33} className="mt-5"/>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ComponentName;
+export default myChallenge;
