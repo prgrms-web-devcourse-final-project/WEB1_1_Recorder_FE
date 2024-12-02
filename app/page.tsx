@@ -3,114 +3,11 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
-import { Mentor } from "@/types/mentorTypes";
-import { ReviewListItem } from "@/types/reviewTypes";
+import { reviewList } from "@/constants/reviews";
+import { mentorList } from "@/constants/mentors";
+import { userStacks } from "@/constants/user";
 
 const Home = ({}) => {
-  const reviewList: ReviewListItem[] = [
-    {
-      id: 1,
-      writer: "user1",
-      title: "title",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic rem veritatis, aliquid recusandae possimus quos quo at eligendi eos tenetur assumenda velit aliquam cum culpa sint sit molestiae obcaecati impedit.",
-      createdAt: "2020-10-10",
-      answerCount: 3,
-      readCount: 10,
-      stacks: ["typescript", "react"]
-    },
-    {
-      id: 2,
-      writer: "user2",
-      title: "title",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic rem veritatis, aliquid recusandae possimus quos quo at eligendi eos tenetur assumenda velit aliquam cum culpa sint sit molestiae obcaecati impedit.",
-      createdAt: "2020-10-10",
-      answerCount: 3,
-      readCount: 10,
-      stacks: ["typescript", "react"]
-    },
-    {
-      id: 3,
-      writer: "user3",
-      title: "title",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic rem veritatis, aliquid recusandae possimus quos quo at eligendi eos tenetur assumenda velit aliquam cum culpa sint sit molestiae obcaecati impedit.",
-      createdAt: "2020-10-10",
-      answerCount: 3,
-      readCount: 10,
-      stacks: ["typescript", "react"]
-    },
-    {
-      id: 4,
-      writer: "user4",
-      title: "title",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic rem veritatis, aliquid recusandae possimus quos quo at eligendi eos tenetur assumenda velit aliquam cum culpa sint sit molestiae obcaecati impedit.",
-      createdAt: "2020-10-10",
-      answerCount: 3,
-      readCount: 10,
-      stacks: ["typescript", "react"]
-    }
-  ];
-  const mentorList: Mentor[] = [
-    {
-      title: "라이브 피드백 멘토합니다.",
-      type: ["react", "typescript"],
-      business: "프로그래머스",
-      score: 100,
-      liveCount: 12,
-      userId: "user1",
-      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
-    },
-    {
-      title: "라이브 피드백 멘토합니다.",
-      type: ["react", "typescript"],
-      business: "프로그래머스",
-      score: 100,
-      liveCount: 12,
-      userId: "user2",
-      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
-    },
-    {
-      title: "라이브 피드백 멘토합니다.",
-      type: ["react", "typescript"],
-      business: "프로그래머스",
-      score: 100,
-      liveCount: 12,
-      userId: "user3",
-      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
-    },
-    {
-      title: "라이브 피드백 멘토합니다.",
-      type: ["react", "typescript"],
-      business: "프로그래머스",
-      score: 100,
-      liveCount: 12,
-      userId: "user1",
-      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
-    },
-    {
-      title: "라이브 피드백 멘토합니다.",
-      type: ["react", "typescript"],
-      business: "프로그래머스",
-      score: 100,
-      liveCount: 12,
-      userId: "user2",
-      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
-    },
-    {
-      title: "라이브 피드백 멘토합니다.",
-      type: ["react", "typescript"],
-      business: "프로그래머스",
-      score: 100,
-      liveCount: 12,
-      userId: "user3",
-      comment: "안녕하세요. 라이브 피드백 멘티를 모집합니다."
-    }
-  ];
-  const userTypes = ["TypeScript", "React", "NextJS"];
-
   return (
     <div className="m-auto max-w px-4 lg:px-20">
       <section className="my-8 flex flex-col sm:flex-row">
@@ -137,10 +34,10 @@ const Home = ({}) => {
             <CardTitle className="text-2xl font-bold">기술별 질문</CardTitle>
             <CardDescription className="pt-2">
               <ToggleGroup type="single" variant="outline" className="flex justify-start">
-                {userTypes.map((type, i) => {
+                {userStacks.map((stack, i) => {
                   return (
-                    <ToggleGroupItem key={i} value={type} aria-label="Toggle bold">
-                      {type}
+                    <ToggleGroupItem key={i} value={stack} aria-label="Toggle bold">
+                      {stack}
                     </ToggleGroupItem>
                   );
                 })}
