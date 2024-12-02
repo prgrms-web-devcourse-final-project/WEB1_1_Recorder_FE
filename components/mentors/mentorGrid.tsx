@@ -10,7 +10,7 @@ const MentorGrid = ({ mentorList, className }: Props) => {
   return (
     <div className={`grid grid-cols-3 gap-4 ${className}`}>
       {mentorList.map((mentor, i) => {
-        return <MentorSummaryItem key={i} {...mentor}></MentorSummaryItem>;
+        return <MentorSummaryItem key={i} mentor={mentor}></MentorSummaryItem>;
       })}
     </div>
   );
