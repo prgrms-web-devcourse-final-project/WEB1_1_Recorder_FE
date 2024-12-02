@@ -1,11 +1,11 @@
 "use client";
 import PageHeader from "@/components/pageHeader";
-import MyInfoProfile from "@/components/mypage/myInfoProfile";
-import MyPageTop from "@/components/mypage/myPageTop";
-import MyChallengeTop from "@/components/mypage/myChallengeTop";
-import MyChallenge from "@/components/mypage/myChallenge";
-import MyStackTop from "@/components/mypage/myStackTop";
-import MyStack from "@/components/mypage/myStack";
+import MyInfoProfile from "@/components/mypage/myInfo/myInfoProfile";
+import MyPageTop from "@/components/mypage/myInfo/myPageTop";
+import MyChallengeTop from "@/components/mypage/myInfo/myChallengeTop";
+import MyChallenge from "@/components/mypage/myInfo/myChallenge";
+import MyStackTop from "@/components/mypage/myInfo/myStackTop";
+import MyStack from "@/components/mypage/myInfo/myStack";
 
 const MyPage = () => {
   return (
