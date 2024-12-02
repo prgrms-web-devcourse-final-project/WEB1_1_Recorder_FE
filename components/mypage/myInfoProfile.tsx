@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 type Props = object;
 
 const MyInfoProfile = ({}: Props) => {
@@ -27,9 +28,9 @@ const MyInfoProfile = ({}: Props) => {
         </div>
       </div>
       <div className="flex justify-end mt-4 mr-12">
-        <button className="bg-btnColor w-[175px] p-[10px] text-white rounded-sm" onClick={() => router.push("/myPage/editProfile")}>
+        <Button size="edit" className="bg-btnColor text-white" onClick={() => router.push("/myPage/editProfile")}>
           회원정보수정
-        </button>
+        </Button>
       </div>
     </div>
   );
