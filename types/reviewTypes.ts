@@ -1,3 +1,8 @@
+import { z } from "zod";
+import { reviewFormSchema } from "@/lib/reviewFormSchema";
+
+export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
+
 export type Question = {
   id: number;
   users_id: number;
