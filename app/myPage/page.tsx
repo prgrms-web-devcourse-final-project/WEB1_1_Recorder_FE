@@ -2,6 +2,7 @@
 import PageHeader from "@/components/pageHeader";
 import MyInfoProfile from "@/components/mypage/myInfoProfile"
 import MyPageTop from "@/components/mypage/myPageTop";
+import MyChallenge from "@/components/mypage/myChallenge"
 
 const MyPage = () => {
   return (
@@ -12,6 +13,7 @@ const MyPage = () => {
         <div className="">
           <MyInfoProfile />
         </div>
+        <MyChallenge />
       </div>
     </div>
   );
