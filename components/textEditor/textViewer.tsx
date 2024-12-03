@@ -8,7 +8,7 @@ const Viewer = dynamic(() => import("./viewer"), {
   ssr: false
 });
 const TextViewer = forwardRef<MDXEditorMethods, MDXEditorProps>((props, ref) => (
-  <Viewer contentEditableClassName="prose" readOnly {...props} editorRef={ref} />
+  <Viewer contentEditableClassName="viewer" readOnly {...props} editorRef={ref} />
 ));
 
 TextViewer.displayName = "TextViewer";

@@ -8,33 +8,36 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
 import TextViewer from "@/components/textEditor/textViewer";
-import { data } from "@/constants/detailReviewData";
+import { TReviewDetail } from "@/types/reviewTypes";
 
-const ReviewDetail = () => {
+type Props = {
+  review: TReviewDetail;
+};
+const ReviewDetail = ({ review }: Props) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   return (
     <>
-      <PageHeader title={data.result.title} />
+      <PageHeader title={review.title} />
       <div className="flex flex-col gap-4 px-5">
         <div className="flex items-center gap-2 font-semibold">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <span>{data.result.writer}</span>
+          <span>{review.writer}</span>
           <Separator />
           <FiGithub size={25} />
-          <span>{data.result.githubLink}</span>
+          <span>{review.githubLink}</span>
           <Separator />
-          <span>{data.result.createdAt}</span>
+          <span>{review.createdAt}</span>
           <Separator />
-          <span>조회수 {data.result.readCount}</span>
+          <span>조회수 {review.readCount}</span>
           <Separator />
-          <span>답변 {data.result.answerCount}개</span>
+          <span>답변 {review.answerCount}개</span>
         </div>
         <div className="flex flex-wrap items-end gap-2">
-          {data.result.codes.length >= 1 &&
-            data.result.codes.map((code, index) => (
+          {review.codes.length >= 1 &&
+            review.codes.map((code, index) => (
               <div key={index} className="flex flex-col space-y-2">
                 <span className={cn(index !== 0 && "sr-only")}>메인 코드</span>
                 <span className={cn(index !== 1 && "sr-only")}>보조 코드</span>
@@ -50,14 +53,14 @@ const ReviewDetail = () => {
         </div>
         <div>
           <div className="border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">
-            {data.result.codes[selectedCodeIndex].name}
+            {review.codes[selectedCodeIndex].name}
           </div>
           <div>
-            <CodeViewer code={data.result.codes[selectedCodeIndex].content} language="javascript" />
+            <CodeViewer code={review.codes[selectedCodeIndex].content} language="javascript" />
           </div>
         </div>
         <div>
-          <TextViewer markdown={data.result.content} />
+          <TextViewer markdown={review.content} />
         </div>
       </div>
     </>
