@@ -25,7 +25,11 @@ const MyPage = () => {
       );
     }
     if (activeTab === "questions") {
-      return <MyQuestion />;
+      return (
+        <>
+          <MyQuestion />
+        </>
+      );
     }
   };
 
