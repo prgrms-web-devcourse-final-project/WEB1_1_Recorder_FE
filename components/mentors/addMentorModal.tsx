@@ -21,7 +21,7 @@ const AddMentorModal = ({}: Props) => {
           멘토 등록하기
         </Button>
       </DialogTrigger>
-      <DialogContent className="h-5/6 overflow-scroll">
+      <DialogContent className="h-5/6 overflow-auto">
         <DialogHeader>
           <DialogTitle>멘토 세부 정보를 입력해주세요</DialogTitle>
         </DialogHeader>
