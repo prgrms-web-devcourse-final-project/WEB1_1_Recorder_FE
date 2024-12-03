@@ -14,3 +14,5 @@ export const users = [
   "user11",
   "user12"
 ];
+
+export const userImage = "https://github.com/shadcn.png";
