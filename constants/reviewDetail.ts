@@ -1,6 +1,6 @@
-import { TReviewDetail } from "@/types/reviewTypes";
+import { TReviewResponse } from "@/types/reviewTypes";
 
-export const data: TReviewDetail = {
+export const reviewDetail: TReviewResponse = {
   message: "Success",
   result: {
     id: 1,
@@ -36,8 +36,21 @@ export const data: TReviewDetail = {
         badCount: 0,
         codes: {
           name: "Example Code 1",
-          content:
-            'public class Example { public static void main(String[] args) { System.out.println("Hello, World!"); } }'
+          content: `"use client";
+import { Editor } from "@monaco-editor/react";
+type Props = {
+  code: string;
+  language: string;
+};
+
+const CodeViewer = ({ code, language }: Props) => {
+  return (
+    <Editor className="h-96 w-full" theme="vs-dark" language={language} value={code} options={{ readOnly: true }} />
+  );
+};
+
+export default CodeViewer;
+`
         }
       },
       {
