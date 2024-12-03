@@ -20,7 +20,7 @@ export type Code = {
   content: string;
 };
 
-export type Answer = {
+export type TAnswer = {
   id: number;
   title: string;
   writer: string;
@@ -32,7 +32,7 @@ export type Answer = {
   codes: Code;
 };
 
-export type Result = {
+export type TReviewDetail = {
   id: number;
   writer: string;
   title: string;
@@ -43,10 +43,10 @@ export type Result = {
   stacks: string[];
   codes: Code[];
   content: string;
-  answers: Answer[];
+  answers: TAnswer[];
 };
 
-export type TReviewDetail = {
+export type TReviewResponse = {
   message: string;
-  result: Result;
+  result: TReviewDetail;
 };
