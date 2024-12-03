@@ -1,9 +1,20 @@
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/ui/app-sidebar";
+
 type Props = {};
 
 const MyQuestion = ({}: Props) => {
-  return <div className="">
-    나의 질문
-  </div>;
+  return (
+    <div className="h-full">
+      <p>sidebar</p>
+      {/* <SidebarProvider>
+        <AppSidebar />
+        <main>
+          <SidebarTrigger />
+        </main>
+      </SidebarProvider> */}
+    </div>
+  )
 };
 
 export default MyQuestion;
