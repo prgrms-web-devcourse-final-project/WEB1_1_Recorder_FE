@@ -2,8 +2,7 @@
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { getReviewList } from "@/services/getReviewList";
-import { TReviewItem } from "@/types/reviewTypes";
+import { TResponseReviewList, TReviewItem } from "@/types/reviewTypes";
 import { useEffect, useState } from "react";
 import { ImFilesEmpty } from "react-icons/im";
 
@@ -21,8 +20,12 @@ const ReviewByStack = ({ userTechs }: Props) => {
 
   useEffect(() => {
     const setList = async () => {
-      const reviews = await getReviewList({ page: "1", stack: stack });
-      setReviewList(reviews);
+      const res = await fetch("/api/getReviewList", {
+        method: "POST",
+        body: JSON.stringify({ page: "1", ...(stack.length > 0 && { stack: stack }) })
+      });
+      const data: TResponseReviewList = await res.json();
+      setReviewList(data.result.content);
     };
     setList();
   }, [stack]);

@@ -17,10 +17,12 @@ const getReviewList = async (params: {
   const res = await fetch(url, {
     method: "GET",
     headers: {
+      Accept: "application/json",
       Authorization: `Bearer ${process.env.API_TOKEN}`
     }
   });
   const data: TResponseReviewList = await res.json();
+  console.log(data);
   return data.result.content;
 };
 
@@ -33,6 +35,7 @@ const getRecentReviewList = async (params: { size: string }) => {
   const res = await fetch(url, {
     method: "GET",
     headers: {
+      Accept: "application/json",
       Authorization: `Bearer ${process.env.API_TOKEN}`
     }
   });
@@ -49,6 +52,7 @@ const getPopularReviewList = async (params: { size: string; days: string }) => {
   const res = await fetch(url, {
     method: "GET",
     headers: {
+      Accept: "application/json",
       Authorization: `Bearer ${process.env.API_TOKEN}`
     }
   });

@@ -6,6 +6,7 @@ const getMentorLists = async (params: { page: string }) => {
   const res = await fetch(url, {
     method: "GET",
     headers: {
+      Accept: "application/json",
       Authorization: `Bearer ${process.env.API_TOKEN}`
     }
   });
