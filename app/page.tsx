@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
@@ -8,11 +8,13 @@ import { TReviewItem } from "@/types/reviewTypes";
 import { getMentorLists } from "@/services/getMentorList";
 import { TMentorItem } from "@/types/mentorTypes";
 import { ImFilesEmpty } from "react-icons/im";
+import { getUserTechs } from "@/services/getUserTechs";
 
 const Home = async () => {
   const recentReviewList: TReviewItem[] | [] = await getRecentReviewList({ size: "3" });
   const popularReviewList: TReviewItem[] | [] = await getPopularReviewList({ size: "3", days: "7" });
   const mentorList: TMentorItem[] | [] = await getMentorLists({ page: "1" });
+  const userTechs: { id: number; name: string }[] | [] = await getUserTechs();
 
   return (
     <div className="m-auto max-w px-4 lg:px-20">
@@ -35,7 +37,7 @@ const Home = async () => {
         </Card>
       </section>
       <section className="my-8">
-        <ReviewByStack />
+        <ReviewByStack userTechs={userTechs} />
       </section>
       <section className="my-8">
         <Card>

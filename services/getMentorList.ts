@@ -10,7 +10,6 @@ const getMentorLists = async (params: { page: string }) => {
     }
   });
   const data: TResponseMentorList = await res.json();
-  console.log(data);
   return data.result?.content || [];
 };
 export { getMentorLists };
