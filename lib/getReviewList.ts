@@ -1,5 +1,5 @@
 import getApiUrl from "@/lib/getApiUrl";
-import { ReviewItem } from "@/types/reviewTypes";
+import { ResponseRecentAndPopularReviewList, ResponseReviewList, ReviewItem } from "@/types/reviewTypes";
 
 /** 리뷰 목록을 불러오는 함수입니다.
  * @example const reviews = getReviewList({ type: 'DEBUG', page: 0, state: 'PENDING', stack: 'JAVASCRIPT', keyword: 'URLSearchParam',
@@ -14,9 +14,14 @@ const getReviewList = async (params: {
   keyword?: string;
 }) => {
   const url = getApiUrl("/api/v1/question/list", params);
-  const res = await fetch(url, { method: "GET" });
-  const data = await res.json();
-  return data;
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`
+    }
+  });
+  const data: ResponseReviewList = await res.json();
+  return data.result.content;
 };
 
 /** 인기 리뷰 목록을 불러오는 함수입니다.
@@ -25,9 +30,15 @@ const getReviewList = async (params: {
  */
 const getPopularReviewList = async (params: { size: string; days: string }) => {
   const url = getApiUrl("/api/v1/question/popular", params);
-  const res = await fetch(url, { method: "GET" });
-  const data = await res.json();
-  return data;
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`
+    }
+  });
+  const data: ResponseRecentAndPopularReviewList = await res.json();
+
+  return data.result;
 };
 
 /** 최근 리뷰 목록을 불러오는 함수입니다.
@@ -36,9 +47,14 @@ const getPopularReviewList = async (params: { size: string; days: string }) => {
  */
 const getRecentReviewList = async (params: { size: string }) => {
   const url = getApiUrl("/api/question/recent", params);
-  const res = await fetch(url, { method: "GET" });
-  const data: ReviewItem[] = await res.json();
-  return data;
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${process.env.API_TOKEN}`
+    }
+  });
+  const data: ResponseRecentAndPopularReviewList = await res.json();
+  return data.result;
 };
 
 export { getReviewList, getPopularReviewList, getRecentReviewList };

@@ -3,6 +3,22 @@ import { reviewFormSchema, answerFormSchema } from "@/lib/formSchema";
 
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
 export type AnswerFormSchema = z.infer<typeof answerFormSchema>;
+export type ResponseReviewList = {
+  message: string;
+  result: {
+    content: ReviewItem[];
+    currentPage: number;
+    size: number;
+    startPage: number;
+    endPage: number;
+    prev: boolean;
+    next: boolean;
+  };
+};
+
+export type ResponseRecentAndPopularReviewList = Pick<ResponseReviewList, "message"> & {
+  result: Pick<ResponseReviewList["result"], "content">;
+};
 
 export type ReviewItem = {
   id: number;
