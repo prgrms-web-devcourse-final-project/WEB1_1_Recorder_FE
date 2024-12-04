@@ -1,19 +1,19 @@
-import Answer from "@/components/detail/review/answer";
+import AnswerDetail from "@/components/detail/review/answer";
 import AnswerForm from "@/components/detail/review/answerForm";
-import ReviewDetail from "@/components/detail/review/reviewDetail";
+import ContentDetail from "@/components/detail/contentDetail";
 import { Separator } from "@/components/ui/separator";
 
 import { reviewDetail } from "@/constants/reviewDetail";
 
-const ReviewDetailPage = async () => {
+const ReviewDetail = async () => {
   return (
     <div className="m-auto flex max-w flex-col gap-5 p-10">
-      <ReviewDetail review={reviewDetail.result} />
+      <ContentDetail review={reviewDetail.result} />
       <Separator className="bg-primary opacity-70" />
       <AnswerForm />
       {reviewDetail.result.answers.map((answer, index) => (
         <div key={index}>
-          <Answer answer={answer} />
+          <AnswerDetail answer={answer} />
           <Separator className="bg-primary opacity-70" />
         </div>
       ))}
@@ -21,4 +21,4 @@ const ReviewDetailPage = async () => {
   );
 };
 
-export default ReviewDetailPage;
+export default ReviewDetail;

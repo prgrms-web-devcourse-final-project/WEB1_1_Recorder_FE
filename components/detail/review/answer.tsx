@@ -8,7 +8,7 @@ import { RxCheckCircled } from "react-icons/rx";
 type Props = {
   answer: TAnswer;
 };
-const Answer = ({ answer }: Props) => {
+const AnswerDetail = ({ answer }: Props) => {
   return (
     <div className="flex items-start gap-5 p-5 pr-[60px]">
       <VoteMenu className="sticky top-20" />
@@ -37,4 +37,4 @@ const Answer = ({ answer }: Props) => {
   );
 };
 
-export default Answer;
+export default AnswerDetail;
