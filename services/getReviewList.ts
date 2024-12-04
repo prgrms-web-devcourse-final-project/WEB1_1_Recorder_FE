@@ -29,7 +29,7 @@ const getReviewList = async (params: {
  * @param params size: 받아올 질문 개수
  */
 const getRecentReviewList = async (params: { size: string }) => {
-  const url = getApiUrl("/api/question/recent", params);
+  const url = getApiUrl("/api/v1/question/recent", params);
   const res = await fetch(url, {
     method: "GET",
     headers: {
