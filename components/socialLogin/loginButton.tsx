@@ -2,7 +2,7 @@ import Image from "next/image";
 
 type Props = object;
 
-const SocialLogin = ({}: Props) => {
+const LoginButton = ({}: Props) => {
   return (
     <div className="flex flex-col gap-[20px]">
       <div>
@@ -27,4 +27,4 @@ const SocialLogin = ({}: Props) => {
   );
 };
 
-export default SocialLogin;
+export default LoginButton;
