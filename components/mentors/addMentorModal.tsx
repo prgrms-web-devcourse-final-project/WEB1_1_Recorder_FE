@@ -7,13 +7,18 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import SearchSelect from "@/components/reviews/searchSelect";
-import { useState } from "react";
+import { FormEvent, FormEventHandler, useState } from "react";
 import { techStackList } from "@/constants/reviews";
 
 type Props = {};
 
 const AddMentorModal = ({}: Props) => {
   const [stack, setstack] = useState("추가하기");
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -64,14 +69,18 @@ const AddMentorModal = ({}: Props) => {
             />
           </div>
         </div>
-        <div>
-          <h3 className="font-bold">멘토 소개</h3>
-          <Label>제목</Label>
-          <Input />
-          <Label>본문</Label>
-          <Textarea className="h-36 resize-none" />
-        </div>
-        <Button className="text-white">등록하기</Button>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <h3 className="font-bold">멘토 소개</h3>
+            <Label>제목</Label>
+            <Input name="title" />
+            <Label>본문</Label>
+            <Textarea className="h-36 resize-none" name="content" />
+          </div>
+          <Button className="text-white" type="submit">
+            등록하기
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   );

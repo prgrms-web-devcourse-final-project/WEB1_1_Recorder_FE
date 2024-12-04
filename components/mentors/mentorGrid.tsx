@@ -1,8 +1,8 @@
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
-import { Mentor } from "@/types/mentorTypes";
+import { TMentorItem } from "@/types/mentorTypes";
 
 type Props = {
-  mentorList: Mentor[];
+  mentorList: TMentorItem[] | [];
   className: string;
 };
 

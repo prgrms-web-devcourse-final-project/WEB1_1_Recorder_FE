@@ -1,7 +1,7 @@
 import getApiUrl from "@/services/getApiUrl";
 import { TResponseMentorList } from "@/types/mentorTypes";
 
-const getMentorLists = async (params: { page: string }) => {
+const getMentorList = async (params: { page: string }) => {
   const url = getApiUrl("/api/question/recent", params);
   const res = await fetch(url, {
     method: "GET",
@@ -13,4 +13,4 @@ const getMentorLists = async (params: { page: string }) => {
   const data: TResponseMentorList = await res.json();
   return data.result?.content || [];
 };
-export { getMentorLists };
+export { getMentorList };
