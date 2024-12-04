@@ -15,7 +15,7 @@ import TextEditor from "@/components/textEditor/textEditor";
 import { reviewFormSchema } from "@/lib/reviewFormSchema";
 import { ReviewFormSchema } from "@/types/reviewTypes";
 
-const RequestReviewForm = ({}) => {
+const requestForm = ({}) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   const form = useForm<ReviewFormSchema>({
     resolver: zodResolver(reviewFormSchema),
@@ -267,4 +267,4 @@ const RequestReviewForm = ({}) => {
   );
 };
 
-export default RequestReviewForm;
+export default requestForm;
