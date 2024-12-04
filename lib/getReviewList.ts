@@ -1,3 +1,4 @@
+import getApiUrl from "@/lib/getApiUrl";
 import { ReviewItem } from "@/types/reviewTypes";
 
 /** 리뷰 목록을 불러오는 함수입니다.
@@ -7,32 +8,35 @@ import { ReviewItem } from "@/types/reviewTypes";
  */
 const getReviewList = async (params: {
   type?: string;
-  page: number;
+  page: string;
   state?: string;
   stack?: string;
   keyword?: string;
 }) => {
-  const res = await fetch("api/question/list", { method: "GET" });
+  const url = getApiUrl("/api/v1/question/list", params);
+  const res = await fetch(url, { method: "GET" });
   const data = await res.json();
   return data;
 };
 
 /** 인기 리뷰 목록을 불러오는 함수입니다.
- * @example const reviews = getPopularReviewList({size: 3, days: 7})
+ * @example const reviews = getPopularReviewList({size: '3', days: '7'})
  * @param params size: 받아올 질문 개수, days: 최근 며칠간의 데이터
  */
-const getPopularReviewList = async (params: { size: number; days: number }) => {
-  const res = await fetch("api/question/popular", { method: "GET" });
+const getPopularReviewList = async (params: { size: string; days: string }) => {
+  const url = getApiUrl("/api/v1/question/popular", params);
+  const res = await fetch(url, { method: "GET" });
   const data = await res.json();
   return data;
 };
 
 /** 최근 리뷰 목록을 불러오는 함수입니다.
- * @example const reviews = getRecentReviewList({size: 3})
+ * @example const reviews = getRecentReviewList({size: '3'})
  * @param params size: 받아올 질문 개수
  */
-const getRecentReviewList = async (params: { size: number }) => {
-  const res = await fetch("api/question/recent", { method: "GET" });
+const getRecentReviewList = async (params: { size: string }) => {
+  const url = getApiUrl("/api/question/recent", params);
+  const res = await fetch(url, { method: "GET" });
   const data: ReviewItem[] = await res.json();
   return data;
 };
