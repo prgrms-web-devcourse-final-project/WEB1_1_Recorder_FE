@@ -2,11 +2,10 @@ import { z } from "zod";
 import { reviewFormSchema, answerFormSchema } from "@/lib/formSchema";
 
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
-export type AnswerFormSchema = z.infer<typeof answerFormSchema>;
 export type ResponseReviewList = {
   message: string;
   result: {
-    content: ReviewItem[];
+    content: TReviewItem[] | [];
     currentPage: number;
     size: number;
     startPage: number;
@@ -16,11 +15,17 @@ export type ResponseReviewList = {
   };
 };
 
-export type ResponseRecentAndPopularReviewList = Pick<ResponseReviewList, "message"> & {
-  result: Pick<ResponseReviewList["result"], "content">;
+export type TResponseRecentReviewList = {
+  message: string;
+  result: TReviewItem[] | null;
 };
 
-export type ReviewItem = {
+export type TResponsePopularReviewList = {
+  message: string;
+  result: TReviewItem[] | [];
+};
+
+export type TReviewItem = {
   id: number;
   writer: string;
   writerImage?: string;

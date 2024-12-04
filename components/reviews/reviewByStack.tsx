@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { reviewList } from "@/constants/reviews";
 import { userStacks } from "@/constants/user";
-import { getReviewList } from "@/lib/getReviewList";
+import { getReviewList } from "@/services/getReviewList";
 import { useEffect, useState } from "react";
 
 type Props = {};

@@ -2,14 +2,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
-import { reviewList } from "@/constants/reviews";
 import { mentorList } from "@/constants/mentors";
 import ReviewByStack from "@/components/reviews/reviewByStack";
-import { getPopularReviewList } from "@/lib/getReviewList";
+import { getPopularReviewList, getRecentReviewList } from "@/services/getReviewList";
+import { TReviewItem } from "@/types/reviewTypes";
 
 const Home = async () => {
-  // const popularReviewList = await getPopularReviewList({ size: 1, days: 7 });
-  // const recentReviewList = await getRecentReviewList({ size: 1 });
+  const recentReviewList: TReviewItem[] | [] = await getRecentReviewList({ size: "3" });
+  const popularReviewList: TReviewItem[] | [] = await getPopularReviewList({ size: "3", days: "7" });
 
   return (
     <div className="m-auto max-w px-4 lg:px-20">
@@ -19,7 +19,7 @@ const Home = async () => {
             <CardTitle className="text-2xl font-bold">최신 질문</CardTitle>
           </CardHeader>
           <CardContent>
-            <ReviewSummaryList reviewList={reviewList} length={3} />
+            <ReviewSummaryList reviewList={recentReviewList} />
           </CardContent>
         </Card>
         <Card className="sm:ml-2 sm:w-1/2">
@@ -27,7 +27,7 @@ const Home = async () => {
             <CardTitle className="text-2xl font-bold">인기 질문</CardTitle>
           </CardHeader>
           <CardContent>
-            <ReviewSummaryList reviewList={reviewList} length={3} />
+            <ReviewSummaryList reviewList={popularReviewList} />
           </CardContent>
         </Card>
       </section>
