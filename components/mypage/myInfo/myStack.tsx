@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 type Props = object;
 
-const ComponentName = ({ }: Props) => {
+const myStack = ({ }: Props) => {
   return (
 <div className="mt-2 flex gap-2">
     <Badge variant="secondary">react</Badge>
@@ -11,4 +11,4 @@ const ComponentName = ({ }: Props) => {
   );
 };
 
-export default ComponentName;
+export default myStack;
