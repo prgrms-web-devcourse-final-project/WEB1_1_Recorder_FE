@@ -1,7 +1,7 @@
 import SocialLogin from "@/components/socialLogin/login";
 import Image from "next/image";
 
-const Login = () => {
+const socialLogin = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex flex-col justify-center items-center h-screen max-w-4xl w-full">
@@ -17,4 +17,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default socialLogin;
