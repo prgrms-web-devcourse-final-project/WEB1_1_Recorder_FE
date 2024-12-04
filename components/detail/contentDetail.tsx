@@ -14,7 +14,7 @@ type Props = {
   review: TReviewDetail;
   isLiveFeedback?: boolean;
 };
-const ReviewDetail = ({ review, isLiveFeedback = false }: Props) => {
+const ContentDetail = ({ review, isLiveFeedback = false }: Props) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   return (
     <>
@@ -76,4 +76,4 @@ const ReviewDetail = ({ review, isLiveFeedback = false }: Props) => {
   );
 };
 
-export default ReviewDetail;
+export default ContentDetail;
