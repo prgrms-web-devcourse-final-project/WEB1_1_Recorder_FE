@@ -12,12 +12,16 @@ import { TReviewDetail } from "@/types/reviewTypes";
 
 type Props = {
   review: TReviewDetail;
+  isLiveFeedback?: boolean;
 };
-const ReviewDetail = ({ review }: Props) => {
+const ContentDetail = ({ review, isLiveFeedback = false }: Props) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   return (
     <>
-      <PageHeader title={review.title} />
+      <div className="flex justify-between">
+        <PageHeader title={review.title} />
+        {isLiveFeedback && <Button>라이브 피드백 -&gt;</Button>}
+      </div>
       <div className="flex flex-col gap-4 px-5">
         <div className="flex items-center gap-2 font-semibold">
           <Avatar>
@@ -62,9 +66,14 @@ const ReviewDetail = ({ review }: Props) => {
         <div>
           <TextViewer markdown={review.content} />
         </div>
+        {isLiveFeedback && (
+          <div className="flex justify-center">
+            <Button>라이브 피드백 -&gt;</Button>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-export default ReviewDetail;
+export default ContentDetail;
