@@ -3,7 +3,7 @@ import PageHeader from "@/components/pageHeader";
 type Props = {
   params: Promise<{ userId: string }>;
 };
-const RequestReview = async ({ params }: Props) => {
+const RequestLiveFeedback = async ({ params }: Props) => {
   const userId = (await params).userId;
   return (
     <div className="m-auto max-w p-10">
@@ -13,4 +13,4 @@ const RequestReview = async ({ params }: Props) => {
   );
 };
 
-export default RequestReview;
+export default RequestLiveFeedback;
