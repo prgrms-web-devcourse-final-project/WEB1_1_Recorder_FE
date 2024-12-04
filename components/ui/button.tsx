@@ -26,7 +26,10 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
         edit: "w-[175px] p-[10px] rounded-sm",
-        change: "w-[100px] p-[10px] rounded-sm"
+        change: "w-[100px] p-[10px] rounded-sm",
+        kakao: "gap-[20px] w-full p-[20px] rounded-xl",
+        google: "gap-[20px] w-full p-[18px] rounded-xl",
+        github: "gap-[20px] w-full p-[20.5px] rounded-xl",
       },
     },
     defaultVariants: {
