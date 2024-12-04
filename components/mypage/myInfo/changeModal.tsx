@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 type Props = object;
 
-const ComponentName = ({}: Props) => {
+const changeModal = ({}: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -22,4 +22,4 @@ const ComponentName = ({}: Props) => {
   );
 };
 
-export default ComponentName;
+export default changeModal;

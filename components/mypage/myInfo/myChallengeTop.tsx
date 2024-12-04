@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 type Props = object;
 
-const ComponentName = ({ }: Props) => {
+const myChallengeTop = ({ }: Props) => {
   const router = useRouter();
   return (
     <div className="flex justify-between items-center gap-6 border-b-2 border-btnColor mt-8">
@@ -11,4 +11,4 @@ const ComponentName = ({ }: Props) => {
   );
 };
 
-export default ComponentName;
+export default myChallengeTop;
