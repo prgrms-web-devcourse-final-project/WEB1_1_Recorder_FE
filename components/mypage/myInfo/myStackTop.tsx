@@ -1,6 +1,6 @@
 type Props = object;
 
-const myStack = ({}: Props) => {
+const myStackTop = ({}: Props) => {
   return (
     <div className="mt-8 flex items-center justify-between gap-6 border-b-2 border-btnColor">
       <p className="pb-3 text-[32px] font-bold">기술 스택</p>
@@ -11,4 +11,4 @@ const myStack = ({}: Props) => {
   );
 };
 
-export default myStack;
+export default myStackTop;
