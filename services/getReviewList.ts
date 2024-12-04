@@ -22,7 +22,6 @@ const getReviewList = async (params: {
     }
   });
   const data: TResponseReviewList = await res.json();
-  console.log(data);
   return data.result.content;
 };
 
