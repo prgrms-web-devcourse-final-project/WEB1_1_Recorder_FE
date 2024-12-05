@@ -13,13 +13,7 @@ export const reviewFormSchema = z.object({
     required_error: "질문 유형을 선택해야 합니다."
   }),
   isAnonymous: z.boolean().optional(),
-  stacks: z
-    .array(
-      z.object({
-        value: z.string()
-      })
-    )
-    .optional(),
+  stacks: z.array(z.string()),
   codes: z.array(
     z.object({
       name: z.string(),
