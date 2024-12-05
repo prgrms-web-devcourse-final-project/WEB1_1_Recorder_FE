@@ -7,9 +7,10 @@ import { Card } from "@/components/ui/card";
 import { techStackList } from "@/constants/reviews";
 import { useEffect, useState } from "react";
 import { getReviewList } from "@/services/getReviewList";
+import { TReviewItem } from "@/types/reviewTypes";
 
 const Reviews = () => {
-  const [reviewList, setReviewList] = useState(() => {
+  const [reviewList, setReviewList] = useState<TReviewItem[] | []>(() => {
     return [];
   });
   const [techStack, setTechStack] = useState("기술 스택");
@@ -23,11 +24,11 @@ const Reviews = () => {
   const [sortType, setSortType] = useState("최신순");
 
   useEffect(() => {
-    const r = async () => {
-      const aa = await getReviewList({ page: "1" });
-      console.log(aa);
+    const makeReviewList = async () => {
+      const data = await getReviewList({ page: "1" });
+      setReviewList(data);
     };
-    r();
+    makeReviewList();
   }, []);
 
   return (
