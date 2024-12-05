@@ -11,11 +11,18 @@ type Props = {
   setState: React.Dispatch<SetStateAction<string>>;
   className?: string;
   placeholder?: string;
+  type?: "all" | "one";
 };
 
-const SearchSelect = ({ state, setState, className, placeholder }: Props) => {
+const SearchSelect = ({ state, setState, className, placeholder, type = "all" }: Props) => {
   const [open, setOpen] = useState(false);
-  const [techStackList, setTechStackList] = useState(["전체"]);
+  const [techStackList, setTechStackList] = useState(() => {
+    if (type === "all") {
+      return ["전체"];
+    } else {
+      return [];
+    }
+  });
 
   useEffect(() => {
     const makeTechList = async () => {
@@ -49,7 +56,7 @@ const SearchSelect = ({ state, setState, className, placeholder }: Props) => {
                   }}
                 >
                   {item}
-                  <FaCheck className={state === item ? "" : "hidden"} />
+                  {type === "all" && <FaCheck className={state === item ? "" : "hidden"} />}
                 </CommandItem>
               ))}
             </CommandGroup>

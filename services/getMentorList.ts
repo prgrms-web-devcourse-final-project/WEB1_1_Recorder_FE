@@ -19,9 +19,10 @@ const getMentorList = async (params: { page: number }) => {
  * @example
  * @param params
  */
-const enrollMentor = async (params: { description: string; skillStacks: string[] }) => {
+const enrollMentor = async (params: { title: string; content: string; skillStacks: string[] }) => {
   try {
-    await fetchInstance.post("/mentor", params);
+    console.log(params);
+    // await fetchInstance.post("/mentor", params);
   } catch (error) {
     console.error(error);
   }
