@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import CodeEditor from "@/components/codeEditor";
 import { useEffect, useState } from "react";
 import TextEditor from "@/components/textEditor/textEditor";
-import { reviewFormSchema } from "@/lib/reviewFormSchema";
+import { reviewFormSchema } from "@/lib/formSchema";
 import { ReviewFormSchema } from "@/types/reviewTypes";
 import createReview from "@/services/createReview";
 import { Label } from "@radix-ui/react-label";

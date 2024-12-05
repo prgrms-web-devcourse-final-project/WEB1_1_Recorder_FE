@@ -21,3 +21,10 @@ export const reviewFormSchema = z.object({
     })
   )
 });
+
+export const answerFormSchema = z.object({
+  code: z.string(),
+  content: z.string().min(2, {
+    message: "내용을 입력해야 합니다."
+  })
+});
