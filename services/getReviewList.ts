@@ -1,4 +1,4 @@
-import getApiUrl from "@/services/getApiUrl";
+import fetchInstance from "@/services/fetchInstance";
 import { TResponsePopularReviewList, TResponseRecentReviewList, TResponseReviewList } from "@/types/reviewTypes";
 
 /** 리뷰 목록을 불러오는 함수입니다.
@@ -8,52 +8,47 @@ import { TResponsePopularReviewList, TResponseRecentReviewList, TResponseReviewL
  */
 const getReviewList = async (params: {
   type?: string;
-  page: string;
+  page: number;
   state?: string;
   stack?: string;
   keyword?: string;
 }) => {
-  const url = getApiUrl("/api/v1/question/list", params);
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      Accept: "application/json"
-    }
-  });
-  const data: TResponseReviewList = await res.json();
-  return data.result?.content || [];
+  try {
+    const data: TResponseReviewList = await fetchInstance.get("/question/list", params);
+    return data.result?.content || [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 /** 최근 리뷰 목록을 불러오는 함수입니다.
  * @example const reviews = getRecentReviewList({size: '3'})
  * @param params size: 받아올 질문 개수
  */
-const getRecentReviewList = async (params: { size: string }) => {
-  const url = getApiUrl("/api/v1/question/recent", params);
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      Accept: "application/json"
-    }
-  });
-  const data: TResponseRecentReviewList = await res.json();
-  return data.result || [];
+const getRecentReviewList = async (params: { size: number }) => {
+  try {
+    const data: TResponseRecentReviewList = await fetchInstance.get("/question/recent", params);
+
+    return data.result || [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 /** 인기 리뷰 목록을 불러오는 함수입니다.
  * @example const reviews = getPopularReviewList({size: '3', days: '7'})
  * @param params size: 받아올 질문 개수, days: 최근 며칠간의 데이터
  */
-const getPopularReviewList = async (params: { size: string; days: string }) => {
-  const url = getApiUrl("/api/v1/question/popular", params);
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      Accept: "application/json"
-    }
-  });
-  const data: TResponsePopularReviewList = await res.json();
-  return data.result;
+const getPopularReviewList = async (params: { size: number; days: number }) => {
+  try {
+    const data: TResponsePopularReviewList = await fetchInstance.get("/question/polular", params);
+    return data.result;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 export { getReviewList, getRecentReviewList, getPopularReviewList };

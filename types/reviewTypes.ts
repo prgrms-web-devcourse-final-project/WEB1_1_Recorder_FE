@@ -2,7 +2,7 @@ import { z } from "zod";
 import { reviewFormSchema, answerFormSchema } from "@/lib/formSchema";
 
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
-export type ResponseReviewList = {
+export type TResponseReviewList = {
   message: string;
   result: {
     content: TReviewItem[] | [];

@@ -1,13 +1,14 @@
-import getApiUrl from "@/services/getApiUrl";
+import fetchInstance from "@/services/fetchInstance";
 import { TResponseTechList } from "@/types/userTypes";
 
 const getTechList = async () => {
-  const url = getApiUrl("/api/v1/tech", {});
-  const res = await fetch(url, {
-    method: "GET"
-  });
-  const data: TResponseTechList = await res.json();
-  return data.result?.skillStacks || [];
+  try {
+    const data: TResponseTechList = await fetchInstance.get("/tech");
+    return data.result?.skillStacks || [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 export { getTechList };

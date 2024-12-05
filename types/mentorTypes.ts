@@ -7,11 +7,6 @@ export type TMentorItem = {
   content: string;
 };
 
-export type TRequestMentor = {
-  description: string;
-  skillStacks: string[];
-};
-
 export type TResponseMentorList = {
   message: string;
   result: {

@@ -3,17 +3,17 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import ReviewByStack from "@/components/reviews/reviewByStack";
-import { getPopularReviewList, getRecentReviewList } from "@/services/getReviewList";
+import { getPopularReviewList, getRecentReviewList, getReviewList } from "@/services/getReviewList";
 import { getMentorList } from "@/services/getMentorList";
-import { getUserTechs } from "@/services/getUserTechs";
 import { TReviewItem } from "@/types/reviewTypes";
 import { TMentorItem } from "@/types/mentorTypes";
 import { ImFilesEmpty } from "react-icons/im";
+import { getUserTechs } from "@/services/getUserTechs";
 
 const Home = async () => {
-  const recentReviewList: TReviewItem[] | [] = await getRecentReviewList({ size: "3" });
-  const popularReviewList: TReviewItem[] | [] = await getPopularReviewList({ size: "3", days: "7" });
-  const mentorList: TMentorItem[] | [] = await getMentorList({ page: "0" });
+  const recentReviewList: TReviewItem[] | [] = await getRecentReviewList({ size: 3 });
+  const popularReviewList: TReviewItem[] | [] = await getPopularReviewList({ size: 3, days: 7 });
+  const mentorList: TMentorItem[] | [] = await getMentorList({ page: 0 });
   const userTechs: { id: number; name: string }[] | [] = await getUserTechs();
 
   return (
