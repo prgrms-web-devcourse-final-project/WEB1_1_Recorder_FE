@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { reviewFormSchema } from "@/lib/reviewFormSchema";
+import { reviewFormSchema, answerFormSchema } from "@/lib/formSchema";
 
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
+export type AnswerFormSchema = z.infer<typeof answerFormSchema>;
 
 export type ReviewItem = {
   id: number;
@@ -15,26 +16,29 @@ export type ReviewItem = {
   stacks: string[];
 };
 
-export type Code = {
+type Code = {
   name: string;
   content: string;
 };
 
 export type TAnswer = {
   id: number;
-  title: string;
-  writer: string;
   content: string;
+  code: string;
+  writer: string;
+  profileImage: string | null;
+  totalAnswerCount: number;
+  adoptedRate: number;
   createdAt: string;
   isAccept: boolean;
   goodCount: number;
   badCount: number;
-  codes: Code;
 };
 
 export type TReviewDetail = {
   id: number;
   writer: string;
+  profileImage: string | null;
   title: string;
   createdAt: string;
   answerCount: number;
@@ -43,10 +47,4 @@ export type TReviewDetail = {
   stacks: string[];
   codes: Code[];
   content: string;
-  answers: TAnswer[];
-};
-
-export type TReviewResponse = {
-  message: string;
-  result: TReviewDetail;
 };
