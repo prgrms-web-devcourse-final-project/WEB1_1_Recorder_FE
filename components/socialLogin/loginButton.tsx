@@ -29,7 +29,7 @@ const LoginButton = () => {
       // 최초 로그인 여부에 따라 다른 페이지로 리다이렉트
       router.push(isFirstLogin ? '/onboarding' : '/');
     } catch (err) {
-      setError('로그인 처리 중 오류가 발생했습니다.');
+      setError('로그인 처리 중 오류가 생했습니다.');
     }
   };
 
@@ -37,11 +37,13 @@ const LoginButton = () => {
     try {
       // 백엔드 서버의 소셜 로그인 엔드포인트로 직접 리다이렉트
       if (provider === 'google') {
-        window.location.href = 'http://15.164.143.242:8080/oauth2/authorization/google';
+        const redirectUri = encodeURIComponent('http://15.164.143.242:8080/login/oauth2/code/google');
+        window.location.href = `http://ec2-15-164-143-242.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google?redirect_uri=${redirectUri}`;
       } else if (provider === 'kakao') {
         window.location.href = 'http://15.164.143.242:8080/oauth2/authorization/kakao';
       } else if (provider === 'github') {
-        window.location.href = 'http://15.164.143.242:8080/oauth2/authorization/github';
+        const redirectUri = encodeURIComponent('http://15.164.143.242:8080/login/oauth2/code/github');
+        window.location.href = `http://15.164.143.242:8080/oauth2/authorization/github?redirect_uri=${redirectUri}`;
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "로그인 중 오류가 발생했습니다");
