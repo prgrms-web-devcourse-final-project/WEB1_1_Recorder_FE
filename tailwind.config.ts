@@ -12,8 +12,12 @@ export default {
         pretendard: ["var(--font-pretendard)"]
       },
       colors: {
-        primary: "#EE6F57",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))"
+        },
         background: "hsl(var(--background))",
+        btnColor: "#2D3648", // 와이어프레임 버튼 색상
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",

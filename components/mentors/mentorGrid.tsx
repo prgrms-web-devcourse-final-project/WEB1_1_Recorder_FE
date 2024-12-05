@@ -1,4 +1,4 @@
-import MentorSummaryItem from "@/components/mentorSummaryItem";
+import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import { Mentor } from "@/types/mentorTypes";
 
 type Props = {
@@ -10,7 +10,7 @@ const MentorGrid = ({ mentorList, className }: Props) => {
   return (
     <div className={`grid grid-cols-3 gap-4 ${className}`}>
       {mentorList.map((mentor, i) => {
-        return <MentorSummaryItem key={i} {...mentor}></MentorSummaryItem>;
+        return <MentorSummaryItem key={i} mentor={mentor}></MentorSummaryItem>;
       })}
     </div>
   );

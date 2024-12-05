@@ -59,7 +59,7 @@ const Editor = ({ editorRef, ...props }: Props) => {
         quotePlugin(),
         thematicBreakPlugin(),
         markdownShortcutPlugin(),
-        codeBlockPlugin({ defaultCodeBlockLanguage: "" }),
+        codeBlockPlugin({ defaultCodeBlockLanguage: "js" }),
         codeMirrorPlugin({
           codeBlockLanguages: {
             js: "JavaScript",
