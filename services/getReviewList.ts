@@ -9,7 +9,7 @@ import { TResponsePopularReviewList, TResponseRecentReviewList, TResponseReviewL
 const getReviewList = async (params: {
   type?: string;
   page: string;
-  state?: string;
+  state?: "PENDING" | "ADOPTED";
   stack?: string;
   keyword?: string;
 }) => {
@@ -17,10 +17,12 @@ const getReviewList = async (params: {
   const res = await fetch(url, {
     method: "GET",
     headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${process.env.API_TOKEN}`
+      Accept: "application/json"
     }
   });
+
+  console.log("=============================");
+  console.log(url);
   const data: TResponseReviewList = await res.json();
   return data.result.content;
 };
@@ -34,8 +36,7 @@ const getRecentReviewList = async (params: { size: string }) => {
   const res = await fetch(url, {
     method: "GET",
     headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${process.env.API_TOKEN}`
+      Accept: "application/json"
     }
   });
   const data: TResponseRecentReviewList = await res.json();
@@ -51,8 +52,7 @@ const getPopularReviewList = async (params: { size: string; days: string }) => {
   const res = await fetch(url, {
     method: "GET",
     headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${process.env.API_TOKEN}`
+      Accept: "application/json"
     }
   });
   const data: TResponsePopularReviewList = await res.json();
