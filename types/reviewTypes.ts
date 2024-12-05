@@ -23,19 +23,22 @@ type Code = {
 
 export type TAnswer = {
   id: number;
-  title: string;
-  writer: string;
   content: string;
+  code: string;
+  writer: string;
+  profileImage: string | null;
+  totalAnswerCount: number;
+  adoptedRate: number;
   createdAt: string;
   isAccept: boolean;
   goodCount: number;
   badCount: number;
-  code: string;
 };
 
 export type TReviewDetail = {
   id: number;
   writer: string;
+  profileImage: string | null;
   title: string;
   createdAt: string;
   answerCount: number;
@@ -44,5 +47,4 @@ export type TReviewDetail = {
   stacks: string[];
   codes: Code[];
   content: string;
-  answers: TAnswer[];
 };
