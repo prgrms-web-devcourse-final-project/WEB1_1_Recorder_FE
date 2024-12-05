@@ -14,15 +14,19 @@ import { useEffect, useState } from "react";
 import TextEditor from "@/components/textEditor/textEditor";
 import { reviewFormSchema } from "@/lib/reviewFormSchema";
 import { ReviewFormSchema } from "@/types/reviewTypes";
+import createReview from "@/services/createReview";
+import { Label } from "@radix-ui/react-label";
+import { useRouter } from "next/navigation";
 
 const requestForm = ({}) => {
+  const router = useRouter();
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   const form = useForm<ReviewFormSchema>({
     resolver: zodResolver(reviewFormSchema),
     defaultValues: {
       type: "REFACTOR",
       title: "test_title",
-      stacks: [{ value: "React" }, { value: "Typescript" }],
+      stacks: ["React", "Typescript"],
       githubLink: "https://github.com/",
       githubLinkReveal: false,
       codes: [
@@ -38,17 +42,19 @@ const requestForm = ({}) => {
     form.setValue(`codes.${selectedCodeIndex}.content`, currentContent);
   }, [selectedCodeIndex, form]);
 
-  const stacks = useFieldArray({
-    name: "stacks",
-    control: form.control
-  });
   const codes = useFieldArray({
     name: "codes",
     control: form.control
   });
-  function onSubmit(values: ReviewFormSchema) {
-    console.log(values);
-  }
+  const onSubmit = async (values: ReviewFormSchema) => {
+    try {
+      const data = await createReview({ requestParams: values });
+      const path = `/detail/review/${data.result.id}`;
+      router.push(path);
+    } catch (error) {
+      console.error("Error creating review:", error);
+    }
+  };
 
   return (
     <div className="m-auto p-5">
@@ -113,33 +119,43 @@ const requestForm = ({}) => {
               </FormItem>
             )}
           />
-          <div className="flex flex-wrap items-end gap-2">
-            {stacks.fields.map((field, index) => (
-              <FormField
-                control={form.control}
-                key={field.id}
-                name={`stacks.${index}.value`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={cn(index !== 0 && "sr-only")}>개발 스택</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ))}
-            <Button
-              type="button"
-              variant="outline"
-              size="default"
-              className="mt-2"
-              disabled={stacks.fields.length >= 3}
-              onClick={() => stacks.append({ value: "" })}
-            >
-              태그 추가
-            </Button>
+          <div className="flex flex-col flex-wrap gap-2">
+            <Label>개발 스택</Label>
+            <div className="flex gap-2">
+              {form.watch("stacks").map((stack, index) => (
+                <FormField
+                  control={form.control}
+                  key={index}
+                  name={`stacks.${index}`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          onClick={() => {
+                            const updateStacks = form.watch("stacks").filter((item, i) => i !== index);
+                            form.setValue("stacks", updateStacks);
+                          }}
+                        >
+                          {stack}
+                        </Button>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+              <Button
+                type="button"
+                variant="outline"
+                size="default"
+                disabled={form.watch("stacks").length >= 3}
+                onClick={() => form.setValue("stacks", [...form.watch("stacks"), ""])}
+              >
+                태그 추가
+              </Button>
+              {/* 태그 선택 모달버튼으로 대체 예정 */}
+            </div>
           </div>
           <div className="flex items-start space-x-4">
             <FormField
