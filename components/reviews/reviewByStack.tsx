@@ -22,7 +22,6 @@ const ReviewByStack = ({ userTechs }: Props) => {
   useEffect(() => {
     const makeReviewList = async () => {
       const data = await getReviewList({ page: "1", ...(stack.length > 0 && { stack: stack }) });
-      console.log(data);
       setReviewList(data);
     };
 

@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import SearchSelect from "@/components/reviews/searchSelect";
 import { FormEvent, FormEventHandler, useState } from "react";
-import { techStackList } from "@/constants/reviews";
 
 type Props = {};
 
@@ -61,12 +60,7 @@ const AddMentorModal = ({}: Props) => {
             <Button size="sm" variant="outline">
               React
             </Button>
-            <SearchSelect
-              state={stack}
-              setState={setstack}
-              fillterList={techStackList}
-              placeholder="기술 스택을 입력해보세요."
-            />
+            <SearchSelect state={stack} setState={setstack} placeholder="기술 스택을 입력해보세요." />
           </div>
         </div>
         <form onSubmit={handleSubmit}>

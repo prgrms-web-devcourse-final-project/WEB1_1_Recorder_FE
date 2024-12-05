@@ -1,9 +1,17 @@
-export type TMentorItem = { userId: number; description: string; nickname: string; skillStacks: string[] };
+export type TMentorItem = {
+  userId: number;
+  description: string;
+  nickname: string;
+  userImage: string;
+  skillStacks: string[];
+  content: string;
+};
 
 export type TRequestMentor = {
   description: string;
   skillStacks: string[];
 };
+
 export type TResponseMentorList = {
   message: string;
   result: {

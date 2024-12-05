@@ -9,7 +9,7 @@ import { TResponsePopularReviewList, TResponseRecentReviewList, TResponseReviewL
 const getReviewList = async (params: {
   type?: string;
   page: string;
-  state?: "PENDING" | "ADOPTED";
+  state?: string;
   stack?: string;
   keyword?: string;
 }) => {
@@ -20,11 +20,8 @@ const getReviewList = async (params: {
       Accept: "application/json"
     }
   });
-
-  console.log("=============================");
-  console.log(url);
   const data: TResponseReviewList = await res.json();
-  return data.result.content;
+  return data.result?.content || [];
 };
 
 /** 최근 리뷰 목록을 불러오는 함수입니다.

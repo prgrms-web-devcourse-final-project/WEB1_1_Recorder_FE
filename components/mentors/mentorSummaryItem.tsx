@@ -3,11 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Mentor } from "@/types/mentorTypes";
+import { TMentorItem } from "@/types/mentorTypes";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  mentor: Mentor;
+  mentor: TMentorItem;
 };
 
 const MentorSummaryItem = ({ mentor }: Props) => {
@@ -20,13 +20,13 @@ const MentorSummaryItem = ({ mentor }: Props) => {
       }}
     >
       <CardHeader className="pb-4">
-        <CardTitle>{mentor.title}</CardTitle>
-        <CardDescription className="line-clamp-2">{mentor.comment}</CardDescription>
+        <CardTitle>{mentor.description}</CardTitle>
+        <CardDescription className="line-clamp-2">{mentor.content}</CardDescription>
         <div className="line-clamp-1">
-          {mentor.type.map((name, i) => {
+          {mentor.skillStacks.map((stack, i) => {
             return (
               <Badge key={i} className="mr-1" variant="secondary">
-                {name}
+                {stack}
               </Badge>
             );
           })}
@@ -43,15 +43,15 @@ const MentorSummaryItem = ({ mentor }: Props) => {
         <ul className="text-sm">
           <li>
             <span className="inline-block w-24 font-bold">소속</span>
-            <span>{mentor.business}</span>
+            <span>프로그래머스</span>
           </li>
           <li>
             <span className="inline-block w-24 font-bold">신뢰지수</span>
-            <span>{mentor.score} 점</span>
+            <span>0 점</span>
           </li>
           <li>
             <span className="inline-block w-24 font-bold">라이브 피드백</span>
-            <span>{mentor.liveCount} 회</span>
+            <span>0 회</span>
           </li>
         </ul>
       </CardContent>
