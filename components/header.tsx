@@ -2,12 +2,10 @@
 import Image from "next/image";
 import logo from "@/public/svg/logo.svg";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaBell } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { HeaderSearchInput } from "@/components/headerSearchInput";
 import SearchInput from "@/components/reviews/searchInput";
 
 type Props = {

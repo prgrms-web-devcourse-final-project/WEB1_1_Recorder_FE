@@ -19,8 +19,6 @@ const fetchUtil = async (
     headers,
     body: body ? JSON.stringify(body) : undefined
   });
-  console.log(JSON.stringify(body));
-  console.log(response);
   if (!response.ok) {
     const errorMessage = `Status: ${response.status}`;
     throw new Error(errorMessage);

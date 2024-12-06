@@ -13,7 +13,6 @@ const Reviews = () => {
   const params = useSearchParams();
   const query = params.get("query") || "";
   const [input, setInput] = useState(query);
-
   const [reviewList, setReviewList] = useState<TReviewItem[] | []>(() => {
     return [];
   });
@@ -31,6 +30,7 @@ const Reviews = () => {
     };
     makeReviewList();
   }, []);
+
   useEffect(() => {
     // `params`가 바뀔 때마다 input 값을 갱신
     const queryParam = params.get("query") || "";
