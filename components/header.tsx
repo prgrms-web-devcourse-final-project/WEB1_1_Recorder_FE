@@ -2,19 +2,19 @@
 import Image from "next/image";
 import logo from "@/public/svg/logo.svg";
 import { useRouter } from "next/navigation";
-import SearchInput from "@/components/reviews/searchInput";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaBell } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { HeaderSearchInput } from "@/components/headerSearchInput";
+import SearchInput from "@/components/reviews/searchInput";
 
 type Props = {
   isLogin: boolean;
 };
 
 const Header = ({ isLogin }: Props) => {
-  const [input, setInput] = useState("");
   const router = useRouter();
   return (
     <header className="fixed z-50 w-full bg-white shadow-md">
@@ -33,7 +33,7 @@ const Header = ({ isLogin }: Props) => {
         <div className="grow"></div>
         <div className="hidden md:block">
           <div className="flex gap-2">
-            <SearchInput state={input} setState={setInput}></SearchInput>
+            <SearchInput />
             {isLogin ? (
               <div className="ml-5 flex items-center gap-4">
                 <FaBell size={30} className="cursor-pointer" />
@@ -50,7 +50,9 @@ const Header = ({ isLogin }: Props) => {
                 <Button variant="outline" className="ml-5" onClick={() => router.push("/socialLogin")}>
                   로그인
                 </Button>
-                <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>회원가입</Button>
+                <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>
+                  회원가입
+                </Button>
               </>
             )}
           </div>
