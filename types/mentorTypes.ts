@@ -1,10 +1,12 @@
 export type TMentorItem = {
-  userId: number;
-  description: string;
-  nickname: string;
-  userImage: string;
-  skillStacks: string[];
+  userId: string;
+  userImage?: string;
+  nickName: string;
+  title: string;
   content: string;
+  skillStacks: string[];
+  answerAcceptanceRate: number;
+  liveFeedbackCount: number;
 };
 
 export type TResponseMentorList = {

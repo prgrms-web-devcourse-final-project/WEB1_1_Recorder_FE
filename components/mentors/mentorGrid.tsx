@@ -1,13 +1,15 @@
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import { TMentorItem } from "@/types/mentorTypes";
+import { Dispatch, SetStateAction } from "react";
 import { ImFilesEmpty } from "react-icons/im";
 
 type Props = {
   mentorList: TMentorItem[] | [];
   className: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const MentorGrid = ({ mentorList, className }: Props) => {
+const MentorGrid = ({ mentorList, className, setOpen }: Props) => {
   return (
     <>
       {mentorList.length < 1 ? (
@@ -18,7 +20,7 @@ const MentorGrid = ({ mentorList, className }: Props) => {
       ) : (
         <div className={`grid grid-cols-3 gap-4 ${className}`}>
           {mentorList.map((mentor, i) => {
-            return <MentorSummaryItem key={i} mentor={mentor}></MentorSummaryItem>;
+            return <MentorSummaryItem key={i} mentor={mentor} setOpen={setOpen}></MentorSummaryItem>;
           })}
         </div>
       )}

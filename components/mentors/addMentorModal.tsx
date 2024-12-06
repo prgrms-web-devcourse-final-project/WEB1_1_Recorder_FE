@@ -76,16 +76,12 @@ const AddMentorModal = () => {
             </div>
             <ul className="text-sm">
               <li>
-                <span className="inline-block w-24 font-bold">소속</span>
-                <span>프로그래머스</span>
-              </li>
-              <li>
-                <span className="inline-block w-24 font-bold">신뢰지수</span>
-                <span>100 점</span>
-              </li>
-              <li>
                 <span className="inline-block w-24 font-bold">라이브 피드백</span>
                 <span>13 회</span>
+              </li>
+              <li>
+                <span className="inline-block w-24 font-bold">답변 채택률</span>
+                <span>50 %</span>
               </li>
             </ul>
           </div>

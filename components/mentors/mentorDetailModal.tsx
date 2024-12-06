@@ -1,37 +1,40 @@
+import { ChatButton } from "@/components/mentors/chatButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { userImage } from "@/constants/user";
+import { TMentorItem } from "@/types/mentorTypes";
+import { Dispatch, SetStateAction } from "react";
 
-const MentorDetailModal = () => {
+type Props = {
+  mentor: TMentorItem;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+const MentorDetailModal = ({ mentor, open, setOpen }: Props) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="text-white" size="lg">
-          멘토 상세 보기
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="h-5/6 overflow-auto">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="flex h-5/6 flex-col overflow-auto">
         <DialogHeader>
-          <DialogTitle>제목입니다</DialogTitle>
+          <DialogTitle>{mentor.title}</DialogTitle>
         </DialogHeader>
         <div>
-          <h3 className="font-bold">멘토 정보</h3>
-          <div className="mt-3 flex justify-between rounded-lg border border-input px-4 py-2">
+          <h3 className="pb-2 font-bold">멘토 정보</h3>
+          <div className="flex justify-between rounded-lg border border-input px-4 py-2">
             <div className="flex items-center gap-3">
               <Avatar>
-                <AvatarImage src={userImage} />
+                <AvatarImage src={mentor.userImage || userImage} />
               </Avatar>
               <p>userName</p>
             </div>
             <ul className="text-sm">
               <li>
-                <span className="inline-block w-24 font-bold">답변 채택률</span>
-                <span>50 %</span>
+                <span className="inline-block w-24 font-bold">라이브 피드백</span>
+                <span>{mentor.liveFeedbackCount} 회</span>
               </li>
               <li>
-                <span className="inline-block w-24 font-bold">라이브 피드백</span>
-                <span>13 회</span>
+                <span className="inline-block w-24 font-bold">답변 채택률</span>
+                <span>{mentor.answerAcceptanceRate} %</span>
               </li>
             </ul>
           </div>
@@ -40,7 +43,7 @@ const MentorDetailModal = () => {
           <h3 className="mb-3 font-bold">기술 스택</h3>
           <div className="flex items-center justify-between">
             <div className="flex gap-2">
-              {["react", "typescript"].map((stack, i) => {
+              {mentor.skillStacks.map((stack, i) => {
                 return (
                   <div key={i} className="cursor-default rounded-md border px-2 py-1 text-sm">
                     {stack}
@@ -52,15 +55,11 @@ const MentorDetailModal = () => {
         </div>
         <div>
           <h3 className="font-bold">멘토 소개</h3>
-          <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam asperiores sunt quasi vitae ex libero
-            delectus nostrum molestias obcaecati est? Suscipit tenetur in voluptatum sequi mollitia voluptas similique
-            adipisci quos.
-          </div>
+          <div>{mentor.content}</div>
         </div>
-        <Button className="mt-4 w-full text-white" type="submit">
-          1:1 채팅 하기
-        </Button>
+        <div className="grow"></div>
+        <ChatButton />
+        <DialogClose onClick={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );
