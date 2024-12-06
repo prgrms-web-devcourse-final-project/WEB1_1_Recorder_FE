@@ -16,7 +16,7 @@ const signupHeader = ({}: Props) => {
 
   return (
     <div className="flex flex-col items-center gap-[30px]">
-      <Image src="/svg/logo.svg" alt="logo" width={300} height={100} />
+      {/* <Image src="/svg/logo.svg" alt="logo" width={300} height={100} /> */}
       <p className="text-[48px] font-extrabold">Sign Up</p>
       <div className="relative flex items-start">
         <Avatar className="h-40 w-40">
