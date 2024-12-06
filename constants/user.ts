@@ -1,3 +1,5 @@
+import { TMentorItem } from "@/types/mentorTypes";
+
 export const userStacks = ["TypeScript", "React", "NextJS"];
 
 export const users = [
@@ -16,3 +18,43 @@ export const users = [
 ];
 
 export const userImage = "https://github.com/shadcn.png";
+
+export const mentorInfo: TMentorItem = {
+  userId: "1",
+  nickName: "감자",
+  title: "라이브 피드백 받습니다!",
+  content: "채팅주세요!",
+  skillStacks: ["REACT"],
+  answerAcceptanceRate: 20,
+  liveFeedbackCount: 3
+};
+
+export const mentorList: TMentorItem[] = [
+  {
+    userId: "1",
+    nickName: "감자",
+    title: "라이브 피드백 받습니다!",
+    content: "채팅주세요!",
+    skillStacks: ["REACT"],
+    answerAcceptanceRate: 20,
+    liveFeedbackCount: 3
+  },
+  {
+    userId: "1",
+    nickName: "감자",
+    title: "라이브 피드백 받습니다!",
+    content: "채팅주세요!",
+    skillStacks: ["REACT"],
+    answerAcceptanceRate: 20,
+    liveFeedbackCount: 3
+  },
+  {
+    userId: "1",
+    nickName: "감자",
+    title: "라이브 피드백 받습니다!",
+    content: "채팅주세요!",
+    skillStacks: ["REACT"],
+    answerAcceptanceRate: 20,
+    liveFeedbackCount: 3
+  }
+];

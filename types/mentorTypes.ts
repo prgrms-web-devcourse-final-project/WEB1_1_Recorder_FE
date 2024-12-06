@@ -1,10 +1,23 @@
-export type Mentor = {
-  title: string;
-  type: string[];
-  business: string;
-  score: number;
-  liveCount: number;
+export type TMentorItem = {
   userId: string;
   userImage?: string;
-  comment: string;
+  nickName: string;
+  title: string;
+  content: string;
+  skillStacks: string[];
+  answerAcceptanceRate: number;
+  liveFeedbackCount: number;
+};
+
+export type TResponseMentorList = {
+  message: string;
+  result: {
+    content: TMentorItem[] | null;
+    currentPage: number;
+    size: number;
+    startPage: number;
+    endPage: number;
+    prev: boolean;
+    next: boolean;
+  };
 };
