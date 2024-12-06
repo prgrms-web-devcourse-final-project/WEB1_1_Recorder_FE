@@ -2,12 +2,12 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ReviewItem } from "@/types/reviewTypes";
+import { TReviewItem } from "@/types/reviewTypes";
 import { useRouter } from "next/navigation";
 import { RiMessage3Line } from "react-icons/ri";
 
 type Props = {
-  review: ReviewItem;
+  review: TReviewItem;
   size?: "md" | "lg";
 };
 
