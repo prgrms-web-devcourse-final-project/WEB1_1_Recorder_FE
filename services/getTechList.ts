@@ -3,7 +3,7 @@ import { TResponseTechList } from "@/types/userTypes";
 
 const getTechList = async () => {
   try {
-    const data: TResponseTechList = await fetchInstance.get("/tech");
+    const data: TResponseTechList = await fetchInstance.get("/tech", {}, false);
     return data.result?.skillStacks || [];
   } catch (error) {
     console.error(error);

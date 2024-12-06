@@ -7,7 +7,7 @@ import { TResponseMentorList } from "@/types/mentorTypes";
  */
 const getMentorList = async (params: { page: number }) => {
   try {
-    const data: TResponseMentorList = await fetchInstance.get("/mentor", params);
+    const data: TResponseMentorList = await fetchInstance.get("/mentor", params, false);
     return data.result?.content || [];
   } catch (error) {
     console.error(error);

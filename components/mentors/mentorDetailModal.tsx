@@ -23,7 +23,7 @@ const MentorDetailModal = ({ mentor, open, setOpen }: Props) => {
           <div className="flex justify-between rounded-lg border border-input px-4 py-2">
             <div className="flex items-center gap-3">
               <Avatar>
-                <AvatarImage src={mentor.userImage || userImage} />
+                <AvatarImage src={mentor.profileImage || userImage} />
               </Avatar>
               <p>userName</p>
             </div>

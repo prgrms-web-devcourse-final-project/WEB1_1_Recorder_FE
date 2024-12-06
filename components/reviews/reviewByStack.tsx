@@ -21,10 +21,9 @@ const ReviewByStack = ({ userTechs }: Props) => {
 
   useEffect(() => {
     const makeReviewList = async () => {
-      const data = await getReviewList({ page: "1", ...(stack.length > 0 && { stack: stack }) });
+      const data = await getReviewList({ page: 0, ...(stack.length > 0 && { stack: stack }) });
       setReviewList(data);
     };
-
     makeReviewList();
   }, [stack]);
 
@@ -45,9 +44,9 @@ const ReviewByStack = ({ userTechs }: Props) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {userTechs.length < 1 ? (
+        {reviewList.length < 1 ? (
           <div className="flex h-72 w-full flex-col items-center justify-center">
-            <p className="mb-5">아직 관심 기술을 선택하지 않았습니다.</p>
+            <p className="mb-5">아직 등록된 질문이 없습니다.</p>
             <ImFilesEmpty size={80} color="gray" />
           </div>
         ) : (
