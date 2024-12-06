@@ -1,4 +1,5 @@
 import AddMentorModal from "@/components/mentors/addMentorModal";
+import { MentorDetailModal } from "@/components/mentors/mentorDetailModal";
 import MentorGrid from "@/components/mentors/mentorGrid";
 import PageHeader from "@/components/pageHeader";
 import { getMentorList } from "@/services/getMentorList";
@@ -12,6 +13,7 @@ const Mentors = async () => {
       <PageHeader title="라이브 피드백 멘토">
         <AddMentorModal />
       </PageHeader>
+      <MentorDetailModal />
       <MentorGrid mentorList={mentorList} className="my-10"></MentorGrid>
     </div>
   );
