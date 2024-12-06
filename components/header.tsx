@@ -50,7 +50,7 @@ const Header = ({ isLogin }: Props) => {
                 <Button variant="outline" className="ml-5" onClick={() => router.push("/socialLogin")}>
                   로그인
                 </Button>
-                <Button>회원가입</Button>
+                <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>회원가입</Button>
               </>
             )}
           </div>

@@ -1,26 +1,29 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { TReviewItem } from "@/types/reviewTypes";
+import { useRef } from "react";
 
 type Props = {
-  state: string;
   setState: React.Dispatch<React.SetStateAction<string>>;
   className?: string;
 };
 
-const SearchInput = ({ state, setState, className }: Props) => {
+const SearchInput = ({ setState, className }: Props) => {
+  const inputRef = useRef("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState(e.target.value);
+    inputRef.current = e.target.value;
   };
-  const handleSubmit = () => {
-    setState("");
+
+  const handleSubmit = async () => {
+    setState(inputRef.current);
   };
 
   return (
     <div className={`flex gap-2 ${className}`}>
       <Input
         placeholder="검색어를 입력하세요."
-        value={state}
+        value={inputRef.current}
         onChange={(e) => {
           handleChange(e);
         }}

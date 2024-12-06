@@ -3,30 +3,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Mentor } from "@/types/mentorTypes";
-import { useRouter } from "next/navigation";
+import { TMentorItem } from "@/types/mentorTypes";
+import { Dispatch, SetStateAction } from "react";
 
 type Props = {
-  mentor: Mentor;
+  mentor: TMentorItem;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const MentorSummaryItem = ({ mentor }: Props) => {
-  const router = useRouter();
+const MentorSummaryItem = ({ mentor, setOpen }: Props) => {
   return (
     <Card
       className="cursor-pointer transition-all hover:scale-[0.995] hover:shadow-lg"
       onClick={() => {
-        router.push(`/detail/mentor/${mentor.userId}`);
+        setOpen(true);
       }}
     >
       <CardHeader className="pb-4">
         <CardTitle>{mentor.title}</CardTitle>
-        <CardDescription className="line-clamp-2">{mentor.comment}</CardDescription>
+        <CardDescription className="line-clamp-2">{mentor.content}</CardDescription>
         <div className="line-clamp-1">
-          {mentor.type.map((name, i) => {
+          {mentor.skillStacks.map((stack, i) => {
             return (
               <Badge key={i} className="mr-1" variant="secondary">
-                {name}
+                {stack}
               </Badge>
             );
           })}
@@ -42,16 +42,12 @@ const MentorSummaryItem = ({ mentor }: Props) => {
         </div>
         <ul className="text-sm">
           <li>
-            <span className="inline-block w-24 font-bold">소속</span>
-            <span>{mentor.business}</span>
-          </li>
-          <li>
-            <span className="inline-block w-24 font-bold">신뢰지수</span>
-            <span>{mentor.score} 점</span>
-          </li>
-          <li>
             <span className="inline-block w-24 font-bold">라이브 피드백</span>
-            <span>{mentor.liveCount} 회</span>
+            <span>{mentor.liveFeedbackCount} 회</span>
+          </li>
+          <li>
+            <span className="inline-block w-24 font-bold">답변 채택률</span>
+            <span>{mentor.answerAcceptanceRate} %</span>
           </li>
         </ul>
       </CardContent>
