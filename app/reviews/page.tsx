@@ -22,7 +22,7 @@ const Reviews = () => {
 
   useEffect(() => {
     const makeReviewList = async () => {
-      const data = await getReviewList({ page: 0 });
+      const data = await getReviewList({ page: 2 });
       setReviewList(data);
     };
     makeReviewList();
