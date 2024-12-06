@@ -8,10 +8,16 @@ type Props = object;
 
 const SignupMain = ({}: Props) => {
   const router = useRouter();
-  const [stack, setStack] = useState("");
+  const [stack, setStack] = useState<string>("");
 
   const handleStackClick = (selectedStack: string) => {
-    setStack(selectedStack);
+    const stackSet = new Set(stack.split(", ").filter((item) => item));
+    stackSet.add(selectedStack);
+    setStack(Array.from(stackSet).join(", "));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStack(e.target.value);
   };
 
   return (
@@ -46,7 +52,7 @@ const SignupMain = ({}: Props) => {
           placeholder="Stack"
           className="w-full"
           value={stack}
-          readOnly
+          onChange={handleInputChange}
         />
       </div>
 
@@ -65,7 +71,7 @@ const SignupMain = ({}: Props) => {
         </Button>
         <Button
           className="w-[150px] bg-btnColor"
-          onClick={() => handleStackClick("Spring")}
+          onClick={() => handleStackClick("NextJS")}
         >
           NextJS
         </Button>
