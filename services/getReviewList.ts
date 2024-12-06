@@ -14,7 +14,7 @@ const getReviewList = async (params: {
   keyword?: string;
 }) => {
   try {
-    const data: TResponseReviewList = await fetchInstance.get("/question/list", params);
+    const data: TResponseReviewList = await fetchInstance.get("/question/list", params, false);
     return data.result?.content || [];
   } catch (error) {
     console.error(error);
@@ -28,7 +28,7 @@ const getReviewList = async (params: {
  */
 const getRecentReviewList = async (params: { size: number }) => {
   try {
-    const data: TResponseRecentReviewList = await fetchInstance.get("/question/recent", params);
+    const data: TResponseRecentReviewList = await fetchInstance.get("/question/recent", params, false);
 
     return data.result || [];
   } catch (error) {
@@ -43,7 +43,7 @@ const getRecentReviewList = async (params: { size: number }) => {
  */
 const getPopularReviewList = async (params: { size: number; days: number }) => {
   try {
-    const data: TResponsePopularReviewList = await fetchInstance.get("/question/polular", params);
+    const data: TResponsePopularReviewList = await fetchInstance.get("/question/popular", params, false);
     return data.result;
   } catch (error) {
     console.error(error);
