@@ -13,26 +13,27 @@ const fetchUtil = async (endpoint: string, method: string, params: Record<string
     body: body ? JSON.stringify(body) : undefined
   });
   if (!response.ok) {
-    const errorMessage = `Status: ${response.status}`;
+    const errorData = await response.json();
+    const errorMessage = errorData.message || `Status: ${response.status}`;
     throw new Error(errorMessage);
   }
   return response.json();
 };
 
 const fetchInstance = {
-  get: async (endpoint: string, params: Record<string, any> = {}) => {
+  get: (endpoint: string, params: Record<string, any> = {}) => {
     return fetchUtil(endpoint, "GET", params);
   },
-  post: async (endpoint: string, body: any, params: Record<string, any> = {}) => {
+  post: (endpoint: string, body: any, params: Record<string, any> = {}) => {
     return fetchUtil(endpoint, "POST", params, body);
   },
-  put: async (endpoint: string, body: any, params: Record<string, any> = {}) => {
+  put: (endpoint: string, body: any, params: Record<string, any> = {}) => {
     return fetchUtil(endpoint, "PUT", params, body);
   },
-  delete: async (endpoint: string, body: any, params: Record<string, any> = {}) => {
+  delete: (endpoint: string, body: any, params: Record<string, any> = {}) => {
     return fetchUtil(endpoint, "DELETE", params, body);
   },
-  patch: async (endpoint: string, body: any, params: Record<string, any> = {}) => {
+  patch: (endpoint: string, body: any, params: Record<string, any> = {}) => {
     return fetchUtil(endpoint, "PATCH", params, body);
   }
 };
