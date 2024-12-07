@@ -3,21 +3,34 @@ import Image from "next/image";
 import logo from "@/public/svg/logo.svg";
 import { useRouter } from "next/navigation";
 import SearchInput from "@/components/reviews/searchInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FaBell } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import Cookies from "js-cookie";
 
-type Props = {
-  isLogin: boolean;
-};
-
-const Header = ({ isLogin }: Props) => {
+const Header = () => {
+  const [isLogin, setIsLogin] = useState(false);
   const [input, setInput] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const accessToken = Cookies.get("accessToken");
+      setIsLogin(Boolean(accessToken));
+    };
+    checkAuth();
+    const interval = setInterval(checkAuth, 1000);
+    window.addEventListener("storage", checkAuth);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("storage", checkAuth);
+    };
+  }, []);
+  //임시 코드 추후수정예정
   return (
-    <header className="fixed z-50 w-full bg-white shadow-md">
+    <header className="fixed z-50 h-20 w-full bg-white shadow-md">
       <div className="m-auto flex max-w p-4">
         <div className="flex items-center gap-4">
           <h1 className="mr-4 cursor-pointer" onClick={() => router.push("/")}>
@@ -33,7 +46,8 @@ const Header = ({ isLogin }: Props) => {
         <div className="grow"></div>
         <div className="hidden md:block">
           <div className="flex gap-2">
-            <SearchInput state={input} setState={setInput}></SearchInput>
+            <SearchInput setState={setInput}></SearchInput>
+
             {isLogin ? (
               <div className="ml-5 flex items-center gap-4">
                 <FaBell size={30} className="cursor-pointer" />
@@ -47,10 +61,12 @@ const Header = ({ isLogin }: Props) => {
               </div>
             ) : (
               <>
-                <Button variant="outline" className="ml-5" onClick={() => router.push("/socialLogin")}>
+                <Button variant="outline" className="ml-5" onClick={() => router.push("/login")}>
                   로그인
                 </Button>
-                <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>회원가입</Button>
+                <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>
+                  회원가입
+                </Button>
               </>
             )}
           </div>
