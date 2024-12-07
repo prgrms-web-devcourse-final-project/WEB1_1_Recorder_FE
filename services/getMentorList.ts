@@ -8,10 +8,9 @@ import { TResponseMentorList } from "@/types/mentorTypes";
 const getMentorList = async (params: { page: number }) => {
   try {
     const data: TResponseMentorList = await fetchInstance.get("/mentor", params, false);
-    return data.result?.content || [];
+    return data;
   } catch (error) {
-    console.error(error);
-    return [];
+    return null;
   }
 };
 
@@ -23,9 +22,7 @@ const enrollMentor = async (params: { title: string; content: string; skillStack
   try {
     const data = await fetchInstance.post("/mentor", params);
     return data;
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) {}
 };
 
 export { getMentorList, enrollMentor };
