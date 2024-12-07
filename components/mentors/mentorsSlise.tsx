@@ -36,8 +36,8 @@ const MentorSlide = ({ mentorList }: Props) => {
                   );
                 })}
               </CarouselContent>
-              <CarouselPrevious className="-left-4" />
-              <CarouselNext className="-right-4" />
+              <CarouselPrevious className="-left-4 disabled:hidden" />
+              <CarouselNext className="-right-4 disabled:hidden" />
             </Carousel>
           )}
         </CardContent>
