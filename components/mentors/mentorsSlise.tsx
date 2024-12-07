@@ -1,18 +1,13 @@
-"use client";
-import { MentorDetailModal } from "@/components/mentors/mentorDetailModal";
 import MentorSummaryItem from "@/components/mentors/mentorSummaryItem";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import { mentorInfo } from "@/constants/user";
 import { TMentorItem } from "@/types/mentorTypes";
-import { useState } from "react";
 import { ImFilesEmpty } from "react-icons/im";
 
 type Props = {
-  mentorList: TMentorItem[];
+  mentorList: TMentorItem[] | [];
 };
 const MentorSlide = ({ mentorList }: Props) => {
-  const [open, setOpen] = useState(false);
   return (
     <>
       <Card>
@@ -31,7 +26,7 @@ const MentorSlide = ({ mentorList }: Props) => {
                 {mentorList.map((mentor, i) => {
                   return (
                     <CarouselItem key={i} className="sm:basis-1/2 md:basis-1/3 xl:md:basis-1/5">
-                      <MentorSummaryItem mentor={mentor} setOpen={setOpen} />
+                      <MentorSummaryItem mentor={mentor} />
                     </CarouselItem>
                   );
                 })}
@@ -42,7 +37,6 @@ const MentorSlide = ({ mentorList }: Props) => {
           )}
         </CardContent>
       </Card>
-      <MentorDetailModal mentor={mentorInfo} open={open} setOpen={setOpen} />
     </>
   );
 };
