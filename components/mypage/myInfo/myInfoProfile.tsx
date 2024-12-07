@@ -25,7 +25,7 @@ const MyInfoProfile = ({}: Props) => {
         </div>
       </div>
       <div className="mr-12 mt-4 flex justify-end">
-        <Button size="edit" className="bg-btnColor text-white" onClick={() => router.push("/myPage/editProfile")}>
+        <Button size="edit" className="bg-btnColor text-white" onClick={() => router.push("/myPage/editmember")}>
           회원정보수정
         </Button>
       </div>
