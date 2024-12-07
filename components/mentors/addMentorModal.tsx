@@ -30,7 +30,7 @@ const AddMentorModal = () => {
       }, 3000);
     } else {
       await enrollMentor({ title: title, content: content, skillStacks: stackList });
-      window.location.reload();
+      // window.location.reload();
     }
   };
 
