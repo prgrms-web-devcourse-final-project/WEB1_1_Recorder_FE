@@ -45,7 +45,7 @@ const Home = async () => {
         </Card>
       </section>
       <section className="my-8">
-        {/* <ReviewByStack userTechs={userTechs} /> */} //클라이언트 컴포넌트로 분리 및 내부에서 api 요청해주세요
+        <ReviewByStack userTechs={userTechs} />
       </section>
       <section className="my-8">
         <MentorSlide mentorList={mentorList} />

@@ -46,7 +46,7 @@ const Header = () => {
         <div className="grow"></div>
         <div className="hidden md:block">
           <div className="flex gap-2">
-            <SearchInput setState={setInput}></SearchInput>
+            <SearchInput />
 
             {isLogin ? (
               <div className="ml-5 flex items-center gap-4">
@@ -63,9 +63,6 @@ const Header = () => {
               <>
                 <Button variant="outline" className="ml-5" onClick={() => router.push("/login")}>
                   로그인
-                </Button>
-                <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>
-                  회원가입
                 </Button>
                 <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>
                   회원가입
