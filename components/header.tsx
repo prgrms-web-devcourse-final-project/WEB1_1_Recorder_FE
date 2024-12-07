@@ -67,6 +67,9 @@ const Header = () => {
                 <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>
                   회원가입
                 </Button>
+                <Button variant="outline" className="ml-5" onClick={() => router.push("/signup")}>
+                  회원가입
+                </Button>
               </>
             )}
           </div>
