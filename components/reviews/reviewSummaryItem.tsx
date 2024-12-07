@@ -20,11 +20,11 @@ const ReviewSummaryItem = ({ review, size = "md" }: Props) => {
     >
       <CardHeader className={`${size === "md" ? "p-3" : "p-4"} pb-0`}>
         <CardTitle className="flex items-center justify-between">
-          <div className="flex items-center">
+          <div className="line-clamp-1 flex w-11/12 items-center">
             <span className="pr-4 text-lg">{review.title}</span>
             <span className="text-sm font-medium text-zinc-500">{review.createdAt}</span>
           </div>
-          <div className="flex font-medium">
+          <div className="flex grow font-medium">
             <RiMessage3Line />
             <span className="px-1">{review.answerCount}</span>
           </div>
