@@ -11,17 +11,14 @@ import {
   PaginationLink,
   PaginationNext
 } from "@/components/ui/pagination";
-import { mentorInfo } from "@/constants/user";
 import { getMentorList } from "@/services/getMentorList";
 import { TMentorItem, TResponseMentorList } from "@/types/mentorTypes";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { number } from "zod";
 
 const Mentors = () => {
   const params = useSearchParams();
   const page = !isNaN(parseInt(params.get("page") || "0", 10)) ? parseInt(params.get("page") || "0", 10) : 0;
-  const [open, setOpen] = useState(false);
   const [mentorList, setMentorList] = useState<TMentorItem[] | []>([]);
   const [response, setRespones] = useState<TResponseMentorList | null>();
 
@@ -48,8 +45,7 @@ const Mentors = () => {
       <PageHeader title="라이브 피드백 멘토">
         <AddMentorModal />
       </PageHeader>
-      <MentorDetailModal mentor={mentorInfo} open={open} setOpen={setOpen} />
-      <MentorGrid mentorList={mentorList} className="my-10" setOpen={setOpen}></MentorGrid>
+      <MentorGrid mentorList={mentorList} className="my-10"></MentorGrid>
       <Pagination>
         <PaginationContent>
           <PaginationItem>

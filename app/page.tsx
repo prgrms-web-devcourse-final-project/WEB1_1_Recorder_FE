@@ -11,11 +11,8 @@ import { MentorSlide } from "@/components/mentors/mentorsSlise";
 const Home = async () => {
   const recentReviewList: TReviewItem[] | [] = await getRecentReviewList({ size: 3 });
   const popularReviewList: TReviewItem[] | [] = await getPopularReviewList({ size: 3, days: 7 });
-  // const mentorList: TMentorItem[] | [] = await getMentorList({ page: 0 });
-
-  // const userTechs: { id: number; name: string }[] | [] = await getUserTechs();//클라이언트 컴포넌트로 분리 및 내부에서 api 요청해주세요
-
-  const mentorList: TMentorItem[] | [] = await getMentorList({ page: 0 });
+  const mentorResponse = await getMentorList({ page: 0 });
+  const mentorList: TMentorItem[] | [] = mentorResponse?.result.content || [];
   let userTechs: { id: number; name: string }[] | [] = await getUserTechs();
   if (userTechs.length < 1) {
     userTechs = [
