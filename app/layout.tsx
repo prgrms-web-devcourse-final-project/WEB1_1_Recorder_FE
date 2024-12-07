@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import Login from "./socialLogin/page";
 import Providers from "@/app/provider";
 
 const pretendard = localFont({
@@ -28,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${pretendard.variable} flex min-h-screen flex-col font-pretendard`}>
         <Providers>
-          <Header isLogin={true} />
+          <Header />
           <main className="pt-24">{children}</main>
         </Providers>
         <Footer />

@@ -1,23 +1,20 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 const Footer = () => (
-  <footer className="items-center justify-between p-[60px] border-t-2 border-[#1A202C] bg-gray-800 text-white">
+  <footer className="flex h-60 flex-col items-start justify-center gap-8 bg-gray-800 p-12 text-white">
     <Image className="mb-[33px]" src="/img/logo.png" alt="Revup" width={120} height={40} />
-    <div className="flex justify-between">
+    <div className="flex w-full justify-between">
       <p>© 2024 Revup. All rights reserved.</p>
       <div className="flex">
         <a
           href="https://github.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#A0ABC0] cursor-pointer"
+          className="cursor-pointer text-[#A0ABC0]"
         >
           github
         </a>
-        <a
-          href="#contact"
-          className="text-[#A0ABC0] ml-[32px] cursor-pointer"
-        >
+        <a href="#contact" className="ml-[32px] cursor-pointer text-[#A0ABC0]">
           Contact
         </a>
       </div>

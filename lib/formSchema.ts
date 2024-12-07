@@ -28,3 +28,9 @@ export const answerFormSchema = z.object({
     message: "내용을 입력해야 합니다."
   })
 });
+
+export const signUpFormSchema = z.object({
+  nickname: z.string().min(2, {
+    message: "내용을 입력해야 합니다."
+  })
+});

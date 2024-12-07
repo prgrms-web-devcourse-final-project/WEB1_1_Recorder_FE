@@ -1,30 +1,55 @@
-import Image from "next/image";
+"use client";
+import { cn } from "@/lib/utils";
+import Image, { StaticImageData } from "next/image";
+import google from "@/public/img/google_img.png";
+import kakao from "@/public/img/kakao_img.png";
+import github from "@/public/img/github_grayimg.png";
+import { useRouter } from "next/navigation";
+type Props = {
+  children: React.ReactNode;
+  className: string;
+  icon: StaticImageData;
+  url: string;
+};
 
-type Props = object;
-
-const SocialLogin = ({}: Props) => {
+const LoginButton = ({ icon, children, className, url }: Props) => {
+  const router = useRouter();
+  const handleClick = (url: string) => {
+    router.push(url);
+  };
   return (
-    <div className="flex flex-col gap-[20px]">
-      <div>
-        <button className="flex items-center gap-[20px] w-full bg-[#FEE500] text-black p-[20px] rounded-xl hover:bg-yellow-500 transition">
-          <Image className="ml-32"src="/img/kakao_img.png" alt="KakaoIcon" width={30} height={30} />
-          <span>Login with KaKao</span>
-        </button>
-      </div>
-      <div>
-        <button className="flex items-center gap-[20px] w-full text-black p-[18px] border-2 border-slate-600 rounded-xl transition">
-          <Image className="ml-32"src="/img/google_img.png" alt="githubIcon" width={30} height={28} />
-          <span>Login with Google</span>
-        </button>
-      </div>
-      <div>
-        <button className="flex items-center gap-[20px] w-full bg-black text-white p-[20.5px] rounded-xl hover:bg-[#0d1117] transition">
-          <Image className="ml-32"src="/img/github_grayimg.png" alt="githubIcon" width={30} height={30} />
-          <span>Login with Github</span>
-        </button>
-      </div>
-    </div>
+    <button
+      onClick={() => {
+        handleClick(url);
+      }}
+      className={cn(
+        "flex w-96 items-center justify-start rounded-xl border-2 border-transparent p-2 px-4 text-black transition",
+        className
+      )}
+    >
+      <Image src={icon} alt="githubIcon" width={25} />
+      <div className="w-full">{children}</div>
+    </button>
   );
 };
 
-export default SocialLogin;
+const SocielLogin = () => {
+  const googleURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/google?redirect_uri=http://localhost:3000/signUp`;
+  const kakaoURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao?redirect_uri=http://localhost:3000/login`;
+  const githubURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/github?redirect_uri=http://localhost:3000/login`;
+
+  return (
+    <div className="flex w-fit flex-col gap-8">
+      <LoginButton icon={google} className="border-slate-600" url={googleURL}>
+        <span>Login with Google</span>
+      </LoginButton>{" "}
+      <LoginButton icon={kakao} className="bg-[#FEE500]" url={kakaoURL}>
+        <span>Login with KaKao</span>
+      </LoginButton>
+      <LoginButton icon={github} className="bg-black text-white" url={githubURL}>
+        <span>Login with Github</span>
+      </LoginButton>
+    </div>
+  );
+};
+export default SocielLogin;
