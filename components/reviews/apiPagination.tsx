@@ -18,7 +18,7 @@ type Props = {
   length: number;
 };
 
-const ReviewPagination = ({ route, params, prev, next, current, length }: Props) => {
+const ApiPagination = ({ route, params, prev, next, current, length }: Props) => {
   const searchParams = new URLSearchParams(params);
 
   const sethref = (page: number) => {
@@ -48,4 +48,4 @@ const ReviewPagination = ({ route, params, prev, next, current, length }: Props)
     </Pagination>
   );
 };
-export { ReviewPagination };
+export { ApiPagination };

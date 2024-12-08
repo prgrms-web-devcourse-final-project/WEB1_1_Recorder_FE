@@ -1,4 +1,4 @@
-import { ReviewPagination } from "@/components/reviews/pagination";
+import { ApiPagination } from "@/components/reviews/apiPagination";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import SearchBox from "@/components/reviews/searchBox";
 import { getReviewList } from "@/services/getReviewList";
@@ -18,7 +18,7 @@ const Reviews = async ({ searchParams }: Props) => {
       <section className="my-10">
         <ReviewSummaryList reviewList={reviewListResponse?.result.content || []} size="lg" />
       </section>
-      <ReviewPagination
+      <ApiPagination
         route="reviews"
         params={params}
         prev={reviewListResponse?.result.prev || false}
