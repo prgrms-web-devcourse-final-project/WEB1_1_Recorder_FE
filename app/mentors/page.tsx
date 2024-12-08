@@ -56,11 +56,11 @@ const Mentors = () => {
               className={response?.result.prev ? "" : "hidden"}
             />
           </PaginationItem>
-          {Array.from({ length: response?.result.size || 0 }).map((_number, i) => {
+          {Array.from({ length: response?.result.endPage || 0 }).map((_number, i) => {
             return (
               <PaginationItem key={i}>
                 <PaginationLink isActive={page === i ? true : false} href={`/mentors?page=${i + 1}`}>
-                  1
+                  {i + 1}
                 </PaginationLink>
               </PaginationItem>
             );
