@@ -2,7 +2,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { userImage } from "@/constants/user";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,17 +9,22 @@ import SearchSelect from "@/components/reviews/searchSelect";
 import { FormEvent, useEffect, useState } from "react";
 import { enrollMentor } from "@/services/getMentorList";
 import { FaExclamation } from "react-icons/fa6";
+import { useAuthStore } from "@/store/authStore";
+import { getUserInfo } from "@/services/getUserInfo";
+import { TUserInfo } from "@/types/userTypes";
 
 const AddMentorModal = () => {
+  const { isLogin } = useAuthStore();
   const [stack, setstack] = useState("");
   const [stackList, setStackList] = useState<string[]>([]);
   const [alert, setAlert] = useState("hidden");
   const [text, setText] = useState("");
-
+  const [userInfo, setUserInfo] = useState<TUserInfo | null>();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
+
     if (title.length < 1 || content.length < 1 || stackList.length < 1) {
       setText("내용을 모두 입력해주세요!");
       setAlert("show");
@@ -36,6 +40,14 @@ const AddMentorModal = () => {
     const updatedList = stackList.filter((s) => s !== stack);
     setStackList(updatedList);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserInfo();
+      setUserInfo(data);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (stackList.length === 3) {
@@ -54,11 +66,17 @@ const AddMentorModal = () => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button className="text-white" size="lg">
+      {isLogin ? (
+        <DialogTrigger asChild>
+          <Button className="text-white" size="lg">
+            멘토 등록하기
+          </Button>
+        </DialogTrigger>
+      ) : (
+        <Button className="text-white" size="lg" disabled>
           멘토 등록하기
         </Button>
-      </DialogTrigger>
+      )}
       <DialogContent className="h-5/6 overflow-auto">
         <DialogHeader>
           <DialogTitle>멘토 세부 정보를 입력해주세요</DialogTitle>
@@ -68,11 +86,11 @@ const AddMentorModal = () => {
           <div className="mt-3 flex justify-between rounded-lg border border-input px-4 py-2">
             <div className="flex items-center gap-3">
               <Avatar>
-                <AvatarImage src={userImage} />
+                <AvatarImage src={userInfo?.profileImage} />
               </Avatar>
-              <p>userName</p>
+              <p>{userInfo?.nickname}</p>
             </div>
-            <ul className="text-sm">
+            {/* <ul className="text-sm">
               <li>
                 <span className="inline-block w-24 font-bold">라이브 피드백</span>
                 <span>13 회</span>
@@ -81,7 +99,7 @@ const AddMentorModal = () => {
                 <span className="inline-block w-24 font-bold">답변 채택률</span>
                 <span>50 %</span>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
         <div className={`h-3`}>

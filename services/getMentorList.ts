@@ -26,4 +26,11 @@ const enrollMentor = async (params: { title: string; content: string; skillStack
   } catch (error) {}
 };
 
-export { getMentorList, enrollMentor };
+const deleteMentor = async () => {
+  try {
+    const data = await fetchInstance.delete("/mentor");
+    return data;
+  } catch (error) {}
+};
+
+export { getMentorList, enrollMentor, deleteMentor };

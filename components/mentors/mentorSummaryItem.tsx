@@ -14,6 +14,7 @@ type Props = {
 
 const MentorSummaryItem = ({ mentor }: Props) => {
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <Card
@@ -41,7 +42,7 @@ const MentorSummaryItem = ({ mentor }: Props) => {
             <Avatar className="h-8 w-8">
               <AvatarImage src={mentor.profileImage || userImage}></AvatarImage>
             </Avatar>
-            <span className="px-2">{mentor.userId}</span>
+            <span className="px-2">{mentor.nickName}</span>
           </div>
           <ul className="text-sm">
             <li>
