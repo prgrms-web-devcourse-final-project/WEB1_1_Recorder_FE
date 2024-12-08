@@ -14,8 +14,9 @@ type Props = {
 const SearchBox = ({ params }: Props) => {
   const router = useRouter();
   const searchParams = new URLSearchParams(params);
+  const resetKeyWord = searchParams.get("keyword") || "";
   const [searchInput, setSearchInput] = useState("");
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(resetKeyWord);
   const stateList = ["전체", "해결됨", "미해결"];
   const [state, setState] = useState("");
   const [stack, setStack] = useState("");
