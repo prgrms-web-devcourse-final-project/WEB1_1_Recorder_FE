@@ -25,7 +25,7 @@ const MentorDetailModal = ({ mentor, open, setOpen }: Props) => {
               <Avatar>
                 <AvatarImage src={mentor.profileImage || userImage} />
               </Avatar>
-              <p>userName</p>
+              <p>{mentor.nickName}</p>
             </div>
             <ul className="text-sm">
               <li>
@@ -58,7 +58,7 @@ const MentorDetailModal = ({ mentor, open, setOpen }: Props) => {
           <div>{mentor.content}</div>
         </div>
         <div className="grow"></div>
-        <ChatButton />
+        <ChatButton nickName={mentor.nickName} />
         <DialogClose onClick={() => setOpen(false)} />
       </DialogContent>
     </Dialog>

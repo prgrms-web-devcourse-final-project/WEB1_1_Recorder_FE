@@ -1,5 +1,10 @@
 import fetchInstance from "@/services/fetchInstance";
-import { TResponsePopularReviewList, TResponseRecentReviewList, TResponseReviewList } from "@/types/reviewTypes";
+import {
+  TResponsePopularReviewList,
+  TResponseRecentReviewList,
+  TResponseReviewList,
+  TReviewItem
+} from "@/types/reviewTypes";
 
 /** 리뷰 목록을 불러오는 함수입니다.
  * @example const reviews = getReviewList({ type: 'DEBUG', page: 0, state: 'PENDING', stack: 'JAVASCRIPT', keyword: 'URLSearchParam',
@@ -8,17 +13,20 @@ import { TResponsePopularReviewList, TResponseRecentReviewList, TResponseReviewL
  */
 const getReviewList = async (params: {
   type?: string;
-  page: number;
+  page?: string;
   state?: string;
   stack?: string;
   keyword?: string;
-}) => {
+}): Promise<TResponseReviewList | null> => {
   try {
-    const data: TResponseReviewList = await fetchInstance.get("/question/list", params, false);
-    return data.result?.content || [];
+    const urlParams = {
+      page: params.page ?? 0,
+      ...params
+    };
+    const data: TResponseReviewList = await fetchInstance.get("/question/list", urlParams);
+    return data;
   } catch (error) {
-    console.error(error);
-    return [];
+    return null;
   }
 };
 
@@ -26,13 +34,11 @@ const getReviewList = async (params: {
  * @example const reviews = getRecentReviewList({size: '3'})
  * @param params size: 받아올 질문 개수
  */
-const getRecentReviewList = async (params: { size: number }) => {
+const getRecentReviewList = async (params: { size: number }): Promise<TReviewItem[] | []> => {
   try {
-    const data: TResponseRecentReviewList = await fetchInstance.get("/question/recent", params, false);
-
+    const data: TResponseRecentReviewList = await fetchInstance.get("/question/recent", params);
     return data.result || [];
   } catch (error) {
-    console.error(error);
     return [];
   }
 };
@@ -41,12 +47,11 @@ const getRecentReviewList = async (params: { size: number }) => {
  * @example const reviews = getPopularReviewList({size: '3', days: '7'})
  * @param params size: 받아올 질문 개수, days: 최근 며칠간의 데이터
  */
-const getPopularReviewList = async (params: { size: number; days: number }) => {
+const getPopularReviewList = async (params: { size: number; days: number }): Promise<TReviewItem[] | []> => {
   try {
-    const data: TResponsePopularReviewList = await fetchInstance.get("/question/popular", params, false);
+    const data: TResponsePopularReviewList = await fetchInstance.get("/question/popular", params);
     return data.result;
   } catch (error) {
-    console.error(error);
     return [];
   }
 };

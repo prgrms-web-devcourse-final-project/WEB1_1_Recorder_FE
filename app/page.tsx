@@ -1,29 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import ReviewByStack from "@/components/reviews/reviewByStack";
+import { MentorSlide } from "@/components/mentors/mentorsSlise";
 import { getPopularReviewList, getRecentReviewList } from "@/services/getReviewList";
 import { getMentorList } from "@/services/getMentorList";
-import { getUserTechs } from "@/services/getUserTechs";
-import { TReviewItem } from "@/types/reviewTypes";
-import { TMentorItem } from "@/types/mentorTypes";
-import { MentorSlide } from "@/components/mentors/mentorsSlise";
 
 const Home = async () => {
-  const recentReviewList: TReviewItem[] | [] = await getRecentReviewList({ size: 3 });
-  const popularReviewList: TReviewItem[] | [] = await getPopularReviewList({ size: 3, days: 7 });
-  // const mentorList: TMentorItem[] | [] = await getMentorList({ page: 0 });
+  const recentReviewList = await getRecentReviewList({ size: 3 });
+  const popularReviewList = await getPopularReviewList({ size: 3, days: 7 });
+  const mentorResponse = await getMentorList({ page: "0" });
+  const mentorList = mentorResponse?.result.content || [];
 
-  // const userTechs: { id: number; name: string }[] | [] = await getUserTechs();//클라이언트 컴포넌트로 분리 및 내부에서 api 요청해주세요
-
-  const mentorList: TMentorItem[] | [] = await getMentorList({ page: 0 });
-  let userTechs: { id: number; name: string }[] | [] = await getUserTechs();
-  if (userTechs.length < 1) {
-    userTechs = [
-      { id: 1, name: "JAVA" },
-      { id: 2, name: "TypeScript" },
-      { id: 3, name: "Python" }
-    ];
-  }
   return (
     <div className="m-auto max-w px-4 lg:px-20">
       <section className="my-8 flex flex-col sm:flex-row">
@@ -45,7 +32,7 @@ const Home = async () => {
         </Card>
       </section>
       <section className="my-8">
-        <ReviewByStack userTechs={userTechs} />
+        <ReviewByStack />
       </section>
       <section className="my-8">
         <MentorSlide mentorList={mentorList} />

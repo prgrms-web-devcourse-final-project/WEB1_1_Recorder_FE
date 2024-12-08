@@ -5,13 +5,13 @@ import { TResponseMentorList } from "@/types/mentorTypes";
  * @example const mentors = getMentorList({page: '1'})
  * @param params page: 페이지 번호
  */
-const getMentorList = async (params: { page: number }) => {
+const getMentorList = async (params: { page: string }) => {
   try {
-    const data: TResponseMentorList = await fetchInstance.get("/mentor", params, false);
-    return data.result?.content || [];
+    params.page = params.page ?? 0;
+    const data: TResponseMentorList = await fetchInstance.get("/mentor", params);
+    return data;
   } catch (error) {
-    console.error(error);
-    return [];
+    return null;
   }
 };
 
@@ -23,9 +23,14 @@ const enrollMentor = async (params: { title: string; content: string; skillStack
   try {
     const data = await fetchInstance.post("/mentor", params);
     return data;
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) {}
 };
 
-export { getMentorList, enrollMentor };
+const deleteMentor = async () => {
+  try {
+    const data = await fetchInstance.delete("/mentor");
+    return data;
+  } catch (error) {}
+};
+
+export { getMentorList, enrollMentor, deleteMentor };
