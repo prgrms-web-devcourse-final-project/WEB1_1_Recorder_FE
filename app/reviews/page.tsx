@@ -6,14 +6,17 @@ import SearchSelect from "@/components/reviews/searchSelect";
 import { Card } from "@/components/ui/card";
 import { getReviewList } from "@/services/getReviewList";
 import { TReviewItem } from "@/types/reviewTypes";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Reviews = () => {
+  const params = useSearchParams();
+  const query = params.get("query") || "";
+  const [input, setInput] = useState(query);
   const [reviewList, setReviewList] = useState<TReviewItem[] | []>(() => {
     return [];
   });
   const [stack, setStack] = useState("");
-  const [input, setInput] = useState("");
   const stateList = ["전체", "해결됨", "미해결"];
   const [state, setState] = useState("전체");
   // 최신순, 인기순 정렬은 추후 추가 예정
@@ -22,11 +25,19 @@ const Reviews = () => {
 
   useEffect(() => {
     const makeReviewList = async () => {
-      const data = await getReviewList({ page: 0 });
+      const data = await getReviewList({ page: 0, keyword: input });
       setReviewList(data);
     };
     makeReviewList();
   }, []);
+
+  useEffect(() => {
+    // `params`가 바뀔 때마다 input 값을 갱신
+    const queryParam = params.get("query") || "";
+    if (queryParam !== input) {
+      setInput(queryParam); // URL에서 쿼리 값이 바뀌면 상태 업데이트
+    }
+  }, [params]); // params가 변경될 때마다 실행
 
   useEffect(() => {
     const makeReviewList = async () => {
@@ -48,7 +59,7 @@ const Reviews = () => {
     <div className="m-auto max-w lg:px-20">
       <Card className="p-4">
         <div className="m-auto md:w-2/3 lg:w-1/2">
-          <SearchInput setState={setInput} />
+          <SearchInput />
           <div className="mt-2 flex justify-between">
             <SearchFillter stateList={stateList} setState={setState} />
             <div className="flex gap-2">

@@ -17,9 +17,10 @@ import { ReviewFormSchema } from "@/types/reviewTypes";
 import createReview from "@/services/createReview";
 import { Label } from "@radix-ui/react-label";
 import { useRouter } from "next/navigation";
-
-const requestForm = ({}) => {
+import StacksModal from "@/components/stacksModal";
+const RequestForm = ({}) => {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   const form = useForm<ReviewFormSchema>({
     resolver: zodResolver(reviewFormSchema),
@@ -40,7 +41,7 @@ const requestForm = ({}) => {
   useEffect(() => {
     const currentContent = form.getValues(`codes.${selectedCodeIndex}.content`);
     form.setValue(`codes.${selectedCodeIndex}.content`, currentContent);
-  }, [selectedCodeIndex, form]);
+  }, [selectedCodeIndex]);
 
   const codes = useFieldArray({
     name: "codes",
@@ -55,11 +56,29 @@ const requestForm = ({}) => {
       console.error("Error creating review:", error);
     }
   };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const toggleStack = (stack: string) => {
+    const current = form.watch("stacks");
+    form.setValue("stacks", current.includes(stack) ? current.filter((s) => s !== stack) : [...current, stack]);
+  };
+  const formHandleSubmit = form.handleSubmit(onSubmit);
 
   return (
     <div className="m-auto p-5">
+      <StacksModal
+        closeModal={closeModal}
+        isModalOpen={isModalOpen}
+        current={form.watch("stacks")}
+        toggleStack={toggleStack}
+      />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={formHandleSubmit} className="space-y-8">
           <FormField
             control={form.control}
             name="type"
@@ -127,7 +146,7 @@ const requestForm = ({}) => {
                   control={form.control}
                   key={index}
                   name={`stacks.${index}`}
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormControl>
                         <Button
@@ -145,16 +164,9 @@ const requestForm = ({}) => {
                   )}
                 />
               ))}
-              <Button
-                type="button"
-                variant="outline"
-                size="default"
-                disabled={form.watch("stacks").length >= 3}
-                onClick={() => form.setValue("stacks", [...form.watch("stacks"), ""])}
-              >
+              <Button type="button" variant="outline" size="default" onClick={openModal}>
                 태그 추가
               </Button>
-              {/* 태그 선택 모달버튼으로 대체 예정 */}
             </div>
           </div>
           <div className="flex items-start space-x-4">
@@ -234,11 +246,13 @@ const requestForm = ({}) => {
             name={`codes.${selectedCodeIndex}.content`}
             render={({ field }) => (
               <FormItem className="flex h-96 flex-col space-y-0">
-                <FormLabel className="border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">
-                  {codes.fields[selectedCodeIndex].name}
-                </FormLabel>
                 <FormControl>
-                  <CodeEditor code={field.value} setCode={field.onChange} language="typescript" />
+                  <CodeEditor
+                    codeName={codes.fields[selectedCodeIndex].name}
+                    code={codes.fields[selectedCodeIndex].content}
+                    setCode={field.onChange}
+                    language="typescript"
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -248,7 +262,6 @@ const requestForm = ({}) => {
             name={`content`}
             render={({ field }) => (
               <FormItem className="flex-grow">
-                <FormLabel>본문</FormLabel>
                 <FormControl>
                   <TextEditor markdown={field.value} onChange={field.onChange} className="overflow-y-scroll" />
                 </FormControl>
@@ -283,4 +296,4 @@ const requestForm = ({}) => {
   );
 };
 
-export default requestForm;
+export default RequestForm;

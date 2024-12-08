@@ -6,7 +6,6 @@ const getUserTechs = async () => {
     const data: TResponseUserTechs = await fetchInstance.get("/user/tech");
     return data.result?.stacks || [];
   } catch (error) {
-    console.error(error);
     return [];
   }
 };

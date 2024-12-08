@@ -1,6 +1,6 @@
 export type TMentorItem = {
   userId: string;
-  userImage?: string;
+  profileImage: string;
   nickName: string;
   title: string;
   content: string;

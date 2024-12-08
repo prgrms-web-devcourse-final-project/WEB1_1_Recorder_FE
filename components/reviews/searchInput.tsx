@@ -1,32 +1,39 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { TReviewItem } from "@/types/reviewTypes";
-import { useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-type Props = {
-  setState: React.Dispatch<React.SetStateAction<string>>;
-  className?: string;
-};
+const SearchInput = () => {
+  const params = useSearchParams();
+  const query = params.get("query") || "";
+  const router = useRouter();
+  const [input, setInput] = useState(() => query);
 
-const SearchInput = ({ setState, className }: Props) => {
-  const inputRef = useRef("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    inputRef.current = e.target.value;
+    setInput(e.target.value);
   };
 
   const handleSubmit = async () => {
-    setState(inputRef.current);
+    if (input.length < 1) return;
+    router.push(`/reviews?query=${input}`);
   };
+  useEffect(() => {
+    // `params`가 바뀔 때마다 input 값을 갱신
+    const queryParam = params.get("query") || "";
+    if (queryParam !== input) {
+      setInput(queryParam); // URL에서 쿼리 값이 바뀌면 상태 업데이트
+    }
+  }, [params]); // params가 변경될 때마다 실행
 
   return (
-    <div className={`flex gap-2 ${className}`}>
+    <div className="flex gap-2">
       <Input
         placeholder="검색어를 입력하세요."
-        value={inputRef.current}
         onChange={(e) => {
           handleChange(e);
         }}
+        value={input}
       ></Input>
       <Button variant="outline" onClick={handleSubmit}>
         검색

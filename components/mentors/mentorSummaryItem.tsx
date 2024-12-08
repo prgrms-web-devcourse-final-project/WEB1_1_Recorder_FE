@@ -4,6 +4,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { TMentorItem } from "@/types/mentorTypes";
+import { userImage } from "@/constants/user";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -36,7 +37,7 @@ const MentorSummaryItem = ({ mentor, setOpen }: Props) => {
       <CardContent className="pt-4">
         <div className="flex items-center pb-4">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={mentor.userImage || "https://github.com/shadcn.png"}></AvatarImage>
+            <AvatarImage src={mentor.profileImage || userImage}></AvatarImage>
           </Avatar>
           <span className="px-2">{mentor.userId}</span>
         </div>

@@ -4,15 +4,25 @@ import { Dispatch, SetStateAction } from "react";
 type Props = {
   code: string;
   language: string;
+  codeName?: string;
   setCode: Dispatch<SetStateAction<string>>;
 };
 
-const CodeEditor = ({ code, setCode, language }: Props) => {
+const CodeEditor = ({ code, setCode, codeName = "Code", language }: Props) => {
   const changeEventHandler = (value: string | undefined) => {
     setCode(value || "");
   };
   return (
-    <Editor className="h-full w-full" theme="vs-dark" language={language} value={code} onChange={changeEventHandler} />
+    <>
+      <div className="h-[2.5rem] border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">{codeName}</div>
+      <Editor
+        className="h-full w-full"
+        theme="vs-dark"
+        language={language}
+        value={code}
+        onChange={changeEventHandler}
+      />
+    </>
   );
 };
 
