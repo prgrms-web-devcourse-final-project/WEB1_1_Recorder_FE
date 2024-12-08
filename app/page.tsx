@@ -4,21 +4,13 @@ import ReviewByStack from "@/components/reviews/reviewByStack";
 import { MentorSlide } from "@/components/mentors/mentorsSlise";
 import { getPopularReviewList, getRecentReviewList } from "@/services/getReviewList";
 import { getMentorList } from "@/services/getMentorList";
-import { getUserTechs } from "@/services/getUserTechs";
 
 const Home = async () => {
   const recentReviewList = await getRecentReviewList({ size: 3 });
   const popularReviewList = await getPopularReviewList({ size: 3, days: 7 });
-  const mentorResponse = await getMentorList({ page: 0 });
+  const mentorResponse = await getMentorList({ page: "0" });
   const mentorList = mentorResponse?.result.content || [];
-  let userTechs = await getUserTechs();
-  if (userTechs.length < 1) {
-    userTechs = [
-      { id: 1, name: "JAVA" },
-      { id: 2, name: "TypeScript" },
-      { id: 3, name: "Python" }
-    ];
-  }
+
   return (
     <div className="m-auto max-w px-4 lg:px-20">
       <section className="my-8 flex flex-col sm:flex-row">
@@ -40,7 +32,7 @@ const Home = async () => {
         </Card>
       </section>
       <section className="my-8">
-        <ReviewByStack userTechs={userTechs} />
+        <ReviewByStack />
       </section>
       <section className="my-8">
         <MentorSlide mentorList={mentorList} />
