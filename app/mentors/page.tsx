@@ -1,6 +1,5 @@
 "use client";
 import AddMentorModal from "@/components/mentors/addMentorModal";
-import { MentorDetailModal } from "@/components/mentors/mentorDetailModal";
 import MentorGrid from "@/components/mentors/mentorGrid";
 import PageHeader from "@/components/pageHeader";
 import {

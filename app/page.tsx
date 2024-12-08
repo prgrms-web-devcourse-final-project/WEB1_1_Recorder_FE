@@ -1,19 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import ReviewByStack from "@/components/reviews/reviewByStack";
+import { MentorSlide } from "@/components/mentors/mentorsSlise";
 import { getPopularReviewList, getRecentReviewList } from "@/services/getReviewList";
 import { getMentorList } from "@/services/getMentorList";
 import { getUserTechs } from "@/services/getUserTechs";
-import { TReviewItem } from "@/types/reviewTypes";
-import { TMentorItem } from "@/types/mentorTypes";
-import { MentorSlide } from "@/components/mentors/mentorsSlise";
 
 const Home = async () => {
-  const recentReviewList: TReviewItem[] | [] = await getRecentReviewList({ size: 3 });
-  const popularReviewList: TReviewItem[] | [] = await getPopularReviewList({ size: 3, days: 7 });
+  const recentReviewList = await getRecentReviewList({ size: 3 });
+  const popularReviewList = await getPopularReviewList({ size: 3, days: 7 });
   const mentorResponse = await getMentorList({ page: 0 });
-  const mentorList: TMentorItem[] | [] = mentorResponse?.result.content || [];
-  let userTechs: { id: number; name: string }[] | [] = await getUserTechs();
+  const mentorList = mentorResponse?.result.content || [];
+  let userTechs = await getUserTechs();
   if (userTechs.length < 1) {
     userTechs = [
       { id: 1, name: "JAVA" },

@@ -32,7 +32,7 @@ const fetchUtil = async (endpoint: string, method: string, params: Record<string
 
 const fetchInstance = {
   get: (endpoint: string, params: Record<string, any> = {}) => {
-    return fetchUtil(endpoint, "GET", params, undefined);
+    return fetchUtil(endpoint, "GET", params);
   },
   post: (endpoint: string, body: any) => {
     return fetchUtil(endpoint, "POST", {}, body);
@@ -41,7 +41,7 @@ const fetchInstance = {
     return fetchUtil(endpoint, "PUT", {}, body);
   },
   delete: (endpoint: string, params: Record<string, any> = {}) => {
-    return fetchUtil(endpoint, "DELETE", params, undefined);
+    return fetchUtil(endpoint, "DELETE", params);
   },
   patch: (endpoint: string, body: any, params: Record<string, any> = {}) => {
     return fetchUtil(endpoint, "PATCH", params, body);
