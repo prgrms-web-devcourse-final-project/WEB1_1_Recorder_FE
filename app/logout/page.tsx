@@ -10,7 +10,7 @@ const Logout = () => {
   }, []);
   return (
     <div className="flex h-[calc(100vh-320px)] w-full flex-col items-center justify-center">
-      <div className="">로그아웃이 완료되었습니다.</div>{" "}
+      <div className="">로그아웃이 완료되었습니다.</div>
       <Button
         onClick={() => {
           router.push("/login");

@@ -34,9 +34,12 @@ const LoginButton = ({ icon, children, className, url }: Props) => {
 };
 
 const SocielLogin = () => {
-  const googleURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/google?redirect_uri=http://localhost:3000/signUp`;
-  const kakaoURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao?redirect_uri=http://localhost:3000/login`;
-  const githubURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/github?redirect_uri=http://localhost:3000/login`;
+  const currentUrl = typeof window !== "undefined" ? window.location.origin : "";
+  const loginUrl = `?redirect_uri=${encodeURIComponent(currentUrl)}/signUp`;
+
+  const googleURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/google${loginUrl}`;
+  const kakaoURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao${loginUrl}`;
+  const githubURL = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/github${loginUrl}`;
 
   return (
     <div className="flex w-fit flex-col gap-8">
