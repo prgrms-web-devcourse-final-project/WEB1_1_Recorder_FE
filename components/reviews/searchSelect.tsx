@@ -31,6 +31,7 @@ const SearchSelect = ({ state, setState, className, placeholder, type = "all" }:
     };
     makeTechList();
   }, []);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className={`justify-between ${className}`}>

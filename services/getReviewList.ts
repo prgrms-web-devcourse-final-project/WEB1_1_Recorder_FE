@@ -13,16 +13,20 @@ import {
  */
 const getReviewList = async (params: {
   type?: string;
-  page: number;
+  page?: string;
   state?: string;
   stack?: string;
   keyword?: string;
-}): Promise<TReviewItem[] | []> => {
+}): Promise<TResponseReviewList | null> => {
   try {
-    const data: TResponseReviewList = await fetchInstance.get("/question/list", params);
-    return data.result?.content || [];
+    const urlParams = {
+      page: params.page ?? 0,
+      ...params
+    };
+    const data: TResponseReviewList = await fetchInstance.get("/question/list", urlParams);
+    return data;
   } catch (error) {
-    return [];
+    return null;
   }
 };
 
