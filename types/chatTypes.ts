@@ -8,3 +8,11 @@ export type ChatListItem = {
   latestMessage: string;
   createdAt: string;
 };
+
+export type TRequestChatId = {
+  opponentId: string;
+};
+export type TResponseChatId = {
+  message: string;
+  result: number;
+};

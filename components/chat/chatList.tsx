@@ -1,7 +1,7 @@
 "use client";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { ChatListItem } from "@/types/charTypes";
+import { ChatListItem } from "@/types/chatTypes";
 import { useRouter, useSearchParams } from "next/navigation";
 
 type Props = {

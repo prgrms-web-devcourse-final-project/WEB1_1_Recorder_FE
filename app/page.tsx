@@ -12,7 +12,7 @@ const Home = async () => {
   const mentorList = mentorResponse?.result.content || [];
 
   return (
-    <div className="m-auto max-w px-4 lg:px-20">
+    <div className="m-auto max-w p-10">
       <section className="my-8 flex flex-col sm:flex-row">
         <Card className="sm:mr-2 sm:w-1/2">
           <CardHeader>

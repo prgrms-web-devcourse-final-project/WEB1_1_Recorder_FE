@@ -20,7 +20,7 @@ const fetchUtil = async (endpoint: string, method: string, params: Record<string
     headers,
     body: body ? JSON.stringify(body) : undefined
   });
-
+  console.log(response);
   if (!response.ok) {
     const errorData = await response.json();
     const errorMessage = errorData.message || `Status: ${response.status}`;
