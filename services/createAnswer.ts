@@ -11,7 +11,7 @@ type createAnswerResponseProps = Promise<{
 
 const createAnswer = async ({ requestParams }: createAnswerRequestProps): createAnswerResponseProps => {
   try {
-    const data = await fetchInstance.post("/answer", { ...requestParams, title: "dummy" });
+    const data = await fetchInstance.post("/answer", { ...requestParams });
 
     return data;
   } catch (error) {

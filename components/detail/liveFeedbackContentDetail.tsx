@@ -8,17 +8,19 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
 import TextViewer from "@/components/textEditor/textViewer";
-import { TReviewDetail } from "@/types/reviewTypes";
+import { TLiveFeedbackDetail } from "@/types/reviewTypes";
 
 type Props = {
-  review: TReviewDetail;
+  liveFeedback: TLiveFeedbackDetail;
+  handleReturn: () => void;
 };
-const ContentDetail = ({ review }: Props) => {
+const LiveFeedbackContentDetail = ({ liveFeedback, handleReturn }: Props) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   return (
     <>
       <div className="flex justify-between">
-        <PageHeader title={review.title} />
+        <PageHeader title={liveFeedback.title} />
+        <Button onClick={handleReturn}>목록으로 돌아가기</Button>
       </div>
       <div className="flex flex-col gap-4 px-5">
         <div className="flex items-center gap-2 font-semibold">
@@ -26,20 +28,14 @@ const ContentDetail = ({ review }: Props) => {
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <span>{review.writer}</span>
+          <span>{liveFeedback.studentId}</span>
           <Separator />
           <FiGithub size={25} />
-          <span>{review.githubLink}</span>
-          <Separator />
-          <span>{review.createdAt}</span>
-          <Separator />
-          <span>조회수 {review.readCount}</span>
-          <Separator />
-          <span>답변 {review.answerCount}개</span>
+          <span>{liveFeedback.githubLink}</span>
         </div>
         <div className="flex flex-wrap items-end gap-2">
-          {review.codes.length >= 1 &&
-            review.codes.map((code, index) => (
+          {liveFeedback.feedbackCodes.length >= 1 &&
+            liveFeedback.feedbackCodes.map((code, index) => (
               <div key={index} className="flex flex-col space-y-2">
                 <span className={cn(index !== 0 && "sr-only")}>메인 코드</span>
                 <span className={cn(index !== 1 && "sr-only")}>보조 코드</span>
@@ -55,18 +51,22 @@ const ContentDetail = ({ review }: Props) => {
         </div>
         <div>
           <div className="border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">
-            {review.codes[selectedCodeIndex].name}
+            {liveFeedback.feedbackCodes[selectedCodeIndex].name}
           </div>
           <div>
-            <CodeViewer code={review.codes[selectedCodeIndex].content} language="javascript" />
+            <CodeViewer code={liveFeedback.feedbackCodes[selectedCodeIndex].content} language="javascript" />
           </div>
         </div>
         <div>
-          <TextViewer markdown={review.content} />
+          <TextViewer markdown={liveFeedback.description} />
+        </div>
+
+        <div className="flex justify-center">
+          <Button>라이브 피드백 -&gt;</Button>
         </div>
       </div>
     </>
   );
 };
 
-export default ContentDetail;
+export default LiveFeedbackContentDetail;
