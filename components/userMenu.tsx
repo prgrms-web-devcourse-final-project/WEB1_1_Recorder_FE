@@ -17,8 +17,6 @@ const UserMenu = ({}: Props) => {
   const pathname = usePathname();
   useEffect(() => {
     checkAuth();
-    window.addEventListener("storage", checkAuth);
-    return () => window.removeEventListener("storage", checkAuth);
   }, [checkAuth, pathname]);
   return (
     <>
