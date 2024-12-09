@@ -9,18 +9,33 @@ import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
 import TextViewer from "@/components/textEditor/textViewer";
 import { TReviewDetail } from "@/types/reviewTypes";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import getMyInfo from "@/services/getMyInfo";
+import deleteReview from "@/services/deleteReview";
+import { useRouter } from "next/navigation";
 
 type Props = {
   review: TReviewDetail;
 };
 const ContentDetail = ({ review }: Props) => {
+  const router = useRouter();
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   const code = sortCodes(review.codes);
+  const { data } = useQuery({ queryKey: ["getMyInfo"], queryFn: getMyInfo });
+
+  const mutation = useMutation({
+    mutationFn: () => deleteReview(review.id)
+  });
+  const handleDelete = () => {
+    mutation.mutate();
+    router.push("/reviews");
+  };
 
   return (
     <>
       <div className="flex justify-between">
         <PageHeader title={review.title} />
+        {review.writer === data?.result.nickname && <Button onClick={handleDelete}>게시글 삭제</Button>}
       </div>
       <div className="flex flex-col gap-4 px-5">
         <div className="flex items-center gap-2 font-semibold">
@@ -33,7 +48,7 @@ const ContentDetail = ({ review }: Props) => {
           <FiGithub size={25} />
           <span>{review.githubLink}</span>
           <Separator />
-          <span>{review.createdAt}</span>
+          <span>{review.createdAt.split("T")[0]}</span>
           <Separator />
           <span>조회수 {review.readCount}</span>
           <Separator />

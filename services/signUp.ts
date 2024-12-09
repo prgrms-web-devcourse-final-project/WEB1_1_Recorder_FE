@@ -1,13 +1,13 @@
 import fetchInstance from "@/services/fetchInstance";
 
-// type signUpRequestProps = {
-//   requestParams: {
-//     nickname: string;
-//     includeData: boolean;
-//     profileImage?: string;
-//     introduction?: string;
-//   };
-// };
+type signUpRequestProps = {
+  formData: {
+    nickname: string;
+    profileImage?: string;
+    introduction?: string;
+    stacks: string[];
+  };
+};
 
 type signUpResponseProps = Promise<{
   message: string;
@@ -18,9 +18,14 @@ type signUpResponseProps = Promise<{
   } | null;
 }>;
 
-const signUp = async (nickname: string): signUpResponseProps => {
+const signUp = async ({ formData }: signUpRequestProps): signUpResponseProps => {
   try {
-    const data = await fetchInstance.post("/user", { nickname: nickname, includeData: false });
+    const { stacks, ...signUpData } = formData;
+
+    const data = await fetchInstance.post("/user", { ...signUpData, includeData: false });
+    stacks.map(async (stack) => {
+      await fetchInstance.post("/user/tech", { name: stack });
+    });
     return data;
   } catch (error) {
     console.log(error);

@@ -239,9 +239,25 @@ const RequestForm = ({}) => {
               size="default"
               className="mt-2"
               disabled={codes.fields.length >= 5}
-              onClick={() => codes.append({ name: "", content: "" })}
+              onClick={() => {
+                codes.append({ name: "", content: "" });
+                setSelectedCodeIndex(0);
+              }}
             >
               파일 추가
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="default"
+              className="mt-2"
+              disabled={codes.fields.length <= 1}
+              onClick={() => {
+                codes.remove(codes.fields.length - 1);
+                setSelectedCodeIndex(0);
+              }}
+            >
+              파일 제거
             </Button>
           </div>
           <FormField

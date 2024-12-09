@@ -27,7 +27,7 @@ const Header = () => {
             질문하기
           </Link>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-8">
           <SearchInput />
           <UserMenu />
         </div>

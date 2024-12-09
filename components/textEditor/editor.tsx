@@ -27,7 +27,7 @@ import {
   directivesPlugin,
   AdmonitionDirectiveDescriptor
 } from "@mdxeditor/editor";
-
+import uploadImage from "@/services/uploadImage";
 type Props = { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps;
 
 const Editor = ({ editorRef, ...props }: Props) => {
@@ -50,8 +50,10 @@ const Editor = ({ editorRef, ...props }: Props) => {
           )
         }),
         imagePlugin({
-          imageAutocompleteSuggestions: ["https://via.placeholder.com/150", "https://via.placeholder.com/150"],
-          imageUploadHandler: async () => Promise.resolve("https://picsum.photos/200/300")
+          imageUploadHandler: async (file) => {
+            const data = await uploadImage(file);
+            return data.result.imageUrl;
+          }
         }),
         linkDialogPlugin(),
         headingsPlugin(),
