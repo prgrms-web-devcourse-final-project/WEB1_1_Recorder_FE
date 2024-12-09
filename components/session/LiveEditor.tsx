@@ -7,13 +7,13 @@ import saveLiveFeedbackCode from "@/services/saveLiveFeedbackCode";
 import dynamic from "next/dynamic";
 import getLiveFeedbackSessions from "@/services/getLiveFeedbackSessions";
 import getLiveFeedbackCode from "@/services/getLiveFeedbackCode";
-import { useParams } from "next/navigation";
-
 const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((mod) => mod.Editor), { ssr: false });
 
-const Session = () => {
-  const docId = useParams<{ docId: string }>().docId;
-
+type Props = {
+  id: number;
+};
+const LiveEditor = ({ id }: Props) => {
+  const docId = `${id}`;
   const editorRef = useRef<any>(null);
   const providerRef = useRef<WebsocketProvider | null>(null);
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -62,18 +62,10 @@ const Session = () => {
     const initializeWebSocket = () => {
       const wsProvider = new WebsocketProvider(`${process.env.NEXT_PUBLIC_WS_URL}/ws/feedback`, docId, ydoc);
       providerRef.current = wsProvider;
-      // WebSocket 상태 모니터링
-      wsProvider.on("status", ({ status }: { status: any }) => {
-        setWsStatus(status === "connected" ? "connected" : "disconnected");
-      });
 
-      wsProvider.on("connection-error", (error: Error) => {
-        console.error("WebSocket connection error:", error);
-        setWsStatus("disconnected");
-      });
       const binding = new MonacoBinding(ytext, editor.getModel()!, new Set([editor]), wsProvider.awareness);
 
-      ytext.observe(onTextChange); // Y.Text 변경 감지
+      ytext.observe(onTextChange);
 
       return () => {
         ytext.unobserve(onTextChange);
@@ -88,11 +80,15 @@ const Session = () => {
 
   return (
     <div ref={editorRef}>
-      {wsStatus === "connecting" && <div>연결 중...</div>}
-      {wsStatus === "disconnected" && <div>연결 끊김</div>}
-      <MonacoEditor className="h-96 w-full" theme="vs-dark" onMount={handleEditorDidMount} />
+      <MonacoEditor
+        loading={<div className="h-96 w-full bg-black"></div>}
+        className="h-96 w-full"
+        theme="vs-dark"
+        language="javascript"
+        onMount={handleEditorDidMount}
+      />
     </div>
   );
 };
 
-export default Session;
+export default LiveEditor;
