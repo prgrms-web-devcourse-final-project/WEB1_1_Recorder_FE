@@ -9,22 +9,19 @@ import acceptAnswer from "@/services/acceptAnswer";
 import { TAnswer } from "@/types/reviewTypes";
 import { RxCheckCircled } from "react-icons/rx";
 import { useRouter } from "next/navigation";
+import { Card } from "@/components/ui/card";
 type Props = {
   answer: TAnswer;
   postId: number;
 };
-const AnswerDetail = ({ answer, postId }: Props) => {
+const AcceptedAnswerDetail = ({ answer, postId }: Props) => {
   const router = useRouter();
   const handleClick = async () => {
-    try {
-      await acceptAnswer({ questionId: postId, answerId: answer.id, review: "EASY" });
-    } catch (error) {
-      alert(error);
-    }
+    await acceptAnswer({ questionId: postId, answerId: answer.id, review: "EASY" });
     router.refresh();
   };
   return (
-    <div className="flex items-start gap-5 p-5 pr-[60px]">
+    <div className="flex items-start gap-5 border-l-8 border-primary p-5 pr-[60px]">
       <VoteMenu className="sticky top-20" answerId={answer.id} />
       <div className="flex w-full flex-col gap-5">
         <div className="flex w-full justify-between">
@@ -37,14 +34,7 @@ const AnswerDetail = ({ answer, postId }: Props) => {
             <Separator />
             <span>{answer.createdAt}</span>
           </div>
-          <RxCheckCircled
-            size={50}
-            onClick={handleClick}
-            className={cn(
-              "cursor-pointer text-primary opacity-20 transition-opacity hover:opacity-100",
-              answer.isAccept && "opacity-100"
-            )}
-          />
+          <RxCheckCircled size={50} onClick={handleClick} className={cn("cursor-pointer text-primary opacity-100")} />
         </div>
         <div className="flex flex-col p-5">
           <CodeViewer code={answer.code} language="javascript" />
@@ -55,4 +45,4 @@ const AnswerDetail = ({ answer, postId }: Props) => {
   );
 };
 
-export default AnswerDetail;
+export default AcceptedAnswerDetail;
