@@ -11,14 +11,17 @@ type Props = {
   className: string;
 };
 
+type Message = { content: string; authorization: string; type: "CHAT" };
+
 const ChatDetail = ({ id, className }: Props) => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [client, setClient] = useState<Client | null>(null);
+  const [input, setInput] = useState("");
+  const [sendInput, setSendInput] = useState("");
 
   useEffect(() => {
     const token = Cookies.get("accessToken");
     const headers = { Authorization: token };
-
     const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws/chat`);
     const stompClient = Stomp.over(socket);
 
@@ -38,7 +41,6 @@ const ChatDetail = ({ id, className }: Props) => {
     );
 
     setClient(stompClient);
-
     return () => stompClient.deactivate();
   }, []);
 
@@ -51,17 +53,25 @@ const ChatDetail = ({ id, className }: Props) => {
     }
   };
 
+  useEffect(() => {
+    const token = Cookies.get("accessToken");
+
+    if (token) {
+      const m = { content: sendInput, authorization: `Bearer ${token}`, type: "CHAT" };
+      sendMessage(JSON.stringify(m));
+    }
+  }, [sendInput]);
+
   return (
     <div className={`relative ${className}`}>
-      {/* <div className="flex h-full flex-col-reverse items-end pb-28">
-        {messageList.map((message, i) => {
-          return <ChatBubble key={i}>{message}</ChatBubble>;
+      <div className="flex h-full flex-col items-end justify-end pb-28">
+        {messages.map((message, i) => {
+          return <ChatBubble key={i}>{message.content}</ChatBubble>;
         })}
       </div>
       <div className="absolute bottom-4 w-full pr-8">
-        <ChatInput className="h-24" state={messageList} setState={setMessageList} ref={messageRef} />
+        <ChatInput className="h-24" state={input} setState={setInput} setSendInput={setSendInput} />
       </div>
-      <button onClick={() => sendMessage("안녕")}>보내기</button> */}
     </div>
   );
 };
