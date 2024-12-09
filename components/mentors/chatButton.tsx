@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 
 type Props = {
   nickName: string;
+  id: string;
 };
 
-const ChatButton = ({ nickName }: Props) => {
+const ChatButton = ({ nickName, id }: Props) => {
   const router = useRouter();
   const [isDelete, setIsDelete] = useState(false);
   const [userInfo, setUserInfo] = useState<TUserInfo | null>();
@@ -41,7 +42,7 @@ const ChatButton = ({ nickName }: Props) => {
     );
   } else {
     return (
-      <Button className="mt-4 w-full text-white" type="submit" onClick={() => router.push("/chat")}>
+      <Button className="mt-4 w-full text-white" type="submit" onClick={() => router.push(`/chat?opponentId=${id}`)}>
         1:1 채팅하기
       </Button>
     );

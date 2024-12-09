@@ -21,6 +21,8 @@ const AddMentorModal = () => {
   const [text, setText] = useState("");
   const [userInfo, setUserInfo] = useState<TUserInfo | null>();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
@@ -32,7 +34,8 @@ const AddMentorModal = () => {
         setAlert("hidden");
       }, 3000);
     } else {
-      await enrollMentor({ title: title, content: content, skillStacks: stackList });
+      const data = await enrollMentor({ title: title, content: content, skillStacks: stackList });
+      window.location.reload();
     }
   };
 

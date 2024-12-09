@@ -13,7 +13,7 @@ const ChatList = ({ list, className }: Props) => {
   const router = useRouter();
   const params = useSearchParams();
   const currentUser = params.get("user") || "";
-  console.log(list);
+
   return (
     <ScrollArea className={className}>
       <h3 className="pb-4 font-bold">목록</h3>
