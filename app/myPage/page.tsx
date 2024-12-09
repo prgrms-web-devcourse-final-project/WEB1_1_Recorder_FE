@@ -39,7 +39,7 @@ const MyPage = () => {
   return (
     <div className="m-auto my-10 h-full max-w px-4 lg:px-20">
       <PageHeader title="마이페이지" />
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 mt-5">
         <MyPageTop activeTab={activeTab} setActiveTab={setActiveTab} />
         {renderContent()}
         <Button

@@ -21,6 +21,7 @@ const UserMenu = ({}: Props) => {
   useEffect(() => {
     checkAuth();
   }, [checkAuth, pathname]);
+
   return (
     <>
       {isLogin ? (

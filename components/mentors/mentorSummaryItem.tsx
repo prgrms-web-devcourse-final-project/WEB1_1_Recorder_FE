@@ -25,7 +25,7 @@ const MentorSummaryItem = ({ mentor }: Props) => {
       >
         <CardHeader className="pb-4">
           <CardTitle className="line-clamp-1">{mentor.title}</CardTitle>
-          <CardDescription className="line-clamp-2">{mentor.content}</CardDescription>
+          <CardDescription className="line-clamp-1">{mentor.content}</CardDescription>
           <div className="line-clamp-1">
             {mentor.skillStacks.map((stack, i) => {
               return (

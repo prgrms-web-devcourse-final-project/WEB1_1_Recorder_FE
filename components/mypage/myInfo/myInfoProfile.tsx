@@ -9,12 +9,13 @@ const MyInfoProfile = ({}: Props) => {
   return (
     <div className="flex flex-col rounded-[10px] bg-secondary p-6">
       <div className="flex flex-col items-center justify-center">
-        <Avatar className="w-40 h-40">
-          <AvatarImage src="https://github.com/shadcn.png" className="w-40 h-40 rounded-full border-none bg-white" />
+        <Avatar className="h-40 w-40">
+          <AvatarImage src="https://github.com/shadcn.png" className="h-40 w-40 rounded-full border-none bg-white" />
         </Avatar>
         <div className="mt-4 flex flex-col items-center gap-2">
           <div className="flex items-center gap-2">
-            <Image src="/img/reward.png" alt="reward" width={30} height={30} />
+            <Image src="/img/silver.png" alt="" width={20} height={20} />
+            <p>채택률</p>
             <p>test1</p>
           </div>
           <p>test@email.com</p>
@@ -25,8 +26,8 @@ const MyInfoProfile = ({}: Props) => {
         </div>
       </div>
       <div className="mr-12 mt-4 flex justify-end">
-        <Button size="edit" className="bg-btnColor text-white" onClick={() => router.push("/myPage/editProfile")}>
-          회원정보수정
+        <Button size="edit" className="bg-btnColor text-white" onClick={() => router.push("/myPage/editmember")}>
+          회원정보 수정
         </Button>
       </div>
     </div>

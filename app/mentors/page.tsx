@@ -12,7 +12,7 @@ const Mentors = async ({ searchParams }: Props) => {
   const params = await searchParams;
   const mentorListResponse = await getMentorList(params);
   return (
-    <div className="m-auto max-w px-4 lg:px-20">
+    <div className="m-auto max-w p-10">
       <PageHeader title="라이브 피드백 멘토">
         <AddMentorModal />
       </PageHeader>

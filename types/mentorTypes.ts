@@ -1,5 +1,6 @@
 export type TMentorItem = {
   userId: string;
+  mentorId: string;
   profileImage: string;
   nickName: string;
   title: string;

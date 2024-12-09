@@ -15,7 +15,6 @@ const fetchUtil = async (endpoint: string, method: string, params: Record<string
   if (accessToken) {
     headers.Authorization = `Bearer ${accessToken}`;
   }
-
   const response = await fetch(url.toString(), {
     method,
     headers,

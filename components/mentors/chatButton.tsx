@@ -9,9 +9,12 @@ import { useEffect, useState } from "react";
 
 type Props = {
   nickName: string;
+  id: string;
+  img: string;
+  mentorId: string;
 };
 
-const ChatButton = ({ nickName }: Props) => {
+const ChatButton = ({ nickName, id, img, mentorId }: Props) => {
   const router = useRouter();
   const [isDelete, setIsDelete] = useState(false);
   const [userInfo, setUserInfo] = useState<TUserInfo | null>();
@@ -23,25 +26,25 @@ const ChatButton = ({ nickName }: Props) => {
     };
     fetchData();
   }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await deleteMentor();
-    };
-    if (isDelete) {
-      fetchData();
-      window.location.reload();
-    }
-  }, [isDelete]);
+
+  const handleClick = async () => {
+    await deleteMentor(mentorId);
+    window.location.reload();
+  };
 
   if (userInfo?.nickname === nickName) {
     return (
-      <Button className="mt-4 w-full text-white" type="submit" onClick={() => setIsDelete(true)}>
+      <Button className="mt-4 w-full text-white" type="submit" onClick={handleClick}>
         삭제하기
       </Button>
     );
   } else {
     return (
-      <Button className="mt-4 w-full text-white" type="submit" onClick={() => router.push("/chat")}>
+      <Button
+        className="mt-4 w-full text-white"
+        type="submit"
+        onClick={() => router.push(`/chat?opponentId=${id}&name=${nickName}&img=${img}`)}
+      >
         1:1 채팅하기
       </Button>
     );

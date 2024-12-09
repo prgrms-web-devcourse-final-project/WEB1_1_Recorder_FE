@@ -16,7 +16,7 @@ const getMentorList = async (params: { page: string }) => {
 };
 
 /** 멘토를 등록하는 함수입니다.
- * @example
+ * @example const data = await enrollMentor({ title: title, content: content, skillStacks: stackList });
  * @param params
  */
 const enrollMentor = async (params: { title: string; content: string; skillStacks: string[] }) => {
@@ -26,9 +26,13 @@ const enrollMentor = async (params: { title: string; content: string; skillStack
   } catch (error) {}
 };
 
-const deleteMentor = async () => {
+/** 멘토를 삭제하는 함수입니다.
+ * @example
+ * @param params
+ */
+const deleteMentor = async (mentoId: string) => {
   try {
-    const data = await fetchInstance.delete("/mentor");
+    const data = await fetchInstance.delete(`/mentor/${mentoId}`);
     return data;
   } catch (error) {}
 };

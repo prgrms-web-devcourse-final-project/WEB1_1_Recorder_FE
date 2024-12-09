@@ -46,10 +46,10 @@ const ReviewByStack = () => {
   }, [stack]);
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">기술별 질문</CardTitle>
-        <CardDescription className="pt-2">
+    <Card className="border-none p-0 shadow-none">
+      <CardHeader className="p-0">
+        <CardTitle className="border-b-2 border-primary pb-2 text-2xl font-bold">기술별 질문</CardTitle>
+        <CardDescription className="py-2">
           <ToggleGroup
             type="single"
             variant="outline"
@@ -67,9 +67,9 @@ const ReviewByStack = () => {
           </ToggleGroup>
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="min-h-80 p-0">
         {reviewList.length < 1 ? (
-          <div className="flex h-72 w-full flex-col items-center justify-center">
+          <div className="flex min-h-80 w-full flex-col items-center justify-center">
             <p className="mb-5">아직 등록된 질문이 없습니다.</p>
             <ImFilesEmpty size={80} color="gray" />
           </div>

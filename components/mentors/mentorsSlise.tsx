@@ -10,11 +10,11 @@ type Props = {
 const MentorSlide = ({ mentorList }: Props) => {
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold">라이브 피드백</CardTitle>
+      <Card className="border-none p-0 shadow-none">
+        <CardHeader className="p-0">
+          <CardTitle className="border-b-2 border-primary pb-2 text-2xl font-bold">라이브 피드백</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0 pt-4">
           {mentorList.length < 1 ? (
             <div className="flex h-72 w-full flex-col items-center justify-center">
               <p className="mb-5">아직 등록된 멘토가 없습니다.</p>

@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={`${pretendard.variable} flex min-h-screen flex-col font-pretendard`}>
         <Providers>
           <Header />
-          <main className="pt-24">{children}</main>
+          <main className="grow pt-24">{children}</main>
         </Providers>
         <Footer />
       </body>
