@@ -15,9 +15,11 @@ type Props = {};
 const UserMenu = ({}: Props) => {
   const { isLogin, checkAuth } = useAuthStore();
   const pathname = usePathname();
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth, pathname]);
+
   return (
     <>
       {isLogin ? (

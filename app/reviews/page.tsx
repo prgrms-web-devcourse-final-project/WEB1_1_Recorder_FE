@@ -13,7 +13,7 @@ const Reviews = async ({ searchParams }: Props) => {
   const reviewListResponse = await getReviewList(params);
 
   return (
-    <div className="m-auto max-w lg:px-20">
+    <div className="m-auto max-w p-10">
       <SearchBox params={params} />
       <section className="my-10">
         <ReviewSummaryList reviewList={reviewListResponse?.result.content || []} size="lg" />

@@ -1,33 +1,43 @@
+"use client";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import React, { SetStateAction } from "react";
+import { ChatListItem } from "@/types/chatTypes";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type Props = {
-  list: string[];
-  state: string;
-  setState: React.Dispatch<SetStateAction<string>>;
+  list: ChatListItem[];
   className?: string;
 };
 
-const ChatList = ({ list, state, setState, className }: Props) => {
+const ChatList = ({ list, className }: Props) => {
+  const router = useRouter();
+  const params = useSearchParams();
+  const currentUser = params.get("user") || "";
+
   return (
     <ScrollArea className={className}>
       <h3 className="pb-4 font-bold">목록</h3>
-      {list.map((user, i) => {
-        return (
-          <div key={i}>
-            <p
-              className={`cursor-pointer rounded-md p-3 hover:bg-secondary ${state === user && "bg-secondary"}`}
-              onClick={() => {
-                setState(user);
-              }}
-            >
-              {user}
-            </p>
-            <Separator />
-          </div>
-        );
-      })}
+      {list.length < 1 ? (
+        <div className="flex justify-center text-gray-500">
+          <p>아직 채팅 기록이 없습니다.</p>
+        </div>
+      ) : (
+        list.map((user, i) => {
+          return (
+            <div key={i}>
+              <p
+                className={`cursor-pointer rounded-md p-3 hover:bg-secondary ${+currentUser === user.opponentId && "bg-secondary"}`}
+                onClick={() => {
+                  router.push(`/chat?user=${user.opponentId}`);
+                }}
+              >
+                {user.opponentId}
+              </p>
+              <Separator />
+            </div>
+          );
+        })
+      )}
     </ScrollArea>
   );
 };

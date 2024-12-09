@@ -38,7 +38,7 @@ export type TResponsePopularReviewList = {
 export type TReviewItem = {
   id: number;
   writer: string;
-  writerImage?: string;
+  profileImage: string;
   title: string;
   content?: string;
   createdAt: string;
