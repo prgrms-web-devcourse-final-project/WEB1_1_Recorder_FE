@@ -9,18 +9,20 @@ import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
 import TextViewer from "@/components/textEditor/textViewer";
 import { TLiveFeedbackDetail } from "@/types/reviewTypes";
+import Link from "next/link";
 
 type Props = {
   liveFeedback: TLiveFeedbackDetail;
-  handleReturn: () => void;
 };
-const LiveFeedbackContentDetail = ({ liveFeedback, handleReturn }: Props) => {
+const LiveFeedbackContentDetail = ({ liveFeedback }: Props) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
   return (
     <>
       <div className="flex justify-between">
         <PageHeader title={liveFeedback.title} />
-        <Button onClick={handleReturn}>목록으로 돌아가기</Button>
+        <Link href="/detail/livefeedback">
+          <Button>목록으로 돌아가기</Button>
+        </Link>
       </div>
       <div className="flex flex-col gap-4 px-5">
         <div className="flex items-center gap-2 font-semibold">
@@ -58,12 +60,12 @@ const LiveFeedbackContentDetail = ({ liveFeedback, handleReturn }: Props) => {
           </div>
         </div>
         <div>
-          <TextViewer markdown={liveFeedback.description} />
+          <TextViewer markdown={liveFeedback.content} />
         </div>
 
-        <div className="flex justify-center">
+        <Link href={`/session/${liveFeedback.feedbackCodes[0].feedbackCodeId}`} className="flex justify-center">
           <Button>라이브 피드백 -&gt;</Button>
-        </div>
+        </Link>
       </div>
     </>
   );

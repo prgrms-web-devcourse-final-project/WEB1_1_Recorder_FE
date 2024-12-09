@@ -19,24 +19,14 @@ export type TResponseReviewList = {
 export type TLiveFeedbackList = {
   id: number;
   studentId: number;
+  studentNickName: string;
   teacherId: number;
+  teacherNickName: string;
   type: "DEBUGGING" | "REFACTORING";
   title: string;
-  githubLink: "http://github.com";
-  githubLinkReveal: "TRUE" | "FALSE";
-  description: string;
-  state: string;
-  feedbackCodes: [
-    {
-      name: string;
-      content: string;
-    },
-    {
-      name: string;
-      content: string;
-    }
-  ];
-  skillStacks: string[];
+  content: string;
+  state: "WAITING_ACCEPTANCE" | "REJECTED" | "ACCEPTED";
+  stacks: string[];
 };
 export type TResponseRecentReviewList = {
   message: string;
@@ -96,22 +86,26 @@ export type TReviewDetail = {
 export type TLiveFeedbackDetail = {
   id: number;
   studentId: number;
+  studentNickName: string;
   teacherId: number;
+  teacherNickName: string;
   type: "DEBUGGING" | "REFACTORING";
   title: string;
   githubLink: string;
   githubLinkReveal: "TRUE" | "FALSE";
-  description: string;
-  state: string;
+  content: string;
+  state: "WAITING_ACCEPTANCE" | "REJECTED" | "ACCEPTED";
   feedbackCodes: [
     {
+      feedbackCodeId: number;
       name: string;
       content: string;
     },
     {
+      feedbackCodeId: number;
       name: string;
       content: string;
     }
   ];
-  skillStacks: string[];
+  stacks: string[];
 };

@@ -5,16 +5,16 @@ const fetchUtil = async (endpoint: string, method: string, params: Record<string
   Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
 
   const headers: Record<string, string> = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    credentials: "include"
   };
-  let accessToken: string | undefined;
-  if (typeof window !== "undefined") {
-    accessToken = Cookies.get("accessToken");
-  }
-  if (accessToken) {
-    headers.Authorization = `Bearer ${accessToken}`;
-  }
-
+  // let accessToken: string | undefined;
+  // if (typeof window !== "undefined") {
+  //   accessToken = Cookies.get("accessToken");
+  // }
+  // if (accessToken) {
+  //   headers.Authorization = `Bearer ${accessToken}`;
+  // }
   const response = await fetch(url.toString(), {
     method,
     headers,
