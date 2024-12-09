@@ -4,6 +4,15 @@ import { reviewFormSchema, answerFormSchema, liveFeedbackFormSchema } from "@/li
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
 export type AnswerFormSchema = z.infer<typeof answerFormSchema>;
 export type LiveFeedbackFormSchema = z.infer<typeof liveFeedbackFormSchema>;
+
+export type TRequestReviewList = {
+  type?: string;
+  page: string;
+  state?: string;
+  stack?: string;
+  keyword?: string;
+};
+
 export type TResponseReviewList = {
   message: string;
   result: {

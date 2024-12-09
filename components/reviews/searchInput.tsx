@@ -2,13 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const SearchInput = () => {
   const params = useSearchParams();
-  const query = params.get("query") || "";
+  const searchParams = new URLSearchParams(params);
   const router = useRouter();
-  const [input, setInput] = useState(() => query);
+  const [input, setInput] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -16,15 +16,14 @@ const SearchInput = () => {
 
   const handleSubmit = async () => {
     if (input.length < 1) return;
-    router.push(`/reviews?query=${input}`);
-  };
-  useEffect(() => {
-    // `params`가 바뀔 때마다 input 값을 갱신
-    const queryParam = params.get("query") || "";
-    if (queryParam !== input) {
-      setInput(queryParam); // URL에서 쿼리 값이 바뀌면 상태 업데이트
+    if (input) {
+      searchParams.set("keyword", input);
+    } else {
+      searchParams.delete("keyword");
     }
-  }, [params]); // params가 변경될 때마다 실행
+    setInput("");
+    router.push("/reviews?" + searchParams.toString());
+  };
 
   return (
     <div className="flex gap-2">
