@@ -1,12 +1,14 @@
 import { useRouter } from "next/navigation";
 type Props = object;
 
-const myChallengeTop = ({ }: Props) => {
+const myChallengeTop = ({}: Props) => {
   const router = useRouter();
   return (
-    <div className="flex justify-between items-center gap-6 border-b-2 border-btnColor mt-8">
-        <p className="text-[32px] font-bold pb-3">나의 도전과제</p>
-        <button className="text-[12px] text-btnColor" onClick={() => router.push("/myPage/AchievementDetail")}>+ 도전과제 상세 보기</button>
+    <div className="mt-8 flex items-center justify-between gap-6 border-b-2 border-btnColor">
+      <p className="pb-3 text-[32px] font-bold">나의 업적</p>
+      <button className="text-btnColor hover:text-primary" onClick={() => router.push("/myPage/achievement")}>
+        + 업적 상세 보기
+      </button>
     </div>
   );
 };
