@@ -10,7 +10,6 @@ type Props = {
   review: TReviewItem;
   size?: "md" | "lg";
 };
-
 const ReviewSummaryItem = ({ review, size = "md" }: Props) => {
   const router = useRouter();
   return (
@@ -22,7 +21,9 @@ const ReviewSummaryItem = ({ review, size = "md" }: Props) => {
         <CardTitle className="flex items-center justify-between">
           <div className="line-clamp-1 flex w-11/12 items-center">
             <span className="pr-4 text-lg">{review.title}</span>
-            <span className="text-sm font-medium text-zinc-500 sm:hidden md:block">{review.createdAt}</span>
+            <span className="text-sm font-medium text-zinc-500 sm:hidden md:block">
+              {review.createdAt.split("T")[0]}
+            </span>
           </div>
           <div className="flex grow font-medium">
             <RiMessage3Line />

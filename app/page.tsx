@@ -14,19 +14,19 @@ const Home = async () => {
   return (
     <div className="m-auto max-w p-10">
       <section className="my-8 flex flex-col sm:flex-row">
-        <Card className="sm:mr-2 sm:w-1/2">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">최신 질문</CardTitle>
+        <Card className="border-none p-0 shadow-none sm:mr-2 sm:w-1/2">
+          <CardHeader className="p-0">
+            <CardTitle className="border-b-2 border-primary pb-2 text-2xl font-bold">최신 질문</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-0 pt-4">
             <ReviewSummaryList reviewList={recentReviewList} />
           </CardContent>
         </Card>
-        <Card className="sm:ml-2 sm:w-1/2">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">인기 질문</CardTitle>
+        <Card className="border-none p-0 shadow-none sm:ml-2 sm:w-1/2">
+          <CardHeader className="p-0">
+            <CardTitle className="border-b-2 border-primary pb-2 text-2xl font-bold">인기 질문</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-0 pt-4">
             <ReviewSummaryList reviewList={popularReviewList} />
           </CardContent>
         </Card>
