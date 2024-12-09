@@ -26,9 +26,13 @@ const enrollMentor = async (params: { title: string; content: string; skillStack
   } catch (error) {}
 };
 
-const deleteMentor = async (id: string) => {
+/** 멘토를 삭제하는 함수입니다.
+ * @example
+ * @param params
+ */
+const deleteMentor = async (mentoId: string) => {
   try {
-    const data = await fetchInstance.delete(`/mentor/${id}`);
+    const data = await fetchInstance.delete(`/mentor/${mentoId}`);
     return data;
   } catch (error) {}
 };
