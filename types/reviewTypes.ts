@@ -1,8 +1,9 @@
 import { z } from "zod";
-import { reviewFormSchema, answerFormSchema } from "@/lib/formSchema";
+import { reviewFormSchema, answerFormSchema, liveFeedbackFormSchema } from "@/lib/formSchema";
 
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
 export type AnswerFormSchema = z.infer<typeof answerFormSchema>;
+export type LiveFeedbackFormSchema = z.infer<typeof liveFeedbackFormSchema>;
 
 export type TRequestReviewList = {
   type?: string;
@@ -24,7 +25,18 @@ export type TResponseReviewList = {
     next: boolean;
   };
 };
-
+export type TLiveFeedbackList = {
+  id: number;
+  studentId: number;
+  studentNickName: string;
+  teacherId: number;
+  teacherNickName: string;
+  type: "DEBUGGING" | "REFACTORING";
+  title: string;
+  content: string;
+  state: "WAITING_ACCEPTANCE" | "REJECTED" | "ACCEPTED";
+  stacks: string[];
+};
 export type TResponseRecentReviewList = {
   message: string;
   result: TReviewItem[] | null;
@@ -78,4 +90,31 @@ export type TReviewDetail = {
   stacks: string[];
   codes: Code[];
   content: string;
+};
+
+export type TLiveFeedbackDetail = {
+  id: number;
+  studentId: number;
+  studentNickName: string;
+  teacherId: number;
+  teacherNickName: string;
+  type: "DEBUGGING" | "REFACTORING";
+  title: string;
+  githubLink: string;
+  githubLinkReveal: "TRUE" | "FALSE";
+  content: string;
+  state: "WAITING_ACCEPTANCE" | "REJECTED" | "ACCEPTED";
+  feedbackCodes: [
+    {
+      feedbackCodeId: number;
+      name: string;
+      content: string;
+    },
+    {
+      feedbackCodeId: number;
+      name: string;
+      content: string;
+    }
+  ];
+  stacks: string[];
 };

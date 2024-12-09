@@ -12,48 +12,50 @@ import { Checkbox } from "@/components/ui/checkbox";
 import CodeEditor from "@/components/codeEditor";
 import { useEffect, useState } from "react";
 import TextEditor from "@/components/textEditor/textEditor";
-import { reviewFormSchema } from "@/lib/formSchema";
-import { ReviewFormSchema } from "@/types/reviewTypes";
+import { liveFeedbackFormSchema } from "@/lib/formSchema";
+import { LiveFeedbackFormSchema } from "@/types/reviewTypes";
 import createReview from "@/services/createReview";
 import { Label } from "@radix-ui/react-label";
 import { useRouter } from "next/navigation";
 import StacksModal from "@/components/stacksModal";
+import createLiveFeedback from "@/services/createLiveFeedback";
 
-const RequestForm = ({}) => {
+type Props = {
+  teacherId: number;
+};
+const RequestLiveFeedbackForm = ({ teacherId }: Props) => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
-  const form = useForm<ReviewFormSchema>({
-    resolver: zodResolver(reviewFormSchema),
+  const form = useForm<LiveFeedbackFormSchema>({
+    resolver: zodResolver(liveFeedbackFormSchema),
     defaultValues: {
-      type: "REFACTOR",
+      type: "REFACTORING",
       title: "test_title",
-      stacks: ["React", "Typescript"],
+      skillStacks: ["React", "Typescript"],
       githubLink: "https://github.com/",
       githubLinkReveal: false,
-      codes: [
+      feedbackCodes: [
         { name: "main.tsx", content: "console.log('Hello, World!')" },
         { name: "sub.tsx", content: "console.log('Hello, World!')" }
       ],
-      content: "test_content",
-      isAnonymous: false
+      description: "test_content"
     }
   });
 
   useEffect(() => {
-    const currentContent = form.getValues(`codes.${selectedCodeIndex}.content`);
-    form.setValue(`codes.${selectedCodeIndex}.content`, currentContent);
+    const currentContent = form.getValues(`feedbackCodes.${selectedCodeIndex}.content`);
+    form.setValue(`feedbackCodes.${selectedCodeIndex}.content`, currentContent);
   }, [selectedCodeIndex]);
 
   const codes = useFieldArray({
-    name: "codes",
+    name: "feedbackCodes",
     control: form.control
   });
-  const onSubmit = async (values: ReviewFormSchema) => {
+  const onSubmit = async (values: LiveFeedbackFormSchema) => {
     try {
-      values.codes[0].name = "main!" + values.codes[0].name;
-      const data = await createReview({ requestParams: values });
-      const path = `/detail/review/${data.result.id}`;
+      const data = await createLiveFeedback({ requestParams: { ...values, teacherId } });
+      const path = `/detail/livefeedback/${data.result}`;
       router.push(path);
     } catch (error) {
       console.error("Error creating review:", error);
@@ -67,8 +69,8 @@ const RequestForm = ({}) => {
   };
 
   const toggleStack = (stack: string) => {
-    const current = form.watch("stacks");
-    form.setValue("stacks", current.includes(stack) ? current.filter((s) => s !== stack) : [...current, stack]);
+    const current = form.watch("skillStacks");
+    form.setValue("skillStacks", current.includes(stack) ? current.filter((s) => s !== stack) : [...current, stack]);
   };
   const formHandleSubmit = form.handleSubmit(onSubmit);
 
@@ -77,7 +79,7 @@ const RequestForm = ({}) => {
       <StacksModal
         closeModal={closeModal}
         isModalOpen={isModalOpen}
-        current={form.watch("stacks")}
+        current={form.watch("skillStacks")}
         toggleStack={toggleStack}
       />
       <Form {...form}>
@@ -96,30 +98,30 @@ const RequestForm = ({}) => {
                   >
                     <FormItem>
                       <FormControl>
-                        <RadioGroupItem value="REFACTOR" className="sr-only" />
+                        <RadioGroupItem value="REFACTORING" className="sr-only" />
                       </FormControl>
                       <FormLabel
                         className={cn(
                           "flex justify-between rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent",
-                          field.value === "REFACTOR" && "border-primary bg-accent text-primary"
+                          field.value === "REFACTORING" && "border-primary bg-accent text-primary"
                         )}
                       >
-                        REFACTOR
-                        <FaCheck className={cn(field.value !== "REFACTOR" && "text-transparent")} />
+                        Refactoring
+                        <FaCheck className={cn(field.value !== "REFACTORING" && "text-transparent")} />
                       </FormLabel>
                     </FormItem>
                     <FormItem>
                       <FormControl>
-                        <RadioGroupItem value="DEBUG" className="sr-only" />
+                        <RadioGroupItem value="DEBUGGING" className="sr-only" />
                       </FormControl>
                       <FormLabel
                         className={cn(
                           "flex justify-between rounded-md border-2 border-muted bg-popover p-2 hover:bg-accent",
-                          field.value === "DEBUG" && "border-primary bg-accent text-primary"
+                          field.value === "DEBUGGING" && "border-primary bg-accent text-primary"
                         )}
                       >
                         Debugging
-                        <FaCheck className={cn(field.value !== "DEBUG" && "text-transparent")} />
+                        <FaCheck className={cn(field.value !== "DEBUGGING" && "text-transparent")} />
                       </FormLabel>
                     </FormItem>
                   </RadioGroup>
@@ -144,19 +146,19 @@ const RequestForm = ({}) => {
           <div className="flex flex-col flex-wrap gap-2">
             <Label>개발 스택</Label>
             <div className="flex gap-2">
-              {form.watch("stacks").map((stack, index) => (
+              {form.watch("skillStacks").map((stack, index) => (
                 <FormField
                   control={form.control}
                   key={index}
-                  name={`stacks.${index}`}
+                  name={`skillStacks.${index}`}
                   render={() => (
                     <FormItem>
                       <FormControl>
                         <Button
                           variant={"outline"}
                           onClick={() => {
-                            const updateStacks = form.watch("stacks").filter((item, i) => i !== index);
-                            form.setValue("stacks", updateStacks);
+                            const updateStacks = form.watch("skillStacks").filter((item, i) => i !== index);
+                            form.setValue("skillStacks", updateStacks);
                           }}
                         >
                           {stack}
@@ -214,7 +216,7 @@ const RequestForm = ({}) => {
               <FormField
                 control={form.control}
                 key={field.id}
-                name={`codes.${index}.name`}
+                name={`feedbackCodes.${index}.name`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className={cn(index !== 0 && "sr-only")}>메인 코드</FormLabel>
@@ -246,7 +248,7 @@ const RequestForm = ({}) => {
           </div>
           <FormField
             control={form.control}
-            name={`codes.${selectedCodeIndex}.content`}
+            name={`feedbackCodes.${selectedCodeIndex}.content`}
             render={({ field }) => (
               <FormItem className="flex h-96 flex-col space-y-0">
                 <FormControl>
@@ -262,25 +264,12 @@ const RequestForm = ({}) => {
           />
           <FormField
             control={form.control}
-            name={`content`}
+            name={`description`}
             render={({ field }) => (
               <FormItem className="flex-grow">
                 <FormControl>
                   <TextEditor markdown={field.value} onChange={field.onChange} className="overflow-y-scroll" />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name={`isAnonymous`}
-            render={({ field }) => (
-              <FormItem className="flex items-center gap-2 space-y-0">
-                <FormControl>
-                  <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                </FormControl>
-                <FormLabel className="text-sm">작성자의 닉네임을 익명으로 처리합니다.</FormLabel>
                 <FormMessage />
               </FormItem>
             )}
@@ -299,4 +288,4 @@ const RequestForm = ({}) => {
   );
 };
 
-export default RequestForm;
+export default RequestLiveFeedbackForm;

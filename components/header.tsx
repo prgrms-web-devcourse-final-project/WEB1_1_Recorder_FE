@@ -14,8 +14,18 @@ const Header = () => {
               <Image src={logo} alt="logo" width={150} />
             </h1>
           </Link>
-          <Link href="/reviews">코드리뷰</Link>
-          <Link href="/mentors">라이브 피드백</Link>
+          <Link href="/reviews" className="transition-colors hover:text-primary">
+            코드리뷰
+          </Link>
+          <Link href="/mentors" className="transition-colors hover:text-primary">
+            라이브 피드백
+          </Link>
+          <Link href="/detail/livefeedback" className="transition-colors hover:text-primary">
+            나에게온 요청
+          </Link>
+          <Link href="/request/review" className="transition-colors hover:text-primary">
+            질문하기
+          </Link>
         </div>
         <div className="flex gap-2">
           <SearchInput />

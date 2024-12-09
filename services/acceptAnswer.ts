@@ -18,7 +18,11 @@ const acceptAnswer = async ({ questionId, answerId, review }: acceptAnswerReques
     return data;
   } catch (error) {
     console.log(error);
-    throw new Error(String(error));
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("에러가 발생하였습니다.");
+    }
   }
 };
 
