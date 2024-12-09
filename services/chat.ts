@@ -1,6 +1,5 @@
 import fetchInstance from "@/services/fetchInstance";
-import { TResponseChatId } from "@/types/chatTypes";
-import Cookies from "js-cookie";
+import { TResponseChatId, TResponseChatRecord } from "@/types/chatTypes";
 
 const getChatId = async (params: { opponentId: string }): Promise<TResponseChatId | null> => {
   try {
@@ -11,4 +10,16 @@ const getChatId = async (params: { opponentId: string }): Promise<TResponseChatI
   }
 };
 
-export { getChatId };
+const getChatRecord = async (params: {
+  id: string;
+  query?: { lastMessageTimestamp?: string; size?: string };
+}): Promise<TResponseChatRecord | null> => {
+  try {
+    const data = await fetchInstance.get(`/chat/${params.id}/messages`, params.query);
+    console.log(data);
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
+export { getChatId, getChatRecord };

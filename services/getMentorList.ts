@@ -26,9 +26,9 @@ const enrollMentor = async (params: { title: string; content: string; skillStack
   } catch (error) {}
 };
 
-const deleteMentor = async () => {
+const deleteMentor = async (id: string) => {
   try {
-    const data = await fetchInstance.delete("/mentor");
+    const data = await fetchInstance.delete(`/mentor/${id}`);
     return data;
   } catch (error) {}
 };

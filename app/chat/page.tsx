@@ -7,14 +7,17 @@ import { useAuthStore } from "@/store/authStore";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChatListItem } from "@/types/chatTypes";
-import { getChatId } from "@/services/chat";
+import { getChatId, getChatRecord } from "@/services/chat";
+import { TChatRecord } from "@/types/chatTypes";
 
 const Chat = () => {
   const params = useSearchParams();
+  const [userId, setUserId] = useState("");
   const router = useRouter();
   const { isLogin, checkAuth } = useAuthStore();
   const [userList, setUserList] = useState<ChatListItem[]>([]);
   const [roomId, setRoomId] = useState<string | null>();
+  const [chatList, setchatList] = useState<TChatRecord[] | []>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,11 +32,14 @@ const Chat = () => {
     const getChat = async (id: string) => {
       const data = await getChatId({ opponentId: id });
       setRoomId(data?.result.toString() || null);
+      const record = await getChatRecord({ id: data?.result.toString() || "" });
+      setchatList(record?.result || []);
     };
     const searchParams = new URLSearchParams(params);
     const id = searchParams.get("opponentId");
     if (id) {
       getChat(id);
+      setUserId(id);
     }
   }, [params]);
 
@@ -41,13 +47,14 @@ const Chat = () => {
     <>
       {isLogin ? (
         <div className="m-auto my-10 flex max-w justify-center gap-4 px-4">
-          {userList.length > 1 ? (
-            <p className="my-32 text-center text-xl">아직 채팅 내역이 없습니다.</p>
-          ) : (
-            <>
-              <ChatList list={userList} className="h-screen w-1/3 rounded-md border p-4" />
-              {roomId && <ChatDetail id={roomId} className="h-screen w-2/3 rounded-md border p-4" />}
-            </>
+          <ChatList list={userList} className={`h-screen rounded-md border p-4 ${roomId ? "w-1/3" : "w-full"}`} />
+          {roomId && (
+            <ChatDetail
+              roomId={roomId}
+              userId={userId}
+              chatList={chatList}
+              className="h-screen w-2/3 rounded-md border p-4"
+            />
           )}
         </div>
       ) : (

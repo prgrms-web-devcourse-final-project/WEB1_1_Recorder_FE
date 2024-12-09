@@ -26,7 +26,7 @@ const ChatButton = ({ nickName, id }: Props) => {
   }, []);
   useEffect(() => {
     const fetchData = async () => {
-      const data = await deleteMentor();
+      const data = await deleteMentor(id);
     };
     if (isDelete) {
       fetchData();

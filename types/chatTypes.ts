@@ -16,3 +16,14 @@ export type TResponseChatId = {
   message: string;
   result: number;
 };
+
+export type TResponseChatRecord = {
+  message: "Success";
+  result: TChatRecord[];
+};
+
+export type TChatRecord = {
+  sender: string;
+  content: string;
+  createdAt: string;
+};
