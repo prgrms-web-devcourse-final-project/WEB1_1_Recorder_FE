@@ -33,21 +33,21 @@ const SignUp = () => {
     const current = form.watch("stacks");
     form.setValue("stacks", current.includes(stack) ? current.filter((s) => s !== stack) : [...current, stack]);
   };
-  // useEffect(() => {
-  //   if (accessToken) {
-  //     Cookies.set("accessToken", accessToken);
-  //   }
-  //   if (refreshToken) {
-  //     Cookies.set("refreshToken", refreshToken);
-  //   }
-  //   if (accessToken && isFirstLogin === "false") {
-  //     router.push("/");
-  //   }
-  // }, [accessToken, router]);
+  useEffect(() => {
+    if (accessToken) {
+      Cookies.set("accessToken", accessToken);
+    }
+    if (refreshToken) {
+      Cookies.set("refreshToken", refreshToken);
+    }
+    if (accessToken && isFirstLogin === "false") {
+      router.push("/");
+    }
+  }, [accessToken, router]);
 
-  // if (isFirstLogin === "false") {
-  //   return null;
-  // }
+  if (isFirstLogin === "false") {
+    return null;
+  }
 
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),

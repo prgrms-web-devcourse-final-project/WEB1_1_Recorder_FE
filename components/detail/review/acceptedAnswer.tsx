@@ -45,9 +45,13 @@ const AcceptedAnswerDetail = ({ answer, postId }: Props) => {
             <Separator />
             <span>{answer.createdAt.split("T")[0]}</span>
             <Separator />
-            <span>{answer.totalAnswerCount}</span>
+            <span>
+              작성한 답변 <span className="text-primary">{answer.totalAnswerCount}</span>개
+            </span>
             <Separator />
-            <span>{answer.adoptedRate}</span>
+            <span>
+              채택률 <span className="text-primary">{answer.adoptedRate}</span>%
+            </span>
             <Separator />
           </div>
           <RxCheckCircled size={50} onClick={handleClick} className={cn("cursor-pointer text-primary opacity-100")} />

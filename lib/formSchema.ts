@@ -14,12 +14,8 @@ export const reviewFormSchema = z.object({
   }),
   isAnonymous: z.boolean().optional(),
   stacks: z.array(z.string()),
-  codes: z.array(
-    z.object({
-      name: z.string(),
-      content: z.string()
-    })
-  )
+  codesName: z.array(z.string()),
+  codesContent: z.array(z.string())
 });
 
 export const liveFeedbackFormSchema = z.object({

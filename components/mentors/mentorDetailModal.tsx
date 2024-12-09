@@ -3,6 +3,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { userImage } from "@/constants/user";
 import { TMentorItem } from "@/types/mentorTypes";
+import { Link } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -58,6 +59,7 @@ const MentorDetailModal = ({ mentor, open, setOpen }: Props) => {
           <div>{mentor.content}</div>
         </div>
         <div className="grow"></div>
+
         <ChatButton
           nickName={mentor.nickName}
           id={mentor.userId}

@@ -39,7 +39,7 @@ const UserMenu = ({}: Props) => {
           </div>
         )
       ) : (
-        <Link href="/login">
+        <Link href="/login" className="flex items-center">
           <Button variant="outline">로그인</Button>
         </Link>
       )}

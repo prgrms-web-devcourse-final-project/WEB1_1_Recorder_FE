@@ -3,7 +3,7 @@ import PageHeader from "@/components/pageHeader";
 import { Separator } from "@/components/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FiGithub } from "react-icons/fi";
-import { cn, sortCodes } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
@@ -20,7 +20,7 @@ type Props = {
 const ContentDetail = ({ review }: Props) => {
   const router = useRouter();
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
-  const code = sortCodes(review.codes);
+  // const code = sortCodes(review.codes);
   const { data } = useQuery({ queryKey: ["getMyInfo"], queryFn: getMyInfo });
 
   const mutation = useMutation({
@@ -55,8 +55,8 @@ const ContentDetail = ({ review }: Props) => {
           <span>답변 {review.answerCount}개</span>
         </div>
         <div className="flex flex-wrap items-end gap-2">
-          {code.length >= 1 &&
-            code.map((code, index) => (
+          {review.codes.length >= 1 &&
+            review.codes.map((code, index) => (
               <div key={index} className="flex flex-col space-y-2">
                 <span className={cn(index !== 0 && "sr-only")}>메인 코드</span>
                 <span className={cn(index !== 1 && "sr-only")}>보조 코드</span>
@@ -65,17 +65,14 @@ const ContentDetail = ({ review }: Props) => {
                   onClick={() => setSelectedCodeIndex(index)}
                   className={cn("flex w-40 justify-start", selectedCodeIndex === index && "border-primary")}
                 >
-                  {code.name.replace("main!", "")}
+                  {code.name}
                 </Button>
               </div>
             ))}
         </div>
         <div>
-          <div className="border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">
-            {code[selectedCodeIndex].name.replace("main!", "")}
-          </div>
           <div>
-            <CodeViewer code={code[selectedCodeIndex].content} language="javascript" />
+            <CodeViewer code={review.codes[selectedCodeIndex].content} language="javascript" />
           </div>
         </div>
         <div>

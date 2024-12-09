@@ -43,9 +43,9 @@ const ChatButton = ({ nickName, id, img, mentorId }: Props) => {
       <Button
         className="mt-4 w-full text-white"
         type="submit"
-        onClick={() => router.push(`/chat?opponentId=${id}&name=${nickName}&img=${img}`)}
+        onClick={() => router.push(`/request/livefeedback/${id}`)}
       >
-        1:1 채팅하기
+        라이브 피드백 요청하기
       </Button>
     );
   }

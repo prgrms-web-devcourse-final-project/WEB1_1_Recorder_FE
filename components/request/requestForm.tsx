@@ -31,28 +31,31 @@ const RequestForm = ({}) => {
       stacks: ["React", "Typescript"],
       githubLink: "https://github.com/",
       githubLinkReveal: false,
-      codes: [
-        { name: "main.tsx", content: "console.log('Hello, World!')" },
-        { name: "sub.tsx", content: "console.log('Hello, World!')" }
-      ],
+      codesName: ["main.tsx", "sub.tsx"],
+      codesContent: ["console.log('Hello, main.tsx')", "console.log('Hello, sub.tsx')"],
       content: "test_content",
       isAnonymous: false
     }
   });
 
   useEffect(() => {
-    const currentContent = form.getValues(`codes.${selectedCodeIndex}.content`);
-    form.setValue(`codes.${selectedCodeIndex}.content`, currentContent);
+    const currentContent = form.getValues(`codesContent.${selectedCodeIndex}`);
+    form.setValue(`codesContent.${selectedCodeIndex}`, currentContent);
   }, [selectedCodeIndex]);
 
-  const codes = useFieldArray({
-    name: "codes",
-    control: form.control
-  });
   const onSubmit = async (values: ReviewFormSchema) => {
     try {
-      values.codes[0].name = "main!" + values.codes[0].name;
-      const data = await createReview({ requestParams: values });
+      const requestParams = {
+        title: values.title,
+        content: values.content,
+        type: values.type,
+        stacks: values.stacks,
+        githubLink: values.githubLink,
+        githubLinkReveal: values.githubLinkReveal,
+        isAnonymous: values.isAnonymous,
+        codes: values.codesName.map((name, index) => ({ name, content: values.codesContent[index] }))
+      };
+      const data = await createReview({ requestParams: requestParams });
       const path = `/detail/review/${data.result.id}`;
       router.push(path);
     } catch (error) {
@@ -210,11 +213,11 @@ const RequestForm = ({}) => {
             />
           </div>
           <div className="flex flex-wrap items-end gap-2">
-            {codes.fields.map((field, index) => (
+            {form.watch("codesName").map((field, index) => (
               <FormField
                 control={form.control}
-                key={field.id}
-                name={`codes.${index}.name`}
+                key={field + index}
+                name={`codesName.${index}`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className={cn(index !== 0 && "sr-only")}>메인 코드</FormLabel>
@@ -222,6 +225,7 @@ const RequestForm = ({}) => {
                     <FormControl>
                       <Input
                         className={cn(index === selectedCodeIndex && "border-primary")}
+                        readOnly
                         {...field}
                         onClick={() => {
                           setSelectedCodeIndex(index);
@@ -238,37 +242,24 @@ const RequestForm = ({}) => {
               variant="outline"
               size="default"
               className="mt-2"
-              disabled={codes.fields.length >= 5}
+              disabled={form.watch("codesName").length >= 5}
               onClick={() => {
-                codes.append({ name: "", content: "" });
-                setSelectedCodeIndex(0);
+                form.watch("codesName").push(`sub.tsx`);
+                form.watch("codesContent").push("");
               }}
             >
               파일 추가
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="default"
-              className="mt-2"
-              disabled={codes.fields.length <= 1}
-              onClick={() => {
-                codes.remove(codes.fields.length - 1);
-                setSelectedCodeIndex(0);
-              }}
-            >
-              파일 제거
-            </Button>
           </div>
           <FormField
             control={form.control}
-            name={`codes.${selectedCodeIndex}.content`}
+            name={`codesContent.${selectedCodeIndex}`}
             render={({ field }) => (
               <FormItem className="flex h-96 flex-col space-y-0">
                 <FormControl>
                   <CodeEditor
-                    codeName={codes.fields[selectedCodeIndex].name}
-                    code={codes.fields[selectedCodeIndex].content}
+                    codeName={form.watch(`codesName.${selectedCodeIndex}`)}
+                    code={field.value}
                     setCode={field.onChange}
                     language="typescript"
                   />
