@@ -1,4 +1,4 @@
-import SocielLogin from "@/components/socialLogin/login";
+import SocielLogin from "@/components/login/socielLogin";
 import Image from "next/image";
 import logo from "@/public/svg/logo.svg";
 

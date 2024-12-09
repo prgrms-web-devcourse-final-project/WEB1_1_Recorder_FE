@@ -61,6 +61,9 @@ export default {
       },
       maxWidth: {
         DEFAULT: "1400px"
+      },
+      minHeight: {
+        DEFAULT: "calc(100vh - 320px)"
       }
     }
   },
