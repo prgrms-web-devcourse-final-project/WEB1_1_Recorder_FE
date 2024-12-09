@@ -3,7 +3,7 @@ import PageHeader from "@/components/pageHeader";
 import { Separator } from "@/components/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FiGithub } from "react-icons/fi";
-import { cn, sortCodes } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
@@ -16,7 +16,7 @@ type Props = {
 };
 const LiveFeedbackContentDetail = ({ liveFeedback }: Props) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
-  const code = sortCodes(liveFeedback.feedbackCodes);
+  // const code = sortCodes(liveFeedback.feedbackCodes);
 
   return (
     <>
@@ -38,8 +38,8 @@ const LiveFeedbackContentDetail = ({ liveFeedback }: Props) => {
           <span>{liveFeedback.githubLink}</span>
         </div>
         <div className="flex flex-wrap items-end gap-2">
-          {code.length >= 1 &&
-            code.map((code, index) => (
+          {liveFeedback.feedbackCodes.length >= 1 &&
+            liveFeedback.feedbackCodes.map((code, index) => (
               <div key={index} className="flex flex-col space-y-2">
                 <span className={cn(index !== 0 && "sr-only")}>메인 코드</span>
                 <span className={cn(index !== 1 && "sr-only")}>보조 코드</span>
@@ -55,10 +55,10 @@ const LiveFeedbackContentDetail = ({ liveFeedback }: Props) => {
         </div>
         <div>
           <div className="border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">
-            {code[selectedCodeIndex].name}
+            {liveFeedback.feedbackCodes[selectedCodeIndex].name}
           </div>
           <div>
-            <CodeViewer code={code[selectedCodeIndex].content} language="javascript" />
+            <CodeViewer code={liveFeedback.feedbackCodes[selectedCodeIndex].content} language="javascript" />
           </div>
         </div>
         <div>

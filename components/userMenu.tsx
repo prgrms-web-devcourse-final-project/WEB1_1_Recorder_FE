@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { FaBell } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { useAuthStore } from "@/store/authStore";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Link from "next/link";
 import getMyInfo from "@/services/getMyInfo";
 import { useQuery } from "@tanstack/react-query";
-
+import { PiChatCenteredTextThin } from "react-icons/pi";
 type Props = {};
 
 const UserMenu = ({}: Props) => {
@@ -27,9 +27,8 @@ const UserMenu = ({}: Props) => {
       {isLogin ? (
         data && (
           <div className="flex items-center gap-4">
-            <FaBell size={30} className="cursor-pointer" />
             <Link href="/chat">
-              <AiFillMessage size={30} className="cursor-pointer" />
+              <PiChatCenteredTextThin size={30} className="cursor-pointer" />
             </Link>
             <Link className="flex items-center gap-2" href="/myPage">
               <Avatar>
@@ -40,7 +39,7 @@ const UserMenu = ({}: Props) => {
           </div>
         )
       ) : (
-        <Link href="/login">
+        <Link href="/login" className="flex items-center">
           <Button variant="outline">로그인</Button>
         </Link>
       )}

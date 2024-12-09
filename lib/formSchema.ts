@@ -14,12 +14,8 @@ export const reviewFormSchema = z.object({
   }),
   isAnonymous: z.boolean().optional(),
   stacks: z.array(z.string()),
-  codes: z.array(
-    z.object({
-      name: z.string(),
-      content: z.string()
-    })
-  )
+  codesName: z.array(z.string()),
+  codesContent: z.array(z.string())
 });
 
 export const liveFeedbackFormSchema = z.object({
@@ -53,5 +49,8 @@ export const answerFormSchema = z.object({
 export const signUpFormSchema = z.object({
   nickname: z.string().min(2, {
     message: "내용을 입력해야 합니다."
-  })
+  }),
+  profileImage: z.string().url().optional(),
+  introduction: z.string().optional(),
+  stacks: z.array(z.string())
 });

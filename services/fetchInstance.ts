@@ -40,8 +40,8 @@ const fetchInstance = {
   put: (endpoint: string, body: any) => {
     return fetchUtil(endpoint, "PUT", {}, body);
   },
-  delete: (endpoint: string, params: Record<string, any> = {}) => {
-    return fetchUtil(endpoint, "DELETE", params);
+  delete: (endpoint: string, body?: any) => {
+    return fetchUtil(endpoint, "DELETE", {}, body);
   },
   patch: (endpoint: string, body: any, params: Record<string, any> = {}) => {
     return fetchUtil(endpoint, "PATCH", params, body);

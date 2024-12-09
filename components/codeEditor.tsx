@@ -5,10 +5,11 @@ type Props = {
   code: string;
   language: string;
   codeName?: string;
+  ref?: any;
   setCode: Dispatch<SetStateAction<string>>;
 };
 
-const CodeEditor = ({ code, setCode, codeName = "Code", language }: Props) => {
+const CodeEditor = ({ code, setCode, codeName = "Code", language, ref }: Props) => {
   const changeEventHandler = (value: string | undefined) => {
     setCode(value || "");
   };

@@ -2,7 +2,18 @@ import fetchInstance from "@/services/fetchInstance";
 
 import { ReviewFormSchema } from "@/types/reviewTypes";
 
-type createReviewRequestProps = { requestParams: ReviewFormSchema };
+type createReviewRequestProps = {
+  requestParams: {
+    title: string;
+    content: string;
+    type: "REFACTOR" | "DEBUG";
+    stacks: string[];
+    codes: { name: string; content: string }[];
+    githubLinkReveal?: boolean | undefined;
+    githubLink?: string | undefined;
+    isAnonymous?: boolean | undefined;
+  };
+};
 
 type createReviewResponseProps = Promise<{
   message: string;

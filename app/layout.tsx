@@ -24,13 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="kr">
       <body className={`${pretendard.variable} flex min-h-screen flex-col font-pretendard`}>
         <Providers>
           <Header />
-          <main className="grow pt-24">{children}</main>
+          <main className="grow pt-24">{children}</main> <Footer />
         </Providers>
-        <Footer />
       </body>
     </html>
   );
