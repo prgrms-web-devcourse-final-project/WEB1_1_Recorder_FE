@@ -51,6 +51,7 @@ const RequestForm = ({}) => {
   });
   const onSubmit = async (values: ReviewFormSchema) => {
     try {
+      values.codes[0].name = "main!" + values.codes[0].name;
       const data = await createReview({ requestParams: values });
       const path = `/detail/review/${data.result.id}`;
       router.push(path);
