@@ -27,3 +27,5 @@ export type TChatRecord = {
   content: string;
   createdAt: string;
 };
+
+export type Message = { content: string; authorization: string; type: "CHAT"; senderId: string };

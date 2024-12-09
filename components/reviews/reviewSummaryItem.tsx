@@ -44,7 +44,7 @@ const ReviewSummaryItem = ({ review, size = "md" }: Props) => {
           </div>
           <div className="flex items-center">
             <Avatar className="h-6 w-6">
-              <AvatarImage src={review.writerImage || "https://github.com/shadcn.png"}></AvatarImage>
+              <AvatarImage src={review.profileImage || "https://github.com/shadcn.png"}></AvatarImage>
             </Avatar>
             <span className="pl-1 text-sm">{review.writer}</span>
           </div>

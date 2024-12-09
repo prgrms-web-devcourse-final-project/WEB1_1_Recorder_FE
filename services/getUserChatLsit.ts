@@ -4,7 +4,6 @@ import { TResponseChatList } from "@/types/chatTypes";
 const getUserChatList = async () => {
   try {
     const data: TResponseChatList = await fetchInstance.get("/chat/room/my");
-    console.log(data);
     return data.result || [];
   } catch (error) {
     return [];

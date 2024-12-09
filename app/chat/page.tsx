@@ -32,8 +32,11 @@ const Chat = () => {
     const getChat = async (id: string) => {
       const data = await getChatId({ opponentId: id });
       setRoomId(data?.result.toString() || null);
-      const record = await getChatRecord({ id: data?.result.toString() || "" });
+      const record = await getChatRecord({ id: data?.result.toString() || "", query: { size: "50" } });
       setchatList(record?.result || []);
+      const list = await getUserChatList();
+      console.log(list);
+      setUserList(list);
     };
     const searchParams = new URLSearchParams(params);
     const id = searchParams.get("opponentId");
@@ -47,14 +50,9 @@ const Chat = () => {
     <>
       {isLogin ? (
         <div className="m-auto my-10 flex max-w justify-center gap-4 px-4">
-          <ChatList list={userList} className={`h-screen rounded-md border p-4 ${roomId ? "w-1/3" : "w-full"}`} />
+          <ChatList list={userList} className={`rounded-md border p-4 ${roomId ? "w-1/3" : "w-full"}`} />
           {roomId && (
-            <ChatDetail
-              roomId={roomId}
-              userId={userId}
-              chatList={chatList}
-              className="h-screen w-2/3 rounded-md border p-4"
-            />
+            <ChatDetail roomId={roomId} userId={userId} chatList={chatList} className="w-2/3 rounded-md border p-4" />
           )}
         </div>
       ) : (

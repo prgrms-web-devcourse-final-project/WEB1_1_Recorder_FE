@@ -16,7 +16,6 @@ const getChatRecord = async (params: {
 }): Promise<TResponseChatRecord | null> => {
   try {
     const data = await fetchInstance.get(`/chat/${params.id}/messages`, params.query);
-    console.log(data);
     return data;
   } catch (error) {
     return null;
