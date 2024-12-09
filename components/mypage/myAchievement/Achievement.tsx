@@ -8,7 +8,7 @@ type Props = object;
 const myAchievement = ({}: Props) => {
   return (
     <div className="m-auto my-10 h-full max-w px-4 lg:px-20">
-      <PageHeader title="나의 업적" />
+      <PageHeader title="나의 도전과제" />
       <div className="mt-10 flex flex-col rounded-[10px] bg-secondary p-6">
         <div className="flex items-center justify-start gap-[50px] px-[70px] py-20">
           <Avatar className="h-40 w-40">
