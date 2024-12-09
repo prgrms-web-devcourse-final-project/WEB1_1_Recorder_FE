@@ -2,6 +2,16 @@ import { z } from "zod";
 import { reviewFormSchema, answerFormSchema } from "@/lib/formSchema";
 
 export type ReviewFormSchema = z.infer<typeof reviewFormSchema>;
+export type AnswerFormSchema = z.infer<typeof answerFormSchema>;
+
+export type TRequestReviewList = {
+  type?: string;
+  page: string;
+  state?: string;
+  stack?: string;
+  keyword?: string;
+};
+
 export type TResponseReviewList = {
   message: string;
   result: {
