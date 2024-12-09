@@ -3,7 +3,7 @@ import PageHeader from "@/components/pageHeader";
 import { Separator } from "@/components/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FiGithub } from "react-icons/fi";
-import { cn } from "@/lib/utils";
+import { cn, sortCodes } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CodeViewer from "@/components/codeViewer";
@@ -16,6 +16,8 @@ type Props = {
 };
 const LiveFeedbackContentDetail = ({ liveFeedback }: Props) => {
   const [selectedCodeIndex, setSelectedCodeIndex] = useState(0);
+  const code = sortCodes(liveFeedback.feedbackCodes);
+
   return (
     <>
       <div className="flex justify-between">
@@ -27,17 +29,17 @@ const LiveFeedbackContentDetail = ({ liveFeedback }: Props) => {
       <div className="flex flex-col gap-4 px-5">
         <div className="flex items-center gap-2 font-semibold">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage />
+            <AvatarFallback>{liveFeedback.studentNickName[0]}</AvatarFallback>
           </Avatar>
-          <span>{liveFeedback.studentId}</span>
+          <span>{liveFeedback.studentNickName}</span>
           <Separator />
           <FiGithub size={25} />
           <span>{liveFeedback.githubLink}</span>
         </div>
         <div className="flex flex-wrap items-end gap-2">
-          {liveFeedback.feedbackCodes.length >= 1 &&
-            liveFeedback.feedbackCodes.map((code, index) => (
+          {code.length >= 1 &&
+            code.map((code, index) => (
               <div key={index} className="flex flex-col space-y-2">
                 <span className={cn(index !== 0 && "sr-only")}>메인 코드</span>
                 <span className={cn(index !== 1 && "sr-only")}>보조 코드</span>
@@ -53,17 +55,17 @@ const LiveFeedbackContentDetail = ({ liveFeedback }: Props) => {
         </div>
         <div>
           <div className="border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">
-            {liveFeedback.feedbackCodes[selectedCodeIndex].name}
+            {code[selectedCodeIndex].name}
           </div>
           <div>
-            <CodeViewer code={liveFeedback.feedbackCodes[selectedCodeIndex].content} language="javascript" />
+            <CodeViewer code={code[selectedCodeIndex].content} language="javascript" />
           </div>
         </div>
         <div>
           <TextViewer markdown={liveFeedback.content} />
         </div>
 
-        <Link href={`/session/${liveFeedback.feedbackCodes[0].feedbackCodeId}`} className="flex justify-center">
+        <Link href={`/session/${liveFeedback.id}`} className="flex justify-center">
           <Button>라이브 피드백 -&gt;</Button>
         </Link>
       </div>
