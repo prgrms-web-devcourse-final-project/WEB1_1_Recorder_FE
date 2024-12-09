@@ -40,7 +40,7 @@ export type TReviewItem = {
   writer: string;
   profileImage: string;
   title: string;
-  content?: string;
+  content: string;
   createdAt: string;
   answerCount: number;
   readCount: number;

@@ -5,9 +5,9 @@ type Props = {
 
 const MyPageTop = ({ activeTab, setActiveTab }: Props) => {
   return (
-    <div className="flex gap-6 border-b-2 mb-10">
+    <div className="my-10 flex border-b-2">
       <p
-        className={`text-24pt cursor-pointer border-b-2 ${
+        className={`cursor-pointer border-b-2 px-4 pb-2 ${
           activeTab === "info" ? "border-btnColor" : "border-transparent"
         } hover:border-btnColor`}
         onClick={() => setActiveTab("info")}
@@ -15,7 +15,7 @@ const MyPageTop = ({ activeTab, setActiveTab }: Props) => {
         나의 정보
       </p>
       <p
-        className={`text-24pt cursor-pointer border-b-2 ${
+        className={`text-24pt cursor-pointer border-b-2 px-4 pb-2 ${
           activeTab === "questions" ? "border-btnColor" : "border-transparent"
         } hover:border-btnColor`}
         onClick={() => setActiveTab("questions")}
