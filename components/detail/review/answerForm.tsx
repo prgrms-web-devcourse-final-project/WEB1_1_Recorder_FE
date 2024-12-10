@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import CodeEditor from "@/components/codeEditor";
 import TextEditor from "@/components/textEditor/textEditor";
 import { useForm } from "react-hook-form";
@@ -52,7 +52,6 @@ const AnswerForm = ({ postId }: Props) => {
                 name={`code`}
                 render={({ field }) => (
                   <FormItem className="flex h-96 flex-col space-y-0">
-                    <FormLabel className="border-b border-[#858585] bg-[#1e1e1e] p-2 text-[#dcdcdc]">코드</FormLabel>
                     <FormControl>
                       <CodeEditor code={field.value} setCode={field.onChange} language="typescript" />
                     </FormControl>

@@ -31,12 +31,8 @@ export const liveFeedbackFormSchema = z.object({
     required_error: "질문 유형을 선택해야 합니다."
   }),
   skillStacks: z.array(z.string()),
-  feedbackCodes: z.array(
-    z.object({
-      name: z.string(),
-      content: z.string()
-    })
-  )
+  codesName: z.array(z.string()),
+  codesContent: z.array(z.string())
 });
 
 export const answerFormSchema = z.object({

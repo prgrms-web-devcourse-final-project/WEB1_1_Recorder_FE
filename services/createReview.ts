@@ -1,7 +1,5 @@
 import fetchInstance from "@/services/fetchInstance";
 
-import { ReviewFormSchema } from "@/types/reviewTypes";
-
 type createReviewRequestProps = {
   requestParams: {
     title: string;

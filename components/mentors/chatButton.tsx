@@ -40,13 +40,22 @@ const ChatButton = ({ nickName, id, img, mentorId }: Props) => {
     );
   } else {
     return (
-      <Button
-        className="mt-4 w-full text-white"
-        type="submit"
-        onClick={() => router.push(`/request/livefeedback/${id}`)}
-      >
-        라이브 피드백 요청하기
-      </Button>
+      <div className="flex gap-2">
+        <Button
+          className="mt-4 w-full text-white"
+          type="submit"
+          onClick={() => router.push(`/request/livefeedback/${id}`)}
+        >
+          라이브 피드백 요청하기
+        </Button>
+        <Button
+          className="mt-4 w-full text-white"
+          type="submit"
+          onClick={() => router.push(`/chat?opponentId=${id}&name=${nickName}&img=${img}`)}
+        >
+          1:1 채팅하기
+        </Button>
+      </div>
     );
   }
 };

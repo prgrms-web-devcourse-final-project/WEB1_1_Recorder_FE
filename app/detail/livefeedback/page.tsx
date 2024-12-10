@@ -24,10 +24,7 @@ const LiveFeedbackList = () => {
                 <CardTitle>{feedback.title}</CardTitle>
                 <CardDescription>{feedback.studentNickName}의 요청</CardDescription>
                 <CardDescription className="flex gap-2">
-                  <Badge>{feedback.type}</Badge>
-                  <Badge>{feedback.state}</Badge>
-                </CardDescription>
-                <CardDescription className="flex gap-2">
+                  <Badge>{feedback.type}</Badge>{" "}
                   {feedback.stacks.map((v, index) => (
                     <Badge variant="outline" key={`skill-${i}-${index}`}>
                       {v}

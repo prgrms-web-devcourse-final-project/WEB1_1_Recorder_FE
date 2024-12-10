@@ -1,8 +1,20 @@
 import fetchInstance from "@/services/fetchInstance";
 
-import { LiveFeedbackFormSchema } from "@/types/reviewTypes";
-
-type createLiveFeedbackRequestProps = { requestParams: LiveFeedbackFormSchema & { teacherId: number } };
+type createLiveFeedbackRequestProps = {
+  requestParams: {
+    title: string;
+    description: string;
+    type: "REFACTORING" | "DEBUGGING";
+    skillStacks: string[];
+    feedbackCodes: {
+      name: string;
+      content: string;
+    }[];
+    githubLinkReveal?: boolean | undefined;
+    githubLink?: string | undefined;
+    teacherId: number;
+  };
+};
 
 type createLiveFeedbackResponseProps = Promise<{
   message: string;

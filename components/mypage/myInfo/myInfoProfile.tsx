@@ -41,7 +41,7 @@ const MyInfoProfile = ({ profileImage, nickname, businessEmail, loginType }: Pro
         </div>
       </div>
       <div className="mr-12 mt-4 flex justify-end">
-        <Button size="edit" onClick={() => router.push("/myPage/edit")}>
+        <Button size="edit" onClick={() => router.push("/signUp")}>
           회원정보수정
         </Button>
       </div>

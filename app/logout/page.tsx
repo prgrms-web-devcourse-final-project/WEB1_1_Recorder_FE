@@ -7,6 +7,7 @@ const Logout = () => {
   const router = useRouter();
   useEffect(() => {
     Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
   }, []);
   return (
     <div className="min-h flex w-full flex-col items-center justify-center">

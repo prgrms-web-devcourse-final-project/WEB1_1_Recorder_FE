@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import uploadImage from "@/services/uploadImage";
 import StacksModal from "@/components/stacksModal";
 import { Label } from "@/components/ui/label";
+import getMyInfo from "@/services/getMyInfo";
+import { useQuery } from "@tanstack/react-query";
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -21,6 +23,23 @@ const SignUp = () => {
   const accessToken = searchParams.get("access_token");
   const refreshToken = searchParams.get("refresh_token");
   const isFirstLogin = searchParams.get("is_first");
+
+  const { data } = useQuery({ queryKey: ["getMyInfo"], queryFn: getMyInfo });
+
+  let defaultValues = {
+    nickname: "",
+    profileImage: "",
+    introduction: "안녕하세요 신입 개발자입니다. 잘부탁드립니다.",
+    stacks: []
+  };
+  if (!accessToken) {
+    defaultValues = {
+      nickname: data?.result.nickname || "",
+      profileImage: data?.result.profileImage || "",
+      introduction: data?.result.introduction || "안녕하세요 신입 개발자입니다. 잘부탁드립니다.",
+      stacks: []
+    };
+  }
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -51,18 +70,13 @@ const SignUp = () => {
 
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
-    defaultValues: {
-      nickname: "",
-      profileImage: "",
-      introduction: "안녕하세요 신입 개발자입니다. 잘부탁드립니다.",
-      stacks: []
-    }
+    defaultValues: defaultValues
   });
 
   const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
     try {
       console.log(values);
-      const data = await signUp({ formData: values });
+      const data2 = await signUp({ formData: values });
       router.push("/");
     } catch (error) {
       console.error("Error:", error);
@@ -157,7 +171,7 @@ const SignUp = () => {
       </Form>
       <div className="flex gap-4"></div>
       <Button onClick={handleClick} size="lg">
-        가입하기
+        회원정보 저장하기
       </Button>
 
       {isModalOpen && (
