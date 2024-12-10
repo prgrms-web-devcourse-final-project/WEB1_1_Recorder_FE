@@ -4,7 +4,7 @@ import { FaCheck } from "react-icons/fa";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
@@ -27,13 +27,13 @@ const RequestForm = ({}) => {
     resolver: zodResolver(reviewFormSchema),
     defaultValues: {
       type: "REFACTOR",
-      title: "test_title",
+      title: "제목을 입력해주세요",
       stacks: ["React", "Typescript"],
       githubLink: "https://github.com/",
       githubLinkReveal: false,
       codesName: ["main.tsx", "sub.tsx"],
       codesContent: ["console.log('Hello, main.tsx')", "console.log('Hello, sub.tsx')"],
-      content: "test_content",
+      content: "내용을 입력해주세요",
       isAnonymous: false
     }
   });
@@ -55,6 +55,8 @@ const RequestForm = ({}) => {
         isAnonymous: values.isAnonymous,
         codes: values.codesName.map((name, index) => ({ name, content: values.codesContent[index] }))
       };
+      requestParams.codes[0].name = "main!" + requestParams.codes[0].name;
+
       const data = await createReview({ requestParams: requestParams });
       const path = `/detail/review/${data.result.id}`;
       router.push(path);
@@ -107,7 +109,7 @@ const RequestForm = ({}) => {
                           field.value === "REFACTOR" && "border-primary bg-accent text-primary"
                         )}
                       >
-                        REFACTOR
+                        Refactoring
                         <FaCheck className={cn(field.value !== "REFACTOR" && "text-transparent")} />
                       </FormLabel>
                     </FormItem>

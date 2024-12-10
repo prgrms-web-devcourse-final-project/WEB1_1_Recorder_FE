@@ -45,7 +45,7 @@ const SearchBox = ({ params }: Props) => {
     handleParams(input, "keyword");
     handleParams(stack, "stack");
     handleParams(state, "state");
-    router.push("/reviews?" + searchParams.toString());
+    router.push("/reviews?" + (stack === "전체" ? "" : searchParams.toString()));
   }, [input, stack, state]);
 
   return (

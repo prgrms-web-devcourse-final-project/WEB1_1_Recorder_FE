@@ -50,6 +50,7 @@ const MyPage = () => {
           <PageHeader title="마이페이지" />
           <div className="flex flex-col gap-8">
             <MyPageTop activeTab={activeTab} setActiveTab={setActiveTab} />
+
             {activeTab === "info" ? (
               <>
                 <MyInfoProfile {...userInfo} />
@@ -57,6 +58,15 @@ const MyPage = () => {
                 <MyChallenge achivement={achive} />
                 <MyStackTop />
                 <MyStack userTechs={userTechs} />
+                <div className="flex justify-end">
+                  <Button
+                    onClick={() => {
+                      router.push("/logout");
+                    }}
+                  >
+                    로그아웃
+                  </Button>
+                </div>
               </>
             ) : (
               <MyQuestion />

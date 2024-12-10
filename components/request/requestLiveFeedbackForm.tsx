@@ -4,7 +4,7 @@ import { FaCheck } from "react-icons/fa";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import TextEditor from "@/components/textEditor/textEditor";
 import { liveFeedbackFormSchema } from "@/lib/formSchema";
 import { LiveFeedbackFormSchema } from "@/types/reviewTypes";
-import createReview from "@/services/createReview";
 import { Label } from "@radix-ui/react-label";
 import { useRouter } from "next/navigation";
 import StacksModal from "@/components/stacksModal";
@@ -31,31 +30,35 @@ const RequestLiveFeedbackForm = ({ teacherId }: Props) => {
     resolver: zodResolver(liveFeedbackFormSchema),
     defaultValues: {
       type: "REFACTORING",
-      title: "test_title",
+      title: "제목을 입력해주세요",
       skillStacks: ["React", "Typescript"],
       githubLink: "https://github.com/",
       githubLinkReveal: false,
-      feedbackCodes: [
-        { name: "main.tsx", content: "console.log('Hello, World!')" },
-        { name: "sub.tsx", content: "console.log('Hello, World!')" }
-      ],
-      description: "test_content"
+      codesName: ["main.tsx", "sub.tsx"],
+      codesContent: ["console.log('Hello, main.tsx')", "console.log('Hello, sub.tsx')"],
+      description: "내용을 입력해주세요"
     }
   });
 
   useEffect(() => {
-    const currentContent = form.getValues(`feedbackCodes.${selectedCodeIndex}.content`);
-    form.setValue(`feedbackCodes.${selectedCodeIndex}.content`, currentContent);
+    const currentContent = form.getValues(`codesContent.${selectedCodeIndex}`);
+    form.setValue(`codesContent.${selectedCodeIndex}`, currentContent);
   }, [selectedCodeIndex]);
 
-  const codes = useFieldArray({
-    name: "feedbackCodes",
-    control: form.control
-  });
   const onSubmit = async (values: LiveFeedbackFormSchema) => {
     try {
-      values.feedbackCodes[0].name = "main!" + values.feedbackCodes[0].name;
-      const data = await createLiveFeedback({ requestParams: { ...values, teacherId } });
+      const requestParams = {
+        title: values.title,
+        description: values.description,
+        type: values.type,
+        skillStacks: values.skillStacks,
+        githubLink: values.githubLink,
+        githubLinkReveal: values.githubLinkReveal,
+        feedbackCodes: values.codesName.map((name, index) => ({ name, content: values.codesContent[index] })),
+        teacherId: teacherId
+      };
+      requestParams.feedbackCodes[0].name = "main!" + requestParams.feedbackCodes[0].name;
+      const data = await createLiveFeedback({ requestParams: requestParams });
       const path = `/detail/livefeedback/${data.result}`;
       router.push(path);
     } catch (error) {
@@ -213,11 +216,11 @@ const RequestLiveFeedbackForm = ({ teacherId }: Props) => {
             />
           </div>
           <div className="flex flex-wrap items-end gap-2">
-            {codes.fields.map((field, index) => (
+            {form.watch("codesName").map((field, index) => (
               <FormField
                 control={form.control}
-                key={field.id}
-                name={`feedbackCodes.${index}.name`}
+                key={field + index}
+                name={`codesName.${index}`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className={cn(index !== 0 && "sr-only")}>메인 코드</FormLabel>
@@ -225,6 +228,7 @@ const RequestLiveFeedbackForm = ({ teacherId }: Props) => {
                     <FormControl>
                       <Input
                         className={cn(index === selectedCodeIndex && "border-primary")}
+                        readOnly
                         {...field}
                         onClick={() => {
                           setSelectedCodeIndex(index);
@@ -241,37 +245,24 @@ const RequestLiveFeedbackForm = ({ teacherId }: Props) => {
               variant="outline"
               size="default"
               className="mt-2"
-              disabled={codes.fields.length >= 5}
+              disabled={form.watch("codesName").length >= 5}
               onClick={() => {
-                codes.append({ name: "", content: "" });
-                setSelectedCodeIndex(0);
+                form.watch("codesName").push(`sub.tsx`);
+                form.watch("codesContent").push("");
               }}
             >
               파일 추가
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="default"
-              className="mt-2"
-              disabled={codes.fields.length <= 1}
-              onClick={() => {
-                codes.remove(codes.fields.length - 1);
-                setSelectedCodeIndex(0);
-              }}
-            >
-              파일 제거
-            </Button>
           </div>
           <FormField
             control={form.control}
-            name={`feedbackCodes.${selectedCodeIndex}.content`}
+            name={`codesContent.${selectedCodeIndex}`}
             render={({ field }) => (
               <FormItem className="flex h-96 flex-col space-y-0">
                 <FormControl>
                   <CodeEditor
-                    codeName={codes.fields[selectedCodeIndex].name}
-                    code={codes.fields[selectedCodeIndex].content}
+                    codeName={form.watch(`codesName.${selectedCodeIndex}`)}
+                    code={field.value}
                     setCode={field.onChange}
                     language="typescript"
                   />
