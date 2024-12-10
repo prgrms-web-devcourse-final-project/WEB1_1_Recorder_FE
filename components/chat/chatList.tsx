@@ -28,7 +28,7 @@ const ChatList = ({ list, className }: Props) => {
               <p
                 className={`cursor-pointer rounded-md p-3 hover:bg-secondary ${+currentUser === user.opponentId && "bg-secondary"}`}
                 onClick={() => {
-                  router.push(`/chat?user=${user.opponentId}`);
+                  router.push(`/chat?opponentId=${user.opponentId}`);
                 }}
               >
                 {user.opponentId}

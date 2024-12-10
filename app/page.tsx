@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ReviewSummaryList from "@/components/reviews/reviewSummaryList";
 import ReviewByStack from "@/components/reviews/reviewByStack";
