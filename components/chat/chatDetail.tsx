@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { Client, Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { userImage } from "@/constants/user";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 type Props = {
   roomId: string;

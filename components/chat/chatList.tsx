@@ -1,4 +1,5 @@
 "use client";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { ChatListItem } from "@/types/chatTypes";
@@ -12,7 +13,7 @@ type Props = {
 const ChatList = ({ list, className }: Props) => {
   const router = useRouter();
   const params = useSearchParams();
-  const currentUser = params.get("user") || "";
+  const currentUser = params.get("opponentId") || "";
 
   return (
     <ScrollArea className={className}>
@@ -31,7 +32,12 @@ const ChatList = ({ list, className }: Props) => {
                   router.push(`/chat?opponentId=${user.opponentId}`);
                 }}
               >
-                {user.opponentId}
+                <div className="flex items-center gap-2">
+                  <Avatar>
+                    <AvatarImage src={user.opponentProfileImage} />
+                  </Avatar>
+                  <span>{user.opponentNickName}</span>
+                </div>
               </p>
               <Separator />
             </div>
