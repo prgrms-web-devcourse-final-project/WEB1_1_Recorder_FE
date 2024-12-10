@@ -35,7 +35,11 @@ const SearchBox = ({ params }: Props) => {
 
   const handleParams = (state: string, string: string) => {
     if (state) {
-      searchParams.set(string, state);
+      if (state === "전체" && string === "stack") {
+        searchParams.delete(string);
+      } else {
+        searchParams.set(string, state);
+      }
     } else {
       searchParams.delete(string);
     }

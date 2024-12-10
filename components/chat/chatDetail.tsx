@@ -11,15 +11,13 @@ import { userImage } from "@/constants/user";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 type Props = {
-  userImage: string;
-  userName: string;
   roomId: string;
   userId: string;
   chatList: TChatRecord[];
   className: string;
 };
 
-const ChatDetail = ({ userImage, userName, roomId, chatList, userId, className }: Props) => {
+const ChatDetail = ({ roomId, chatList, userId, className }: Props) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [client, setClient] = useState<Client | null>(null);
   const [input, setInput] = useState("");
@@ -69,12 +67,6 @@ const ChatDetail = ({ userImage, userName, roomId, chatList, userId, className }
 
   return (
     <div className={`${className}`}>
-      <div className="flex items-center border-b-2 pb-2">
-        <Avatar>
-          <AvatarImage src={userImage}></AvatarImage>
-        </Avatar>
-        <p className="ml-4">{userName}</p>
-      </div>
       <ScrollArea className="flex h-[600px] flex-col justify-end">
         {chatList.map((message, i) => {
           return (

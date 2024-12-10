@@ -13,8 +13,6 @@ import { TChatRecord } from "@/types/chatTypes";
 const Chat = () => {
   const params = useSearchParams();
   const [userId, setUserId] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userImage, setUserImage] = useState("");
   const router = useRouter();
   const { isLogin, checkAuth } = useAuthStore();
   const [userList, setUserList] = useState<ChatListItem[]>([]);
@@ -53,14 +51,7 @@ const Chat = () => {
         <div className="m-auto my-10 flex max-w justify-center gap-4 px-4">
           <ChatList list={userList} className={`rounded-md border p-4 ${roomId ? "w-1/3" : "h-screen w-full"}`} />
           {roomId && (
-            <ChatDetail
-              userImage={params.get("img") || "https://github.com/shadcn.png"}
-              userName={params.get("name") || "알 수 없음"}
-              roomId={roomId}
-              userId={userId}
-              chatList={chatList}
-              className="w-2/3 rounded-md border p-4"
-            />
+            <ChatDetail roomId={roomId} userId={userId} chatList={chatList} className="w-2/3 rounded-md border p-4" />
           )}
         </div>
       ) : (
