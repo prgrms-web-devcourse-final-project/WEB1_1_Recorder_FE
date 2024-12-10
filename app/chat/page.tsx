@@ -33,7 +33,7 @@ const Chat = () => {
       const data = await getChatId({ opponentId: id });
       setRoomId(data?.result.toString() || null);
       const record = await getChatRecord({ id: data?.result.toString() || "", query: { size: "50" } });
-      setchatList(record?.result || []);
+      setchatList(record?.result.reverse() || []);
       const list = await getUserChatList();
       setUserList(list);
     };
@@ -51,7 +51,13 @@ const Chat = () => {
         <div className="m-auto my-10 flex max-w justify-center gap-4 px-4">
           <ChatList list={userList} className={`rounded-md border p-4 ${roomId ? "w-1/3" : "h-screen w-full"}`} />
           {roomId && (
-            <ChatDetail roomId={roomId} userId={userId} chatList={chatList} className="w-2/3 rounded-md border p-4" />
+            <ChatDetail
+              roomId={roomId}
+              userId={userId}
+              chatList={chatList}
+              setUserList={setUserList}
+              className="w-2/3 rounded-md border p-4"
+            />
           )}
         </div>
       ) : (

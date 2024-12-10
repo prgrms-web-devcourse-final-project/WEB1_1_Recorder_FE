@@ -2,20 +2,22 @@
 import Cookies from "js-cookie";
 import ChatBubble from "@/components/chat/chatBubble";
 import ChatInput from "@/components/chat/chatInput";
-import { Message, TChatRecord } from "@/types/chatTypes";
-import { useEffect, useState } from "react";
+import { ChatListItem, Message, TChatRecord } from "@/types/chatTypes";
+import React, { useEffect, useState } from "react";
 import { Client, Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { getUserChatList } from "@/services/getUserChatLsit";
 
 type Props = {
   roomId: string;
   userId: string;
   chatList: TChatRecord[];
   className: string;
+  setUserList: React.Dispatch<React.SetStateAction<ChatListItem[]>>;
 };
 
-const ChatDetail = ({ roomId, chatList, userId, className }: Props) => {
+const ChatDetail = ({ roomId, chatList, userId, className, setUserList }: Props) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [client, setClient] = useState<Client | null>(null);
   const [input, setInput] = useState("");
@@ -55,6 +57,11 @@ const ChatDetail = ({ roomId, chatList, userId, className }: Props) => {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserChatList();
+      setUserList(data);
+    };
+    fetchData();
     const token = Cookies.get("accessToken");
     if (token && input.trim().length > 0) {
       const message = { content: input, authorization: `Bearer ${token}`, type: "CHAT", senderId: userId };

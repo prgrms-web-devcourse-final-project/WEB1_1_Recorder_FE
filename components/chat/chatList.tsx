@@ -26,7 +26,7 @@ const ChatList = ({ list, className }: Props) => {
         list.map((user, i) => {
           return (
             <div key={i}>
-              <p
+              <div
                 className={`cursor-pointer rounded-md p-3 hover:bg-secondary ${+currentUser === user.opponentId && "bg-secondary"}`}
                 onClick={() => {
                   router.push(`/chat?opponentId=${user.opponentId}`);
@@ -38,7 +38,7 @@ const ChatList = ({ list, className }: Props) => {
                   </Avatar>
                   <span>{user.opponentNickName}</span>
                 </div>
-              </p>
+              </div>
               <Separator />
             </div>
           );
