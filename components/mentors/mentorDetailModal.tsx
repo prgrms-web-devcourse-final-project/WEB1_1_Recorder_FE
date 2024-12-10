@@ -59,13 +59,7 @@ const MentorDetailModal = ({ mentor, open, setOpen }: Props) => {
           <div>{mentor.content}</div>
         </div>
         <div className="grow"></div>
-
-        <ChatButton
-          nickName={mentor.nickName}
-          id={mentor.userId}
-          img={mentor.profileImage}
-          mentorId={mentor.mentorId}
-        />
+        <ChatButton id={mentor.userId} mentorId={mentor.mentorId} nickName={mentor.nickName} />
         <DialogClose onClick={() => setOpen(false)} />
       </DialogContent>
     </Dialog>

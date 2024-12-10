@@ -13,8 +13,6 @@ import { TChatRecord } from "@/types/chatTypes";
 const Chat = () => {
   const params = useSearchParams();
   const [userId, setUserId] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userImage, setUserImage] = useState("");
   const router = useRouter();
   const { isLogin, checkAuth } = useAuthStore();
   const [userList, setUserList] = useState<ChatListItem[]>([]);
@@ -35,7 +33,7 @@ const Chat = () => {
       const data = await getChatId({ opponentId: id });
       setRoomId(data?.result.toString() || null);
       const record = await getChatRecord({ id: data?.result.toString() || "", query: { size: "50" } });
-      setchatList(record?.result || []);
+      setchatList(record?.result.reverse() || []);
       const list = await getUserChatList();
       setUserList(list);
     };
@@ -54,11 +52,10 @@ const Chat = () => {
           <ChatList list={userList} className={`rounded-md border p-4 ${roomId ? "w-1/3" : "h-screen w-full"}`} />
           {roomId && (
             <ChatDetail
-              userImage={params.get("img") || "https://github.com/shadcn.png"}
-              userName={params.get("name") || "알 수 없음"}
               roomId={roomId}
               userId={userId}
               chatList={chatList}
+              setUserList={setUserList}
               className="w-2/3 rounded-md border p-4"
             />
           )}

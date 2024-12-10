@@ -7,6 +7,8 @@ export type ChatListItem = {
   opponentId: number;
   latestMessage: string;
   createdAt: string;
+  opponentNickName: string;
+  opponentProfileImage: string;
 };
 
 export type TRequestChatId = {

@@ -8,13 +8,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Props = {
-  nickName: string;
   id: string;
-  img: string;
   mentorId: string;
+  nickName: string;
 };
 
-const ChatButton = ({ nickName, id, img, mentorId }: Props) => {
+const ChatButton = ({ nickName, id, mentorId }: Props) => {
   const router = useRouter();
   const [isDelete, setIsDelete] = useState(false);
   const [userInfo, setUserInfo] = useState<TUserInfo | null>();
